@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, json
 
 OUT = sys.argv[1]
 EMAIL = "post@learnorg.global"
@@ -14,7 +14,9 @@ NAV = [
         ("E-learning Services", "e-learning-services/"),
         ("Courses", "courses/"),
     ]),
-    ("Open Resources", "open-resources/"),
+    ("Open Resources", "open-resources/", [
+        ("Book Resources", "book-resources/"),
+    ]),
     ("eStore", "estore/"),
     ("Events", None, [
         ("Upcoming Webinars", "upcoming-webinars/"),
@@ -45,12 +47,12 @@ def nav_html(r, current):
     return "<ul>" + "".join(items) + "</ul>"
 
 
-def page(path, title, description, body):
+def page(path, title, description, body, lang="en"):
     depth = path.count("/")
     r = "../" * depth
     full_title = "Institute for Learning Organizations (ILO)" if not path else f"{title} | Institute for Learning Organizations"
     html = f"""<!doctype html>
-<html lang="en">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -231,7 +233,139 @@ def pdf_library():
 </div></section>"""
 
 
+PAST_EVENTS = [
+    # (day, month-year, title, meta, description, image or None)
+    ("17", "Oct 2024", "Obeya dagseminaret i Bergen", "17 October 2024 · 08:30–18:00 · Høgskulen på Vestlandet, Inndalsveien 28, Bergen",
+     "Obeya er et visuelt rom for samarbeid mellom ulike funksjoner i en virksomhet. Se sammen, tenke sammen og lære sammen.", "obeya-day-seminar.jpg"),
+    ("9", "May 2024", "ALIOS Seminar in Piedmont", "9–13 May 2024 · Albergo del Vino, Castelnuovo Calcea, Italy",
+     "Accelerated Learning in Organizations and Society: the annual R&amp;D programme team meeting of ILO COEX, following up the ALIOS project.", "events/alios-seminar.png"),
+    ("Dec", "2023", "Lærende lederskap (Trippel L)", "December 2023 – June 2024 · Online and in Drammen, Bergen and Haugesund",
+     "Course programme run by Institute for Learning Organizations and Flowit, in three modules: Lean and systems thinking, learning culture and Obeya, and learning leadership. Sessions were held at Aker Tranby near Drammen, Toyota Jæger Automobil in Bergen and Flowit in Haugesund, with certificates awarded at the Lean conference in Stavanger in September 2024.", None),
+    ("10", "Nov 2023", "Obeya Summit presentation", "November 10, 2023 · 09:00–11:00 · Utrecht, the Netherlands",
+     "Bjarne Berg Wig presented the book <em>Systems Thinking with Obeya</em> at the 2023 symposium in Utrecht.", None),
+    ("23", "Nov 2021", "Manufacturing and Supply Chain Conference", "November 23, 2021 · 10:00–13:00 · Dublin, Ireland",
+     "Samer Hamadeh spoke on learning culture transformation.", None),
+    ("4", "May 2021", "Studietur Piemonte – FlowIT", "4–8 May 2021 · Via Toetto 5, Castelnuovo Calcea, Italy",
+     "FlowIT and TPM Lean brukernettverket, together with Institute for Learning Organizations, invited participants on a study trip focused on systems leadership and coaching.", "piemonte.jpg"),
+    ("23", "Sep 2020", "Studietur Piemonte – Samarbeidsutvikling", "23–27 September 2020 · Albergo del Vino, Castelnuovo Calcea, Italy",
+     "Samarbeidsutvikling Norge and TPM Lean brukernettverket, together with Institute for Learning Organizations, invited participants on a study trip focused on coaching and systems thinking, for everyone who wants to develop in leadership and Lean.", None),
+    ("4", "Feb 2020", "LOS-studiet 2020 – Lærende organisasjon, lærende system", "4–6 February 2020 (first of three sessions) · Norway",
+     "A new course with three sessions, 12 days in total, during 2020.", None),
+]
+
+
+def past_events():
+    out = ""
+    for day, my, title, meta, desc, img in PAST_EVENTS:
+        pic = f'<img class="event-img" src="{{r}}assets/img/{img}" alt="" loading="lazy">' if img else ""
+        out += f'<div class="event"><div class="date"><b>{day}</b><span>{my}</span></div><div><h3>{title}</h3><div class="meta">{meta}</div><p>{desc}</p>{pic}</div></div>'
+    return out
+
+
+BOOKS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "content", "books")
+
+
+def fragment(name):
+    with open(os.path.join(BOOKS_DIR, name + ".html")) as f:
+        return f.read()
+
+
+LO_PARTS = [
+    ("Del I – Fortid", "Del I ser bakover og utfordrer de mentale modellene som hindrer ny kunnskap.", range(1, 7)),
+    ("Del II – Nåtid", "Lærende organisasjoner i praksis.", range(7, 13)),
+    ("Del III – Framtid: Organisasjon 5.0", "Ressursene til del III ble aldri publisert på det gamle nettstedet.", range(13, 16)),
+]
+LO_LATE = {13: "Morgengry eller solnedgang?", 14: "Organisasjon som levende systemer", 15: "Om å lede fra framtida"}
+
+
+def book_pages():
+    lo_titles = {int(k): v for k, v in json.load(open(os.path.join(BOOKS_DIR, "_chapters.json"))).items()}
+    base = "book-resources/"
+
+    hub = f"""
+{page_hero("Book Resources", "Companion pages for Bjarne Berg Wig's books.", "desk-laptop.jpg", "Open Resources")}
+<section class="section"><div class="container">
+  <div class="section-head"><p class="lead">Videos, links, templates and reading that go with each chapter. These pages were first published on the earlier learnorg.global site and have been restored here. Most of the material is in Norwegian.</p></div>
+  <div class="grid cols-3">
+    <article class="card"><img class="card-img" src="{{r}}assets/img/book-obeya.jpg" alt="Systems Thinking with Obeya cover" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
+      <span class="tag">English · Norsk</span><h3>Systems Thinking with Obeya</h3>
+      <p>Chapter resources for the English edition and the Norwegian edition, <em>Systemtenkning med Obeya</em>.</p>
+      <a class="more" href="{{r}}{base}systems-thinking-with-obeya/">English pages</a>
+      <a class="more" href="{{r}}{base}systemtenkning-med-obeya/" style="margin-top:8px">Norske sider</a></div></article>
+    <article class="card"><img class="card-img" src="{{r}}assets/img/book-laerende-organisasjoner.jpg" alt="Lærende organisasjoner cover" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
+      <span class="tag">Norsk</span><h3>Lærende organisasjoner</h3>
+      <p>Ressurser kapittel for kapittel: videoer, artikler og refleksjonsspørsmål.</p>
+      <a class="more" href="{{r}}{base}laerende-organisasjoner/">Til ressurssidene</a></div></article>
+    <article class="card"><img class="card-img" src="{{r}}assets/img/book-lean-ledelse.jpg" alt="LEAN – Ledelse for lærende organisasjoner cover" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
+      <span class="tag">Norsk</span><h3>LEAN – Ledelse for lærende organisasjoner</h3>
+      <p>Del I Lederskap og kultur: forelesningsnotater, maler og kursmateriell.</p>
+      <a class="more" href="{{r}}{base}lean-ledelse/">Til ressurssidene</a></div></article>
+  </div>
+</div></section>
+{CTA}
+"""
+    page(base, "Book Resources", "Companion resources for the books by Bjarne Berg Wig: Systems Thinking with Obeya, Lærende organisasjoner and LEAN – Ledelse for lærende organisasjoner.", hub)
+
+    def prose_page(path, title, sub, img, crumb, desc, frag, lang, extra=""):
+        body = f"""
+{page_hero(title, sub, img, crumb)}
+<section class="section"><div class="container"><div class="prose">
+{frag}
+</div>{extra}</div></section>
+{CTA}
+"""
+        page(path, title, desc, body, lang)
+
+    order = f'<div class="btn-row"><a class="btn" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the English book</a><a class="btn ghost" href="https://www.amazon.com/Systemtenkning-Obeya-Norwegian-Bjarne-Berg-ebook/dp/B0CG67C74W" target="_blank" rel="noopener">Norsk e-bok</a></div>'
+    prose_page(base + "systems-thinking-with-obeya/", "Systems Thinking with Obeya", "Resources for the book, chapter by chapter.", "obeya-wall.jpg", "Book Resources",
+               "Links, videos, tools and templates for Systems Thinking with Obeya by Bjarne Berg Wig.",
+               '<p class="lead">Welcome to the resource pages for the book. Here you will find links, videos, tools and templates that will speed up your learning. Questions or ideas: <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>' + order + fragment("obeya-en"), "en")
+    prose_page(base + "systemtenkning-med-obeya/", "Systemtenkning med Obeya", "Ressurser til boka, kapittel for kapittel.", "obeya-wall.jpg", "Book Resources",
+               "Videoer, lenker, maler og læreeksempler til Systemtenkning med Obeya av Bjarne Berg Wig.",
+               '<p class="lead">Her finner du videoer, lenker til vitenskapelige publikasjoner, maler og læreeksempler. Tips og spørsmål: <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>' + order + fragment("obeya-no"), "nb")
+    prose_page(base + "lean-ledelse/", "LEAN – Ledelse for lærende organisasjoner", "Ressurser til boka.", "gemba-team.jpg", "Book Resources",
+               "Kursmateriell og ressurser til LEAN – Ledelse for lærende organisasjoner av Bjarne Berg Wig.",
+               fragment("lean-ledelse"), "nb")
+
+    # Lærende organisasjoner hub + chapters
+    parts = ""
+    for ptitle, pintro, chs in LO_PARTS:
+        items = ""
+        for n in chs:
+            if n in lo_titles:
+                items += f'<li><a href="{{r}}{base}laerende-organisasjoner/kapittel-{n}/"><b>{n}</b>{lo_titles[n]}</a></li>'
+            else:
+                items += f'<li><a aria-disabled="true" style="pointer-events:none"><b>{n}</b>{LO_LATE[n]}<span class="soon">ikke publisert</span></a></li>'
+        parts += f'<div><h2>{ptitle}</h2><p class="note">{pintro}</p><ul class="chapter-list">{items}</ul></div>'
+    lo_hub = f"""
+{page_hero("Lærende organisasjoner", "Ressurser til boka, kapittel for kapittel.", "training-session.jpg", "Book Resources")}
+<section class="section"><div class="container">
+  <div class="split" style="margin-bottom:56px">
+    <img src="{{r}}assets/img/book-laerende-organisasjoner.jpg" alt="Lærende organisasjoner" loading="lazy" style="max-width:300px;justify-self:center;box-shadow:none">
+    <div>
+      <p class="lead">Boka gir ledere, tillitsvalgte og andre endringsledere kunnskapen som trengs for å gå fra mål- og resultatstyring til ekte lærende organisasjoner. En rød tråd gjennom boka er systemtenkning.</p>
+      <p>Velg et kapittel for å se videoer, artikler og refleksjoner som hører til. Noen av sidene var bare i versjon 1.0 på det gamle nettstedet.</p>
+      <div class="btn-row"><a class="btn" href="https://www.gyldendal.no/Faglitteratur/OEkonomi-og-administrasjon/Samfunnsoekonomi/Laerende-organisasjoner" target="_blank" rel="noopener">Kjøp boka</a></div>
+    </div>
+  </div>
+  <div class="grid cols-3">{parts}</div>
+</div></section>
+{CTA}
+"""
+    page(base + "laerende-organisasjoner/", "Lærende organisasjoner – ressurser", "Ressurser kapittel for kapittel til boka Lærende organisasjoner av Bjarne Berg Wig.", lo_hub, "nb")
+
+    nums = sorted(lo_titles)
+    for i, n in enumerate(nums):
+        prev = f'<a href="{{r}}{base}laerende-organisasjoner/kapittel-{nums[i-1]}/">← Kapittel {nums[i-1]}</a>' if i else '<span></span>'
+        nxt = f'<a href="{{r}}{base}laerende-organisasjoner/kapittel-{nums[i+1]}/">Kapittel {nums[i+1]} →</a>' if i + 1 < len(nums) else f'<a href="{{r}}{base}laerende-organisasjoner/">Alle kapitler</a>'
+        prose_page(f"{base}laerende-organisasjoner/kapittel-{n}/", f"Kapittel {n}: {lo_titles[n]}", "Lærende organisasjoner – ressurser", "desk-laptop.jpg", "Book Resources",
+                   f"Ressurser til kapittel {n} i Lærende organisasjoner: {lo_titles[n]}.", fragment(f"lo-kapittel-{n}"), "nb",
+                   extra=f'<nav class="chapter-nav">{prev}{nxt}</nav>')
+
+
 def build():
+    book_pages()
+
     # ---------- Home ----------
     services = [
         ("training-session.jpg", "Sensei Mentorship", "Transformation through dialogue.", "sensei-mentorship/"),
@@ -503,6 +637,10 @@ def build():
       <p>On leadership, learning teams and continuous improvement.</p>
       <a class="more" href="{{r}}upcoming-webinars/">See webinars</a></div></article>
   </div>
+  <div class="cta-band" style="margin-top:48px">
+    <div><h2>Book resources</h2><p>Chapter-by-chapter videos, links and templates for Systems Thinking with Obeya, Lærende organisasjoner and LEAN – Ledelse for lærende organisasjoner.</p></div>
+    <a class="btn light" href="{{r}}book-resources/">Open book resources</a>
+  </div>
 </div></section>
 {pdf_library()}
 {CTA}
@@ -576,14 +714,7 @@ def build():
     past = f"""
 {page_hero("Past Events", "Look back at recent symposiums, conferences and seminars.", "obeya-wall.jpg", "Events")}
 <section class="section"><div class="container">
-  <div class="event">
-    <div class="date"><b>10</b><span>Nov 2023</span></div>
-    <div><h3>Obeya Summit presentation</h3><div class="meta">November 10, 2023 · 09:00–11:00 · Utrecht, the Netherlands</div></div>
-  </div>
-  <div class="event">
-    <div class="date"><b>23</b><span>Nov 2021</span></div>
-    <div><h3>Manufacturing and Supply Chain Conference</h3><div class="meta">November 23, 2021 · 10:00–13:00 · Dublin, Ireland</div></div>
-  </div>
+  {past_events()}
 </div></section>
 {CTA}
 """

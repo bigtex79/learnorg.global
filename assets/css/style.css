@@ -272,3 +272,25 @@ p { margin: 0 0 1em; }
   .topbar .container { justify-content: center; }
   .event { grid-template-columns: 72px 1fr; padding: 20px; gap: 16px; }
 }
+
+/* Book resource pages */
+.prose { max-width: 780px; margin: 0 auto; }
+.prose h2 { margin: 56px 0 16px; font-size: clamp(1.5rem, 2.4vw, 2rem); }
+.prose h2:first-child, .prose h3:first-child { margin-top: 0; }
+.prose h3 { margin: 36px 0 12px; font-size: 1.25rem; color: var(--teal-dark); }
+.prose p, .prose li { color: var(--ink, #17252a); }
+.prose ul { padding-left: 1.2em; margin: 0 0 1em; }
+.prose figure { margin: 28px 0; }
+.prose figure img { max-width: 100%; height: auto; border-radius: 10px; }
+.prose .btn-row { margin: 20px 0 32px; }
+.video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 8px; }
+.video { position: relative; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; background: #000; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.chapter-nav { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; max-width: 780px; margin: 56px auto 0; padding-top: 24px; border-top: 1px solid var(--line, #e3eaec); }
+.chapter-nav a { font-weight: 600; text-decoration: none; }
+.chapter-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.chapter-list a { display: flex; gap: 12px; padding: 14px 18px; border-radius: 10px; background: #fff; border: 1px solid var(--line, #e3eaec); text-decoration: none; color: inherit; }
+.chapter-list a:hover { border-color: var(--teal); }
+.chapter-list b { color: var(--teal); min-width: 2.2em; }
+.chapter-list span.soon { color: var(--muted); font-size: .9em; margin-left: auto; }
+.event .event-img { width: 100%; max-width: 420px; border-radius: 10px; margin: 12px 0 4px; }

@@ -28,5 +28,15 @@ python3 tools/build.py .
 
 Rebuilding overwrites every page's `index.html`, so pick one approach and stick with it. Styles live in `assets/css/style.css`.
 
+The text of the book resource pages lives in `tools/content/books/` as HTML fragments, one per page. `build.py` wraps them in the page layout. Their images are in `assets/img/books/`.
+
+## Book resources and older events
+These were restored from the earlier Wix version of the site (2020–2024):
+- **Book resources** (`/book-resources/`): companion pages for *Systems Thinking with Obeya* (English and Norwegian), *Lærende organisasjoner* (chapters 1–12; chapters 9–12 were only outlines on the old site, and 13–15 were never published) and *LEAN – Ledelse for lærende organisasjoner*.
+- **Text:** kept as Bjarne wrote it, apart from rejoining words split by print hyphenation and removing copied chapter 2 text that was left on the chapter 6 page.
+- **Links:** links to ILO's own PDFs point to the copies in `assets/pdf/`. Links to third-party PDFs have been removed, but the text describing them is kept. YouTube videos are embedded using youtube-nocookie.com.
+- **Past Events:** now also lists the older Wix events (Piemonte study trips, ALIOS, Obeya Day Bergen, Trippel L, LOS-studiet 2020).
+- **Not available:** "Ressurser modul 2" was never archived.
+
 ## Pages
-`/`, `/about-us/`, `/services/`, `/sensei-mentorship/`, `/e-learning-services/`, `/courses/`, `/open-resources/`, `/estore/`, `/upcoming-webinars/`, `/workshops-and-webinars/`, `/past-events/`, `/contact/`
+`/`, `/about-us/`, `/services/`, `/sensei-mentorship/`, `/e-learning-services/`, `/courses/`, `/open-resources/`, `/estore/`, `/upcoming-webinars/`, `/workshops-and-webinars/`, `/past-events/`, `/contact/`, `/book-resources/` (with `systems-thinking-with-obeya/`, `systemtenkning-med-obeya/`, `lean-ledelse/`, `laerende-organisasjoner/` and `laerende-organisasjoner/kapittel-1/` … `kapittel-12/`)
