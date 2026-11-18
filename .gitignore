@@ -1,0 +1,8 @@
+# Third-party PDFs: not ours to republish
+_not-for-upload/
+
+# Upload bundle (rebuild with zip when needed)
+*.zip
+
+.DS_Store
+__pycache__/
