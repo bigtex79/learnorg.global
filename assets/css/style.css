@@ -294,3 +294,9 @@ p { margin: 0 0 1em; }
 .chapter-list b { color: var(--teal); min-width: 2.2em; }
 .chapter-list span.soon { color: var(--muted); font-size: .9em; margin-left: auto; }
 .event .event-img { width: 100%; max-width: 420px; border-radius: 10px; margin: 12px 0 4px; }
+.prose blockquote { margin: 24px 0; padding: 4px 0 4px 20px; border-left: 4px solid var(--teal-dark); font-style: italic; font-size: 1.1rem; }
+.video-grid h3 { margin: 14px 0 6px; font-size: 1.1rem; }
+.downloads { margin: 48px 0 8px; padding: 24px 28px; background: var(--bg-alt); border-radius: 12px; }
+.prose .downloads h2 { margin: 0 0 12px; font-size: 1.3rem; }
+.downloads ul { margin: 0; }
+.downloads li { margin: 6px 0; }

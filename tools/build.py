@@ -11,6 +11,7 @@ NAV = [
     ("About ILO", "about-us/"),
     ("Services", "services/", [
         ("Sensei Mentorship", "sensei-mentorship/"),
+        ("Learning Culture", "learning-culture/"),
         ("E-learning Services", "e-learning-services/"),
         ("Courses", "courses/"),
     ]),
@@ -210,8 +211,28 @@ PDF_GROUPS = [
         ("masterplan-obeya-og-hoshin-ledelse", "Masterplan, Obeya og hoshin-ledelse (Bjarne Berg Wig)"),
         ("a3-laerende-system-og-systemtenkning", "A3 lærende system og systemtenkning"),
         ("los-diagnose-a3-mal", "LOS-diagnose – A3-mal"),
+        ("obeya-sources-articles.docx", "Scientific articles about Obeya"),
+        ("obeya-assessment.docx", "Obeya self-assessment sheet"),
+        ("vsm-obeya.pptx", "Value stream mapping and Obeya"),
+        ("obeya-hoshin-vmcl.pptx", "VMCL og Hoshin kanri (norsk)"),
+    ]),
+    ("Lean ledelse – Del II og III", "Arbeidsdokumenter og maler fra boka.", [
+        ("lean-ledelse-del-ii.docx", "Del II"),
+        ("lean-ledelse-del-iii.docx", "Del III"),
+        ("lean-speil-mal.xlsx", "Mal for selvvurdering – Lean-speil"),
+    ]),
+    ("Recommended reading", "Articles and reports by other authors that the book pages refer to.", [
+        ("laloux-reinventing-organizations-summary-changefactory", "Summary of Laloux, Reinventing Organizations"),
+        ("vmcl-build-an-adaptive-organization", "VMCL: build an adaptive organization"),
+        ("tanaka-obeya-pdma-visions-2009", "Tanaka: the Obeya room (PDMA Visions, 2009)"),
+        ("cabrera-why-you-should-map", "Derek Cabrera: why you should map systems"),
+        ("systems-thinking-skills-map", "A3 notes: System of Profound Knowledge"),
+        ("rother-toyota-practice-article", "Mike Rother: study of Toyota Kata practice"),
+        ("digital-obeya-rooms-paper", "Exploring digital Obeya rooms (research paper)"),
+        ("vint-fourth-industrial-revolution", "VINT: the fourth industrial revolution"),
     ]),
 ]
+FILE_KIND = {".docx": "Word", ".pptx": "PowerPoint", ".xlsx": "Excel"}
 
 
 def pdf_library():
@@ -219,9 +240,11 @@ def pdf_library():
     for title, intro, files in PDF_GROUPS:
         items = ""
         for slug, label in files:
-            kb = os.path.getsize(os.path.join(OUT, "assets/pdf", slug + ".pdf")) / 1024
+            ext = os.path.splitext(slug)[1]
+            path, kind, tab = (f"assets/files/{slug}", FILE_KIND[ext], "") if ext else (f"assets/pdf/{slug}.pdf", "PDF", ' target="_blank" rel="noopener"')
+            kb = os.path.getsize(os.path.join(OUT, path)) / 1024
             size = f"{kb / 1024:.1f} MB" if kb >= 1024 else f"{kb:.0f} KB"
-            items += f'<li><a href="{{r}}assets/pdf/{slug}.pdf" target="_blank" rel="noopener">{label}</a><span>PDF · {size}</span></li>'
+            items += f'<li><a href="{{r}}{path}"{tab}>{label}</a><span>{kind} · {size}</span></li>'
         groups += f'<div class="pdf-group"><h3>{title}</h3><p class="note">{intro}</p><ul class="pdf-list">{items}</ul></div>'
     return f"""<section class="section alt" id="library"><div class="container">
   <div class="section-head">
@@ -236,7 +259,7 @@ def pdf_library():
 PAST_EVENTS = [
     # (day, month-year, title, meta, description, image or None)
     ("17", "Oct 2024", "Obeya dagseminaret i Bergen", "17 October 2024 · 08:30–18:00 · Høgskulen på Vestlandet, Inndalsveien 28, Bergen",
-     "Obeya er et visuelt rom for samarbeid mellom ulike funksjoner i en virksomhet. Se sammen, tenke sammen og lære sammen.", "obeya-day-seminar.jpg"),
+     "Obeya – raskere felles læring. Obeya er et visuelt rom for samarbeid mellom ulike funksjoner i en virksomhet, og arkitektur for radikalt bedre samspill på tvers. Ved å visualisere (se sammen), reflektere og prøve ut løsninger skapes raskere læring. På fagseminaret lærte vi om Obeya og delte erfaringer mellom ulike virksomheter.", "obeya-day-seminar.jpg"),
     ("9", "May 2024", "ALIOS Seminar in Piedmont", "9–13 May 2024 · Albergo del Vino, Castelnuovo Calcea, Italy",
      "Accelerated Learning in Organizations and Society: the annual R&amp;D programme team meeting of ILO COEX, following up the ALIOS project.", "events/alios-seminar.png"),
     ("Dec", "2023", "Lærende lederskap (Trippel L)", "December 2023 – June 2024 · Online and in Drammen, Bergen and Haugesund",
@@ -319,7 +342,7 @@ def book_pages():
     order = f'<div class="btn-row"><a class="btn" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the English book</a><a class="btn ghost" href="https://www.amazon.com/Systemtenkning-Obeya-Norwegian-Bjarne-Berg-ebook/dp/B0CG67C74W" target="_blank" rel="noopener">Norsk e-bok</a></div>'
     prose_page(base + "systems-thinking-with-obeya/", "Systems Thinking with Obeya", "Resources for the book, chapter by chapter.", "obeya-wall.jpg", "Book Resources",
                "Links, videos, tools and templates for Systems Thinking with Obeya by Bjarne Berg Wig.",
-               '<p class="lead">Welcome to the resource pages for the book. Here you will find links, videos, tools and templates that will speed up your learning. Questions or ideas: <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>' + order + fragment("obeya-en"), "en")
+               '<p class="lead">Welcome to the resource pages for the book. Here you will find links, videos, tools and templates that will speed up your learning. The pages are continually improved with new resources, and an e-course with a 9-step guide to developing Obeya in your organization is in the works. Questions, ideas or resources to share: <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>' + order + fragment("obeya-en"), "en")
     prose_page(base + "systemtenkning-med-obeya/", "Systemtenkning med Obeya", "Ressurser til boka, kapittel for kapittel.", "obeya-wall.jpg", "Book Resources",
                "Videoer, lenker, maler og læreeksempler til Systemtenkning med Obeya av Bjarne Berg Wig.",
                '<p class="lead">Her finner du videoer, lenker til vitenskapelige publikasjoner, maler og læreeksempler. Tips og spørsmål: <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>' + order + fragment("obeya-no"), "nb")
@@ -478,6 +501,7 @@ def build():
         <h3>Bjarne Berg Wig</h3>
         <div class="role">Founder · Author · Sensei</div>
         <p>Bjarne Berg Wig is an author and sensei with over three decades of experience in quality management, Lean and systems thinking. He has collaborated with Bergen University of Applied Sciences, authored eight professional books, and pioneered programs on leadership and learning organizations. He leads the ALIOS R&amp;D program and is a certified systems thinking trainer.</p>
+        <p>He was Quality and Innovation Manager at Hydro Agri Europe (now Yara), and for the last 20 years has helped many Norwegian and international private and public organizations transform into learning organizations. Bjarne is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p>
       </div>
     </div>
     <div class="person">
@@ -532,6 +556,40 @@ def build():
 {CTA}
 """
     page("sensei-mentorship/", "Sensei Mentorship", "Sensei mentorship from ILO: transformation through challenge and dialogue for leaders becoming systems thinkers.", sensei)
+
+    # ---------- Learning Culture (restored from the old Wix "coaching" and "about" pages) ----------
+    videos = [
+        ("fYoppX3VHIY", "Toyota Kata – Mike Rother", "Mike Rother, author of <em>Toyota Kata</em>, at the Lean Summit 2012."),
+        ("zDZFcDGpL4U", "Changing Education Paradigms", "RSA Animate of a talk by Sir Ken Robinson."),
+        ("STTwZGNvLmM", "Applying the Lens of Profound Knowledge", "Robert Lloyd, PhD, from the IHI Open School course QI101."),
+        ("xKv--YA8XJE", "Deming's System of Profound Knowledge", "Robert Lloyd, PhD, from the IHI Open School course QI101."),
+    ]
+    video_cards = "".join(f'<div><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/{v}" title="{t}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><h3>{t}</h3><p class="note">{d}</p></div>' for v, t, d in videos)
+    culture = f"""
+{page_hero("Learning Culture Transformation", "From seeing work as execution to seeing work as continuous learning and improvement.", "training-session.jpg", '<a href="{r}services/">Services</a>')}
+<section class="section"><div class="container"><div class="prose">
+  <p class="lead">Learning Culture Transformation (LCT) is the shift from seeing work as execution to seeing work as continuous learning and improvement – seeing the organization as a complex adaptive system that adapts to change through learning.</p>
+  <h2>Learning culture</h2>
+  <p>LCT is a breakaway from Taylor's "scientific management" model of centralized command-and-control organizations: from command and control to challenging and developing learners. LCT is about deep respect for people and building on people's innate capacity to learn. Dr W. Edwards Deming (1900–1993) put it this way in <em>The New Economics</em>:</p>
+  <blockquote>"One is born with a natural inclination to learn. Learning is a source of innovation. One inherits a right to enjoy his work. Good management helps us to nurture these positive innate attributes of people."</blockquote>
+  <h2>What is learning?</h2>
+  <p>Learning is the process of developing and improving our mental models – how we see and understand – so we navigate the real world better. It requires a good understanding of the thinking process and of how we acquire knowledge through seeing, dialogue and practical trials. Two insights are key:</p>
+  <ul>
+    <li>People are born with learning capacity. Present management practice has reduced these skills, so they have to be nurtured.</li>
+    <li>We all have biases in how we see and interpret the real world (mental models). We need to understand these biases and use that understanding to become better thinkers.</li>
+  </ul>
+  <h2>Complex adaptive systems</h2>
+  <p>A complex adaptive system (CAS) is able to adapt to change for better interaction with the real world. In an environment of rapid technological, social, geographical and environmental change, the capacity for real learning is crucial for survival. Nature itself is the best teacher of complex adaptive systems.</p>
+  <h2>What is a learning organization?</h2>
+  <p>An organization that acquires, creates, interprets, transmits, shares and retains knowledge, and consciously adapts its behaviour to reflect new knowledge and insights.</p>
+</div></div></section>
+<section class="section alt"><div class="container">
+  <div class="section-head"><span class="eyebrow">Video library</span><h2>Recommended videos</h2></div>
+  <div class="video-grid">{video_cards}</div>
+</div></section>
+{CTA}
+"""
+    page("learning-culture/", "Learning Culture Transformation", "Learning Culture Transformation: seeing work as continuous learning and the organization as a complex adaptive system. With a video library.", culture)
 
     # ---------- E-learning ----------
     books = [

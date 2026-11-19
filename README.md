@@ -13,10 +13,11 @@ Rebuilt on 2026-11-18 from Wayback Machine captures of learnorg.global. The live
 - Client logos (UDI, Equinor, Yara and others) were never archived. Clients are shown as text cards.
 - There is no mailing-list signup or contact form, because these need a backend. Contact goes through email and phone links.
 
-## PDFs
-- **Source:** the PDFs from the old Wix site. The Wayback Machine cut many of its copies off at 1 MB, so the complete files were downloaded from Wix's file storage (static.wixstatic.com/ugd/).
-- **`assets/pdf/`** holds 15 of ILO's own course PDFs: Lean ledelse Del I, plus the chapter resources for Systems Thinking with Obeya. They are listed under Open Resources → Library.
-- **`_not-for-upload/third-party-pdfs/`** holds 8 articles and reports by other authors that the old site used to host (Laloux/change factory, Rother, Tanaka/PDMA, Cabrera, VMCL, VINT, a Digital Obeya paper, a systems-thinking skills map). They are not linked from the site. Leave this folder out when you upload, unless you have permission to republish them.
+## Downloads (PDFs and Office files)
+- **Source:** the Wix site's own file storage, plus Samer's backup of the Wix site (`learnorg-backup.zip`, 85 files, Feb 2025). The Wayback Machine cut many PDFs off at 1 MB, so complete copies were used.
+- **`assets/pdf/`** holds 23 PDFs: ILO's course material (Lean ledelse Del I, Systems Thinking with Obeya chapter resources) and 8 articles by other authors that the old site hosted and the book pages refer to (Laloux, Tanaka, Cabrera, Rother, VMCL, VINT, a Digital Obeya paper, A3 SoPK notes). At the client's request these are all published again.
+- **`assets/files/`** holds 7 Word, PowerPoint and Excel files from the backup (Obeya articles list, Obeya self-assessment, VSM and VMCL/Hoshin presentations, Lean ledelse Del II and III, Lean-speil Excel template).
+- Everything is listed under Open Resources → Library, and linked from the book pages where the old site linked it.
 - **Duplicates:** "Historisk bakgrunn" and "Lean Ledelse" were the same file on the old site, so it appears only once.
 
 ## Editing
@@ -34,9 +35,10 @@ The text of the book resource pages lives in `tools/content/books/` as HTML frag
 These were restored from the earlier Wix version of the site (2020–2024):
 - **Book resources** (`/book-resources/`): companion pages for *Systems Thinking with Obeya* (English and Norwegian), *Lærende organisasjoner* (chapters 1–12; chapters 9–12 were only outlines on the old site, and 13–15 were never published) and *LEAN – Ledelse for lærende organisasjoner*.
 - **Text:** kept as Bjarne wrote it, apart from rejoining words split by print hyphenation and removing copied chapter 2 text that was left on the chapter 6 page.
-- **Links:** links to ILO's own PDFs point to the copies in `assets/pdf/`. Links to third-party PDFs have been removed, but the text describing them is kept. YouTube videos are embedded using youtube-nocookie.com.
+- **Links:** file links point to the copies in `assets/pdf/` and `assets/files/`. YouTube videos are embedded using youtube-nocookie.com; videos that have since been made private or deleted were removed, and two that no longer allow embedding are linked instead.
 - **Past Events:** now also lists the older Wix events (Piemonte study trips, ALIOS, Obeya Day Bergen, Trippel L, LOS-studiet 2020).
-- **Not available:** "Ressurser modul 2" was never archived.
+- **Learning Culture** (`/learning-culture/`): restored from the old Wix "coaching" page, with the video library from the old Wix About page.
+- **Not available:** "Ressurser" and "Ressurser modul 2" were behind a login on Wix, so neither the archive nor the backup holds their content. The Obeya Day sign-up form ("påmelding") was for a past event and needs a backend, so it was not rebuilt.
 
 ## Pages
-`/`, `/about-us/`, `/services/`, `/sensei-mentorship/`, `/e-learning-services/`, `/courses/`, `/open-resources/`, `/estore/`, `/upcoming-webinars/`, `/workshops-and-webinars/`, `/past-events/`, `/contact/`, `/book-resources/` (with `systems-thinking-with-obeya/`, `systemtenkning-med-obeya/`, `lean-ledelse/`, `laerende-organisasjoner/` and `laerende-organisasjoner/kapittel-1/` … `kapittel-12/`)
+`/`, `/about-us/`, `/services/`, `/sensei-mentorship/`, `/learning-culture/`, `/e-learning-services/`, `/courses/`, `/open-resources/`, `/estore/`, `/upcoming-webinars/`, `/workshops-and-webinars/`, `/past-events/`, `/contact/`, `/book-resources/` (with `systems-thinking-with-obeya/`, `systemtenkning-med-obeya/`, `lean-ledelse/`, `laerende-organisasjoner/` and `laerende-organisasjoner/kapittel-1/` … `kapittel-12/`)
