@@ -66,8 +66,7 @@ def nav_html(r, current):
 def page(path, title, description, body, lang="en"):
     depth = path.count("/")
     r = "../" * depth
-    # The home tab shows only the favicon: U+2800 is a blank character browsers keep, unlike an empty title
-    full_title = "&#x2800;" if not path else title
+    full_title = "Institute for Learning Organizations (ILO)" if not path else f"{title} | Institute for Learning Organizations"
     html = f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -77,7 +76,7 @@ def page(path, title, description, body, lang="en"):
 <meta name="description" content="{description}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Institute for Learning Organizations">
-<meta property="og:title" content="{title if path else "Institute for Learning Organizations (ILO)"}">
+<meta property="og:title" content="{title if path else full_title}">
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{SITE_URL}{path}">
 <meta property="og:locale" content="{"nb_NO" if lang == "nb" else "en_GB"}">
@@ -87,7 +86,7 @@ def page(path, title, description, body, lang="en"):
 <meta property="og:image:alt" content="Institute for Learning Organizations: shaping the future with better learning">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{SITE_URL}{path}">
-<link rel="icon" href="{r}assets/img/favicon.png?v=5">
+<link rel="icon" href="{r}assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -182,7 +181,7 @@ def redirect(old, new):
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Page moved | ILO</title>
+<title>Page moved | Institute for Learning Organizations</title>
 <meta name="robots" content="noindex">
 <meta http-equiv="refresh" content="0; url={target}">
 <script>location.replace("{target}")</script>
