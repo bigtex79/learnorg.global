@@ -1,27 +1,33 @@
 import os, sys, json
 
 OUT = sys.argv[1]
-EMAIL = "post@learnorg.global"
+EMAIL = "gabi@learnorg.global"
 PHONE = "+47 48 28 70 00"
 PHONE_TEL = "+4748287000"
 ADDRESS = "Kongens gate 20A, 3717 Skien, Norway"
 
 NAV = [
     ("Home", ""),
-    ("About ILO", "about-us/"),
     ("Services", "services/", [
         ("Sensei Mentorship", "sensei-mentorship/"),
+        ("Training", "training/"),
+        ("Off-site Training", "off-site-training/"),
+        ("Books and e-learning", "e-learning-services/"),
         ("Learning Culture", "learning-culture/"),
-        ("E-learning Services", "e-learning-services/"),
-        ("Courses", "courses/"),
     ]),
-    ("Open Resources", "open-resources/", [
-        ("Book Resources", "book-resources/"),
+    ("Obeya", "obeya/", [
+        ("English edition", "book-resources/systems-thinking-with-obeya/"),
+        ("Norsk utgave", "book-resources/systemtenkning-med-obeya/"),
     ]),
-    ("eStore", "estore/"),
+    ("E-resources", "e-resources/", [
+        ("Lærende organisasjoner", "book-resources/laerende-organisasjoner/"),
+        ("LEAN Ledelse", "book-resources/lean-ledelse/"),
+        ("Det er Ledelse", "det-er-ledelse/"),
+        ("Library", "e-resources/#library"),
+    ]),
+    ("Trippel L", "trippel-l/"),
     ("Events", None, [
-        ("Upcoming Webinars", "upcoming-webinars/"),
-        ("Workshops and Seminars", "workshops-and-webinars/"),
+        ("Obeya dagseminar", "obeya-dagseminar/"),
         ("Past Events", "past-events/"),
     ]),
 ]
@@ -70,7 +76,6 @@ def page(path, title, description, body, lang="en"):
 <div class="topbar"><div class="container">
   <a href="mailto:{EMAIL}">{EMAIL}</a>
   <a href="tel:{PHONE_TEL}">{PHONE}</a>
-  <span>{ADDRESS}</span>
 </div></div>
 <header class="site-header"><div class="container">
   <a class="brand" href="{r or './'}">
@@ -90,15 +95,15 @@ def page(path, title, description, body, lang="en"):
   <div class="cols">
     <div>
       <img class="footer-logo" src="{r}assets/img/logo-ilo.png" alt="ILO – Institute for Learning Organizations">
-      <p>In a rapidly changing world, thriving begins with the ability to learn and improve continuously. In learning organizations, individuals and teams unite to master the art of improvement.</p>
+      <p>Shaping the future with better learning. Mission: we challenge and train, by giving new lenses, for improvement culture transformation.</p>
     </div>
     <div>
       <h4>Quick Links</h4>
       <ul>
         <li><a href="{r or './'}">Home</a></li>
-        <li><a href="{r}about-us/">About ILO</a></li>
-        <li><a href="{r}open-resources/">Open Resources</a></li>
-        <li><a href="{r}estore/">eStore</a></li>
+        <li><a href="{r}obeya/">Obeya</a></li>
+        <li><a href="{r}e-resources/">E-resources</a></li>
+        <li><a href="{r}trippel-l/">Trippel L</a></li>
         <li><a href="{r}contact/">Contact</a></li>
       </ul>
     </div>
@@ -107,14 +112,13 @@ def page(path, title, description, body, lang="en"):
       <ul>
         <li><a href="{r}sensei-mentorship/">Sensei Mentorship</a></li>
         <li><a href="{r}e-learning-services/">E-learning</a></li>
-        <li><a href="{r}courses/">Courses</a></li>
-        <li><a href="{r}upcoming-webinars/">Webinars</a></li>
+        <li><a href="{r}training/">Training</a></li>
+        <li><a href="{r}learning-culture/">Learning Culture</a></li>
       </ul>
     </div>
     <div>
       <h4>Get in Touch</h4>
       <ul>
-        <li>{ADDRESS}</li>
         <li><a href="tel:{PHONE_TEL}">{PHONE}</a></li>
         <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
       </ul>
@@ -306,7 +310,7 @@ def book_pages():
     base = "book-resources/"
 
     hub = f"""
-{page_hero("Book Resources", "Companion pages for Bjarne Berg Wig's books.", "desk-laptop.jpg", "Open Resources")}
+{page_hero("Book Resources", "Companion pages for Bjarne Berg Wig's books.", "desk-laptop.jpg", "E-resources")}
 <section class="section"><div class="container">
   <div class="section-head"><p class="lead">Videos, links, templates and reading that go with each chapter. These pages were first published on the earlier learnorg.global site and have been restored here. Most of the material is in Norwegian.</p></div>
   <div class="grid cols-3">
@@ -389,173 +393,185 @@ def book_pages():
 def build():
     book_pages()
 
-    # ---------- Home ----------
+    # ---------- Home (text from the old Wix site, learnorg-backup.zip) ----------
     services = [
-        ("training-session.jpg", "Sensei Mentorship", "Transformation through dialogue.", "sensei-mentorship/"),
-        ("team-laptops.jpg", "Books and e-learning", "What you need, when you need it, how you need it.", "e-learning-services/"),
-        ("gemba-team.jpg", "Courses and seminars", "Make your own workplace your campus.", "courses/"),
+        ("training-session.jpg", "Sensei Mentorship", "Transformation through dialogue",
+         "Our sensei partnership is helping leaders to learn faster through challenging and dialogue. Leadership for complex systems needs systems thinking and deep understanding of the hidden drivers of improvement and innovation. Whether you are advanced in systems thinking or just now starting to use the method, we recommend you enlist the expertise of our sensei mentor to help you with learning and growing through your journey.",
+         "sensei-mentorship/"),
+        ("team-laptops.jpg", "Books and e-learning", "What you need, when you need it, how you need it.",
+         "ILO provides e-books, e-courses and webinars for learning organizations. These digital resources reflect the best knowledge available on learning leadership. It's affordable and available 24/7. We can also create customized e-learning programs and webinars for learning organizations.",
+         "e-learning-services/"),
+        ("gemba-team.jpg", "Courses and seminars", "Make your own workplace your campus.",
+         "We tailor site training linked to the practical challenges of developing a learning and improvement culture. We also do training with Gemba learning trips to leading Norwegian companies and municipalities. A change of scenery helps open the mind to new ways of thinking: we can also bring your team to our countryside retreat in Italy for our off-site training program.",
+         "training/"),
     ]
     svc = "".join(
-        f'<article class="card"><img class="card-img" src="{{r}}assets/img/{img}" alt="" loading="lazy"><div class="card-body"><h3>{t}</h3><p>{d}</p><a class="more" href="{{r}}{h}">Learn more</a></div></article>'
-        for img, t, d, h in services
+        f'<article class="card"><img class="card-img" src="{{r}}assets/img/{img}" alt="" loading="lazy"><div class="card-body"><h3>{t}</h3><p><strong>{sub}</strong></p><p>{d}</p><a class="more" href="{{r}}{h}">Learn more</a></div></article>'
+        for img, t, sub, d, h in services
     )
     partners = [
-        ("logo-flowit.png", "Flowit", "<p>We cooperate in the following areas:</p><ul><li>Forbedringslederskolen (School)</li><li>Black Belt Lean and continuous improvement program</li><li>Conferences</li><li>Leadership seminar in Piemonte, Italy</li></ul>"),
-        (None, "Obeya.Global", "<p>ILO is a founding member of Obeya.Global, the international community for Obeya practice.</p>"),
-        ("logo-digilean.png", "DigiLEAN", '<p>We cooperate with Kaizen Solutions to develop DigiLEAN LEARNING. ILO provides DigiLEAN with digital learning resources. <a href="https://www.digilean.com/" target="_blank" rel="noopener">digilean.com</a></p>'),
-        ("logo-leonardo.png", "Leonardo Group Americas", "<p>Affiliated for the UK, Spain, Italy, Sweden and Norway. Online training and certification in Mixed Model Line Design and Mixed Model Material Management. Consulting in advanced Lean for healthcare and manufacturing.</p>"),
+        ("logo-flowit.png", "Flowit", "<p>ILO is part of a cluster of providers of organizational learning resources. We cooperate in the following areas:</p><ul><li>Forbedringslederskolen (School)</li><li>Black Belt Lean and continuous improvement program</li><li>Conferences</li><li>Leadership seminar in Piemonte, Italy</li></ul>"),
+        ("logo-los-norge.png", "LOS Norge", "<p>Society for Organizational Learning in Norway. We cooperate with LOS Norge in two areas:</p><ul><li>The Learning Organizations program, ongoing since 2020</li><li>An annual knowledge creation workshop in Piemonte, Italy</li></ul>"),
+        ("logo-digilean.png", "DigiLEAN", "<p>We cooperate with Kaizen Solutions to develop DigiLEAN LEARNING. ILO provides DigiLEAN with digital learning resources.</p>"),
+        ("logo-leonardo.png", "Leonardo Group Americas", "<p>We are affiliated with Leonardo Group Americas for the UK, Spain, Italy, Sweden and Norway. Online training and certification in Mixed Model Line Design and Mixed Model Material Management. Consulting in advanced Lean for the healthcare and manufacturing sectors.</p>"),
     ]
     pcards = "".join(
-        f'<div class="card logo-card"><div class="logo-box">'
-        + (f'<img src="{{r}}assets/img/{logo}" alt="{name}" loading="lazy">' if logo else f'<span class="wordmark">{name}</span>')
-        + f"</div><h3>{name}</h3>{body}</div>"
+        f'<div class="card logo-card"><div class="logo-box"><img src="{{r}}assets/img/{logo}" alt="{name}" loading="lazy"></div><h3>{name}</h3>{body}</div>'
         for logo, name, body in partners
     )
     clients = "".join(f'<div class="mini-card"><h3>{n}</h3><p>{d}</p></div>' for n, d in CLIENTS)
     home = f"""
 <section class="hero" style="background-image:url('{{r}}assets/img/hero-laptop.jpg')"><div class="container">
   <span class="eyebrow">Institute for Learning Organizations</span>
-  <h1>Shaping the Future with Better Learning</h1>
-  <p>Order the book <em>Systems Thinking with Obeya</em> – now available in English.</p>
+  <h1>Shaping the future with better learning</h1>
+  <p>Order the book <em>Systems Thinking with Obeya</em> in English.</p>
   <div class="btn-row">
-    <a class="btn light" href="{{r}}estore/">Get Your Copy Today</a>
-    <a class="btn ghost" style="color:#fff;border-color:#fff" href="{{r}}services/">Our Services</a>
+    <a class="btn light" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the book</a>
+    <a class="btn ghost" style="color:#fff;border-color:#fff" href="{{r}}services/">Learn more</a>
   </div>
 </div></section>
 
 <section class="section"><div class="container mission">
   <div>
-    <span class="eyebrow">Our Mission</span>
-    <h2>Our purpose: millions of improvement culture leaders</h2>
-    <p class="lead">In a rapidly changing world, thriving begins with the ability to learn and improve continuously. In learning organizations, individuals and teams unite to master the art of improvement – building the foundation for adaptability and lasting success.</p>
-    <p>Through Systems Thinking and Obeya, we help leaders and teams transform challenges into opportunities, fostering collaboration, innovation and growth.</p>
-    <div class="stat"><strong>30+</strong><span>years of expertise in sensei mentorship, e-courses and on-site training, supporting leaders and teams to build cultures of improvement and innovation.</span></div>
+    <span class="eyebrow">Our Purpose</span>
+    <h2>Millions of improvement culture leaders</h2>
+    <p class="lead">All organizations wanting to survive in a complex and rapidly changing environment need to transform into a real learning organization. Learning organizations are a system of people who master the art of learning together.</p>
+    <p>In this environment, work is seen as a continuous learning process rather than simply a way to execute tasks. Through sensei mentorship, e-courses and on-site training we offer more than 30 years of experience to leaders and organizations to make changes that last.</p>
+    <div class="stat"><strong>30+</strong><span>years of experience in continuous improvement and developing real learning organizations.</span></div>
   </div>
   <img class="media" src="{{r}}assets/img/obeya-wall.jpg" alt="Obeya room with visual management boards" loading="lazy">
 </div></section>
 
 <section class="section alt"><div class="container">
   <div class="section-head center">
-    <span class="eyebrow">How We Help</span>
-    <h2>How we contribute</h2>
+    <span class="eyebrow">How we can contribute</span>
+    <h2>We challenge and train, by giving new lenses</h2>
+    <p class="lead">Mission: we challenge and train, by giving new lenses, for improvement culture transformation.</p>
   </div>
   <div class="grid cols-3">{svc}</div>
+  <div class="cta-band" style="margin-top:48px">
+    <div><h2>Free consultation</h2><p>Schedule a complimentary consultation with Institute for Learning Organizations.</p></div>
+    <a class="btn light" href="{{r}}contact/">Get in touch</a>
+  </div>
 </div></section>
 
 <section class="section"><div class="container">
   <div class="section-head center">
-    <span class="eyebrow">Partners</span>
-    <h2>Our Partners</h2>
+    <span class="eyebrow">Co-operation partnership</span>
+    <h2>Our partners</h2>
+    <p class="lead">ILO is part of a cluster of providers of organizational learning resources.</p>
   </div>
   <div class="grid cols-4">{pcards}</div>
 </div></section>
 
-{affiliates_section()}
-
-<section class="section"><div class="container">
+<section class="section alt"><div class="container">
   <div class="section-head center">
-    <span class="eyebrow">Our Clients</span>
-    <h2>Organizations we work with</h2>
+    <span class="eyebrow">Some of our clients</span>
+    <h2>Organizations we have trained</h2>
+    <p class="lead">Some of the organizations we have provided improvement training for in recent years.</p>
   </div>
   <div class="grid cols-3">{clients}</div>
 </div></section>
 
-<section class="section alt"><div class="container split">
-  <img src="{{r}}assets/img/bjarne-and-samer.jpg" alt="Bjarne Berg Wig and Samer Hamadeh" loading="lazy">
+<section class="section"><div class="container split">
+  <img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy">
   <div>
     <span class="eyebrow">Meet ILO</span>
     <h2>Making systems thinking affordable and accessible</h2>
-    <p>The Institute for Learning Organizations (ILO) was created to make the knowledge of systems thinking affordable and accessible. It evolved from TQM Center Norway.</p>
-    <p>ILO has two resident experts, Bjarne Berg Wig and Samer Hamadeh. Together they offer over 30 years of experience in continuous improvement and developing real learning organizations. Their focus is to help employees and leaders become systems thinkers, and to apply this thinking in practice within their organizations – through a combination of mentorship, on-site training and e-learning.</p>
-    <div class="btn-row"><a class="btn" href="{{r}}about-us/">About ILO</a></div>
+    <p>The Institute for Learning Organizations (ILO) was created to make the knowledge of systems thinking affordable and accessible. It evolved from TQM Center Norway. ILO has two resident experts, Bjarne Berg Wig and Samer Hamadeh. Together they offer over 30 years of experience in continuous improvement and developing real learning organizations. Their focus is to help employees and leaders become systems thinkers, and to practically apply this thinking within their organizations, through a combination of mentorship, on-site training and e-learning.</p>
+    <h3 style="margin-top:28px">Bjarne Berg Wig</h3>
+    <p>Author and sensei Bjarne Berg Wig has more than 30 years of experience in quality management and Lean. He was Quality and Innovation Manager at Hydro Agri Europe (now Yara). For the last 20 years, Bjarne has helped many Norwegian and international private and public companies transform into learning organizations. He has developed academic programs with Bergen University College in Quality Management and Lean leadership. Several hundred leaders have gone through his practical training, with high impact on many companies and municipalities in Norway.</p>
+    <p>He has written 7 professional books, which are used both in industry and in academic programs. Bjarne is a founder of LOS Norge, the Society for Learning Organizations in Norway, and is regarded as one of the "gurus" of learning organizations in Europe.</p>
+    <div class="btn-row"><a class="btn" href="mailto:bjarne@learnorg.global">bjarne@learnorg.global</a></div>
   </div>
 </div></section>
 {CTA}
 """
-    page("", "Home", "The Institute for Learning Organizations helps leaders and teams build cultures of improvement through systems thinking, Obeya, sensei mentorship, e-learning and training.", home)
-
-    # ---------- About ----------
-    about = f"""
-{page_hero("About ILO", "Future-prepared systems thinkers.", "obeya-wall.jpg")}
-<section class="section"><div class="container split">
-  <div>
-    <span class="eyebrow">Our Story</span>
-    <h2>Since 1998</h2>
-    <p class="lead">The Institute for Learning Organizations was established in 1998 under the name TQM Center Norway, as a collaboration between researchers, industry and consulting environments.</p>
-    <p>We have been developing courses on TQM and Lean management for Norwegian universities, municipalities and international businesses. Our founder Bjarne Berg Wig has published eight books on improvement leadership and Obeya.</p>
-    <p>ILO is part of an R&amp;D program supported by the Research Council of Norway: ALIOS – Accelerated Learning in Organizations and Society.</p>
-    <div class="btn-row"><a class="btn" href="{{r}}services/">Our Services</a></div>
-  </div>
-  <img src="{{r}}assets/img/training-session.jpg" alt="Systems thinking training session" loading="lazy">
-</div></section>
-
-<section class="section alt"><div class="container">
-  <div class="section-head">
-    <span class="eyebrow">Our Team</span>
-    <h2>Meet our experts</h2>
-  </div>
-  <div class="grid cols-2">
-    <div class="person">
-      <img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy">
-      <div>
-        <h3>Bjarne Berg Wig</h3>
-        <div class="role">Founder · Author · Sensei</div>
-        <p>Bjarne Berg Wig is an author and sensei with over three decades of experience in quality management, Lean and systems thinking. He has collaborated with Bergen University of Applied Sciences, authored eight professional books, and pioneered programs on leadership and learning organizations. He leads the ALIOS R&amp;D program and is a certified systems thinking trainer.</p>
-        <p>He was Quality and Innovation Manager at Hydro Agri Europe (now Yara), and for the last 20 years has helped many Norwegian and international private and public organizations transform into learning organizations. Bjarne is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p>
-      </div>
-    </div>
-    <div class="person">
-      <img src="{{r}}assets/img/bjarne-and-samer.jpg" alt="Samer Hamadeh with Bjarne Berg Wig" loading="lazy" style="object-position:30% center">
-      <div>
-        <h3>Samer Hamadeh</h3>
-        <div class="role">Co-founder · Systems Thinking Expert</div>
-        <p>Samer Hamadeh, co-founder of ILO, is a systems thinking expert who helps organizations and communities cultivate actionable cultures of learning and innovation that drive meaningful change.</p>
-      </div>
-    </div>
-  </div>
-</div></section>
-
-{affiliates_section(alt=False)}
-{CTA}
-"""
-    page("about-us/", "About ILO", "ILO was established in 1998 as TQM Center Norway. Meet our experts Bjarne Berg Wig and Samer Hamadeh.", about)
+    page("", "Home", "The Institute for Learning Organizations helps leaders and organizations become learning organizations through sensei mentorship, e-learning, training and Obeya.", home)
 
     # ---------- Services ----------
     svc_rows = [
-        ("hero-coffee.jpg", "Sensei Mentorship", "Transformation through dialogue", "Our sensei mentorship helps leaders develop systems thinking, discover hidden drivers of improvement, and foster innovation. Whether you are an advanced practitioner or just starting, our tailored approach accelerates your journey to becoming a practicing systems thinker and agent of change.", "sensei-mentorship/"),
-        ("piemonte.jpg", "Training Programs", "Tailored training for real impact", "From Gemba learning trips at leading Norwegian organizations to immersive off-site retreats in Italy, our training programs are customized to address your organization's unique challenges and foster a learning culture.", "courses/"),
-        ("logo-digilean.png", "DigiLEAN", "Empowering through digital tools", "Through our partnership with DigiLEAN, we provide innovative digital learning solutions to streamline Lean management and process optimization.", "e-learning-services/"),
+        ("hero-coffee.jpg", "Sensei Mentorship", "Transformation through challenge and dialogue", "Our sensei partnership is helping leaders to learn faster through challenging and dialogue. Leadership for complex systems needs systems thinking and deep understanding of the hidden drivers of improvement and innovation. Whether you are advanced in systems thinking or have just started, enlist the expertise of our sensei mentor to help you with learning and growing through your journey.", "sensei-mentorship/"),
+        ("team-laptops.jpg", "E-learning", "What you need, when you need it, how you need it.", "ILO provides e-books, e-courses and webinars for learning organizations. These digital resources reflect the best knowledge available on learning leadership. It's affordable and available 24/7. We can also create customized e-learning programs and webinars for learning organizations.", "e-learning-services/"),
+        ("piemonte.jpg", "Training", "Make your workplace the primary campus.", "We tailor site training linked to the practical challenges of developing a learning and improvement culture. We also do training with gemba learning trips to leading Norwegian companies and municipalities. A change of scenery helps open the mind to new ways of thinking: we can also bring your team to our countryside retreat in Italy for our off-site program.", "training/"),
     ]
     rows = ""
     for i, (img, t, sub, d, h) in enumerate(svc_rows):
-        style = ' style="background:#fff;padding:48px;object-fit:contain"' if img.endswith(".png") else ""
         rows += f"""<div class="split{' reverse' if i % 2 else ''}" style="margin-bottom:80px">
-  <img src="{{r}}assets/img/{img}" alt="" loading="lazy"{style}>
+  <img src="{{r}}assets/img/{img}" alt="" loading="lazy">
   <div><span class="eyebrow">{sub}</span><h2>{t}</h2><p class="lead">{d}</p><div class="btn-row"><a class="btn" href="{{r}}{h}">Learn more</a></div></div>
 </div>"""
     services_page = f"""
-{page_hero("Services", "Mentorship, training and digital learning for organizations that want to learn faster.", "gemba-team.jpg")}
+{page_hero("Services", "Sensei mentorship, e-learning and training for learning organizations.", "gemba-team.jpg")}
 <section class="section"><div class="container">{rows}</div></section>
 {CTA}
 """
-    page("services/", "Services", "Sensei mentorship, training programs and DigiLEAN digital learning from the Institute for Learning Organizations.", services_page)
+    page("services/", "Services", "Sensei mentorship, e-learning and training from the Institute for Learning Organizations.", services_page)
 
     # ---------- Sensei ----------
     sensei = f"""
 {page_hero("Sensei Mentorship", "Transformation through challenge and dialogue.", "hero-coffee.jpg", '<a href="{r}services/">Services</a>')}
 <section class="section"><div class="container split">
   <div>
-    <span class="eyebrow">What is a sensei?</span>
+    <span class="eyebrow">Sensei</span>
     <h2>Look beyond the borders of your first understanding</h2>
-    <p class="lead">A sensei encourages you to look beyond the borders of your first understanding of the current situation, toward a deeper meaning.</p>
-    <p>Whether you are advanced in systems thinking or just starting to use the method, we recommend you enlist the expertise of our sensei mentor to help you learn and grow through your journey.</p>
-    <div class="btn-row"><a class="btn" href="{{r}}contact/">Talk to a sensei</a></div>
+    <p class="lead">Sensei is encouragement to look beyond the borders of your first understanding of the current situation, toward a deeper meaning.</p>
+    <p>Whether you are advanced in systems thinking or just now starting to use the method, we recommend you enlist the expertise of our sensei mentor to help you with learning and growing through your journey.</p>
+    <div class="btn-row"><a class="btn" href="{{r}}contact/">Let us know how we can help you</a></div>
   </div>
   <img src="{{r}}assets/img/pdca-sketch.jpg" alt="Hand-drawn Plan–Do–Study–Act learning cycle" loading="lazy">
 </div></section>
 {CTA}
 """
-    page("sensei-mentorship/", "Sensei Mentorship", "Sensei mentorship from ILO: transformation through challenge and dialogue for leaders becoming systems thinkers.", sensei)
+    page("sensei-mentorship/", "Sensei Mentorship", "Sensei mentorship from ILO: transformation through challenge and dialogue.", sensei)
+
+    # ---------- Training ----------
+    training = f"""
+{page_hero("Training", "Make your workplace the primary campus.", "training-session.jpg", '<a href="{r}services/">Services</a>')}
+<section class="section"><div class="container">
+  <div class="split" style="margin-bottom:96px">
+    <img src="{{r}}assets/img/training-session.jpg" alt="On-site training" loading="lazy">
+    <div><span class="eyebrow">On-site Training</span><h2>Book an expert to come to your company</h2>
+      <p class="lead">Book an expert to come to your company for hands-on training.</p>
+      <p>We believe that the best way to learn is through a combination of learning together, e-learning and practical application. Our experts provide custom courses that are tailored to the needs of your company and team members.</p>
+      <div class="btn-row"><a class="btn" href="{{r}}contact/">Contact us</a></div></div>
+  </div>
+  <div class="split reverse" style="margin-bottom:96px">
+    <img src="{{r}}assets/img/piemonte.jpg" alt="Vineyards in Piemonte, Italy" loading="lazy">
+    <div><span class="eyebrow">Off-site Training</span><h2>A change of scenery helps open the mind</h2>
+      <p class="lead">Take your team off-site to ILO's Albergo del Vino, surrounded by the vineyards of Piemonte, Italy.</p>
+      <p>Here your team can fully focus on "learning how to learn together". Training programs are tailored to the needs of your organization and cover all key concepts to help participants become systems thinkers. This off-site program is excellent for team building too.</p>
+      <p>In advance of your visit we will discuss the goals and needs of your team. From this we will create a custom program so that your team receives exactly what it needs.</p>
+      <div class="btn-row"><a class="btn" href="{{r}}off-site-training/">Learn more</a></div></div>
+  </div>
+  <div class="split">
+    <img src="{{r}}assets/img/gemba-team.jpg" alt="Team on a Gemba visit" loading="lazy">
+    <div><span class="eyebrow">Gemba Learning Trips</span><h2>Go and see</h2>
+      <p class="lead">Crucial to learning is to go and see, communicate and learn from practitioners.</p>
+      <p>We provide training and learning in partnership with leading companies and municipalities in Norway, Italy and the UK in the field of Lean and learning culture. We organize visits to relevant organizations so participants get a chance to see how improvement and change are made, and discuss specific case studies with the transformation leaders behind them. This combined training and gemba walks provide the ultimate learning experience.</p>
+      <div class="btn-row"><a class="btn" href="{{r}}contact/">Contact us</a></div></div>
+  </div>
+</div></section>
+{CTA}
+"""
+    page("training/", "Training", "On-site training, off-site training in Piemonte, Italy, and Gemba learning trips from ILO.", training)
+
+    offsite = f"""
+{page_hero("Off-site Training at Albergo del Vino", "A change of scenery helps open the mind to new ways of thinking.", "piemonte.jpg", '<a href="{r}services/">Services</a>')}
+<section class="section"><div class="container split">
+  <div>
+    <span class="eyebrow">Training</span>
+    <h2>Learning how to learn together</h2>
+    <p class="lead">Take your team off-site to ILO's Albergo del Vino, surrounded by the vineyards of Piemonte, Italy.</p>
+    <p>Here your team can fully focus on "learning how to learn together". Training programs are tailored to the needs of your organization and cover all key concepts to help participants become systems thinkers. This off-site program is excellent for team building too.</p>
+    <p>In advance of your visit we will discuss the goals and needs of your team. From this we will create a custom program so that your team receives exactly what it needs.</p>
+    <div class="btn-row"><a class="btn" href="{{r}}contact/">Let us know how we can help you</a></div>
+  </div>
+  <img src="{{r}}assets/img/piemonte.jpg" alt="Vineyards around Albergo del Vino, Piemonte" loading="lazy">
+</div></section>
+{CTA}
+"""
+    page("off-site-training/", "Off-site Training", "Off-site training for your team at ILO's Albergo del Vino in Piemonte, Italy.", offsite)
 
     # ---------- Learning Culture (restored from the old Wix "coaching" and "about" pages) ----------
     videos = [
@@ -564,7 +580,7 @@ def build():
         ("STTwZGNvLmM", "Applying the Lens of Profound Knowledge", "Robert Lloyd, PhD, from the IHI Open School course QI101."),
         ("xKv--YA8XJE", "Deming's System of Profound Knowledge", "Robert Lloyd, PhD, from the IHI Open School course QI101."),
     ]
-    video_cards = "".join(f'<div><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/{v}" title="{t}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><h3>{t}</h3><p class="note">{d}</p></div>' for v, t, d in videos)
+    _unused = "".join(f'<div><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/{v}" title="{t}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><h3>{t}</h3><p class="note">{d}</p></div>' for v, t, d in videos)
     culture = f"""
 {page_hero("Learning Culture Transformation", "From seeing work as execution to seeing work as continuous learning and improvement.", "training-session.jpg", '<a href="{r}services/">Services</a>')}
 <section class="section"><div class="container"><div class="prose">
@@ -583,10 +599,6 @@ def build():
   <h2>What is a learning organization?</h2>
   <p>An organization that acquires, creates, interprets, transmits, shares and retains knowledge, and consciously adapts its behaviour to reflect new knowledge and insights.</p>
 </div></div></section>
-<section class="section alt"><div class="container">
-  <div class="section-head"><span class="eyebrow">Video library</span><h2>Recommended videos</h2></div>
-  <div class="video-grid">{video_cards}</div>
-</div></section>
 {CTA}
 """
     page("learning-culture/", "Learning Culture Transformation", "Learning Culture Transformation: seeing work as continuous learning and the organization as a complex adaptive system. With a video library.", culture)
@@ -643,155 +655,147 @@ def build():
 """
     page("e-learning-services/", "E-learning Services", "E-courses, e-books, webinars and books on Lean, systems thinking and learning organizations by Bjarne Berg Wig.", elearn)
 
-    # ---------- Courses ----------
-    courses = f"""
-{page_hero("Courses", "Make your own workplace your campus.", "training-session.jpg", '<a href="{r}services/">Services</a>')}
+    # ---------- E-resources (videos from the old Wix "E-resources" page) ----------
+    vids = "".join(f'<div><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/{v}" title="{t}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><h3>{t}</h3><p class="note">{d}</p></div>' for v, t, d in videos)
+    eres = f"""
+{page_hero("E-resources", "Videos, book resources and downloads for learning organizations.", "desk-laptop.jpg")}
 <section class="section"><div class="container">
-  <div class="split" style="margin-bottom:96px">
-    <img src="{{r}}assets/img/training-session.jpg" alt="On-site training" loading="lazy">
-    <div><span class="eyebrow">On-site Training</span><h2>Bring an expert to your company</h2>
-      <p class="lead">Book an expert to come to your company for hands-on training.</p>
-      <p>We believe the best way to learn is through a combination of learning together, e-learning and practical application. Our experts provide custom courses tailored to the needs of your company and team members.</p>
-      <div class="btn-row"><a class="btn" href="{{r}}contact/">Contact Us</a></div></div>
-  </div>
-  <div class="split reverse" style="margin-bottom:96px">
-    <img src="{{r}}assets/img/piemonte.jpg" alt="Vineyards in Piemonte, Italy" loading="lazy">
-    <div><span class="eyebrow">Off-site Training</span><h2>A change of scenery opens the mind</h2>
-      <p class="lead">Take your team off-site to ILO's Albergo del Vino, surrounded by the vineyards of Piemonte, Italy.</p>
-      <p>Here your team can fully focus on “learning how to learn together”. Programs are tailored to the needs of your organization and cover all key concepts to help participants become systems thinkers. The off-site program is excellent for team building too.</p>
-      <p>Before your visit we discuss the goals and needs of your team, and create a custom program so your team receives exactly what it needs.</p>
-      <div class="btn-row"><a class="btn" href="{{r}}contact/">Plan an off-site</a></div></div>
-  </div>
-  <div class="split">
-    <img src="{{r}}assets/img/gemba-team.jpg" alt="Team at a Gemba visit" loading="lazy">
-    <div><span class="eyebrow">Gemba Learning Trips</span><h2>Go and see</h2>
-      <p class="lead">Crucial to learning is to go and see, communicate and learn from practitioners.</p>
-      <p>We provide training and learning in partnership with leading companies and municipalities in Norway, Italy and the UK in the field of Lean and learning culture. We organize visits to relevant organizations so participants can see how improvement and change are made, and discuss case studies with the transformation leaders behind them. Combined training and gemba walks provide the ultimate learning experience.</p>
-      <div class="btn-row"><a class="btn" href="{{r}}contact/">Contact Us</a></div></div>
-  </div>
-</div></section>
-{CTA}
-"""
-    page("courses/", "Courses", "On-site training, off-site training in Piemonte, Italy, and Gemba learning trips from ILO.", courses)
-
-    # ---------- Open resources ----------
-    res = f"""
-{page_hero("Open Resources", "Knowledge at your fingertips.", "desk-laptop.jpg")}
-<section class="section"><div class="container">
-  <div class="section-head">
-    <p class="lead">Explore our library of e-books, webinars and video resources designed for learning organizations. Gain insights on topics like systems thinking, learning leadership and Lean practices – available anytime, anywhere.</p>
-  </div>
   <div class="grid cols-3">
-    <article class="card"><img class="card-img" src="{{r}}assets/img/book-obeya.jpg" alt="Systems Thinking with Obeya cover" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
-      <span class="tag">Featured</span><h3>Systems Thinking with Obeya</h3>
-      <p>A comprehensive guide for leaders adopting Lean principles.</p>
-      <a class="more" href="{{r}}estore/">Get the book</a></div></article>
-    <article class="card"><img class="card-img" src="{{r}}assets/img/learning-culture-diagram.png" alt="Learning culture model" loading="lazy" style="object-fit:contain;background:#fff;padding:12px"><div class="card-body">
-      <span class="tag">Popular</span><h3>Everyday Learning</h3>
-      <p>Frameworks for building continuous improvement practices.</p>
-      <a class="more" href="https://issuu.com/tqm2/docs/l_rende_hverdag_e-bok_versjon_1.0" target="_blank" rel="noopener">Read the e-book</a></div></article>
-    <article class="card"><img class="card-img" src="{{r}}assets/img/cafe-laptop.jpg" alt="" loading="lazy"><div class="card-body">
-      <span class="tag">Webinars</span><h3>Webinars</h3>
-      <p>On leadership, learning teams and continuous improvement.</p>
-      <a class="more" href="{{r}}upcoming-webinars/">See webinars</a></div></article>
-  </div>
-  <div class="cta-band" style="margin-top:48px">
-    <div><h2>Book resources</h2><p>Chapter-by-chapter videos, links and templates for Systems Thinking with Obeya, Lærende organisasjoner and LEAN – Ledelse for lærende organisasjoner.</p></div>
-    <a class="btn light" href="{{r}}book-resources/">Open book resources</a>
+    <article class="card"><img class="card-img" src="{{r}}assets/img/book-laerende-organisasjoner.jpg" alt="Lærende organisasjoner" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
+      <span class="tag">Norsk</span><h3>Lærende organisasjoner</h3>
+      <p>Ressurser til boka, kapittel for kapittel: Del I Fortid, Del II Nåtid, Del III Framtid.</p>
+      <a class="more" href="{{r}}book-resources/laerende-organisasjoner/">Til ressurssidene</a></div></article>
+    <article class="card"><img class="card-img" src="{{r}}assets/img/book-lean-ledelse.jpg" alt="LEAN Ledelse" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
+      <span class="tag">Norsk</span><h3>LEAN Ledelse for lærende organisasjoner</h3>
+      <p>Del I Lederskap og kultur: forelesningsnotater, maler og kursmateriell.</p>
+      <a class="more" href="{{r}}book-resources/lean-ledelse/">Til ressurssidene</a></div></article>
+    <article class="card"><img class="card-img" src="{{r}}assets/img/book-det-er-ledelse.jpg" alt="Det er Ledelse" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
+      <span class="tag">Norsk · E-bok</span><h3>Det er Ledelse</h3>
+      <p>Kvalitetsledelse for det 21. århundret.</p>
+      <a class="more" href="{{r}}det-er-ledelse/">Les mer</a></div></article>
   </div>
 </div></section>
-{pdf_library()}
+<section class="section alt"><div class="container">
+  <div class="section-head"><span class="eyebrow">Video library</span><h2>Recommended videos</h2></div>
+  <div class="video-grid">{vids}</div>
+</div></section>
+{pdf_library().replace('section alt', 'section')}
 {CTA}
 """
-    page("open-resources/","Open Resources", "Open e-books, webinars and resources on systems thinking, learning leadership and Lean.", res)
+    page("e-resources/", "E-resources", "Videos, book resources and downloadable material on learning organizations, Lean and systems thinking.", eres)
 
-    # ---------- eStore ----------
-    estore = f"""
-{page_hero("eStore", "Digital and print resources.", "butterflies.jpg")}
-<section class="section"><div class="container">
-  <div class="section-head">
-    <span class="eyebrow">Shop our resources</span>
-    <h2>Practical tools and in-depth insight</h2>
-    <p class="lead">Access a curated collection of e-books, training materials and guides tailored to help leaders and organizations excel.</p>
-  </div>
-  <div class="split" style="margin-bottom:72px">
-    <img src="{{r}}assets/img/book-obeya.jpg" alt="Systems Thinking with Obeya" loading="lazy" style="max-width:340px;justify-self:center">
-    <div><span class="eyebrow">New in English</span><h2>Systems Thinking with Obeya</h2>
-      <p class="lead">By Bjarne Berg Wig. A comprehensive guide for leaders adopting Lean principles and building learning organizations with Obeya.</p>
-      <div class="btn-row"><a class="btn" href="mailto:post@learnorg.global?subject=Order%3A%20Systems%20Thinking%20with%20Obeya">Order your copy</a></div></div>
-  </div>
-  <div class="grid cols-3">
-    <article class="card"><img class="card-img" src="{{r}}assets/img/pdca-sketch.jpg" alt="" loading="lazy"><div class="card-body">
-      <span class="tag">Featured</span><h3>How-to Summaries</h3><p>Practical guides for implementing Lean and systems thinking.</p>
-      <a class="more" href="{{r}}contact/">Ask about summaries</a></div></article>
-    <article class="card"><img class="card-img" src="{{r}}assets/img/desk-laptop.jpg" alt="" loading="lazy"><div class="card-body">
-      <span class="tag">Featured</span><h3>Online Courses</h3><p>Self-paced modules designed to meet organizational needs.</p>
-      <a class="more" href="https://educate.potential.com/courses/laerende-hverdag/" target="_blank" rel="noopener">Browse courses</a></div></article>
-    <article class="card"><img class="card-img" src="{{r}}assets/img/book-laerende-organisasjoner.jpg" alt="" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:16px"><div class="card-body">
-      <span class="tag">Books</span><h3>Books by Bjarne Berg Wig</h3><p>Lærende organisasjoner, LEAN – Ledelse for lærende organisasjoner, Quality Improvement as a Craft and more.</p>
-      <a class="more" href="{{r}}e-learning-services/#books">See all books</a></div></article>
+    det = f"""
+{page_hero("Det er Ledelse", "Kvalitetsledelse for det 21. århundret.", "desk-laptop.jpg", '<a href="{r}e-resources/">E-resources</a>')}
+<section class="section"><div class="container split">
+  <img src="{{r}}assets/img/book-det-er-ledelse.jpg" alt="Det er Ledelse" loading="lazy" style="max-width:320px;justify-self:center;box-shadow:none">
+  <div>
+    <span class="eyebrow">E-bok</span>
+    <h2>Seize the opportunity</h2>
+    <p class="lead">E-bok «Det er Ledelse» – Kvalitetsledelse for det 21. århundret.</p>
+    <p>Dette er læreboka i TKL/TQM ved flere høgskoler og universitet. Her vil du også finne en mengde ressurser som er knyttet til opplæring i kvalitetsledelsesfaget.</p>
+    <div class="btn-row"><a class="btn" href="https://issuu.com/tqm2/docs/det_er_ledelse_8" target="_blank" rel="noopener">Kjøp boka og last den ned</a></div>
   </div>
 </div></section>
 {CTA}
 """
-    page("estore/", "eStore", "Books, e-books, how-to summaries and online courses from the Institute for Learning Organizations.", estore)
+    page("det-er-ledelse/", "Det er Ledelse", "E-boka Det er Ledelse – kvalitetsledelse for det 21. århundret, av Bjarne Berg Wig.", det, "nb")
 
-    # ---------- Events ----------
-    upcoming = f"""
-{page_hero("Upcoming Webinars", "Learn and grow.", "cafe-laptop.jpg", "Events")}
-<section class="section"><div class="container">
-  <div class="section-head"><p class="lead">Join our webinars to explore systems thinking, Lean methodologies and real-life applications of learning culture. Gain actionable insights directly from industry experts.</p></div>
-  <div class="event">
-    <div class="date"><b>TBA</b><span>Date</span></div>
-    <div><h3>Everyday Learning</h3>
-      <div class="meta">Online · Hosts: Bjarne Berg Wig and Samer Hamadeh</div>
-      <p>How to frame the transformation to a learning culture. Send us your name and e-mail address and we will follow up with information about the webinar.</p>
-      <a class="btn" href="{{r}}contact/">Register interest</a></div>
+    # ---------- Obeya ----------
+    obeya = f"""
+{page_hero("Systems Thinking with Obeya", "Resource pages for the book.", "obeya-wall.jpg")}
+<section class="section"><div class="container split">
+  <img src="{{r}}assets/img/book-obeya.jpg" alt="Systems Thinking with Obeya" loading="lazy" style="max-width:340px;justify-self:center;box-shadow:none">
+  <div>
+    <p class="lead">Welcome to the resource pages for the book! These pages are still "young" and will be continually improved with new resources.</p>
+    <p>We are also working on an e-course with a 9-step guide for successful development of Obeya in your organization or community. Please help us develop these free resources: if you have ideas or resources, mail <a href="mailto:bjarne@learnorg.global">bjarne@learnorg.global</a>.</p>
+    <div class="btn-row"><a class="btn" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the English book</a><a class="btn ghost" href="https://www.amazon.com/Systemtenkning-Obeya-Norwegian-Bjarne-Berg-ebook/dp/B0CG67C74W" target="_blank" rel="noopener">Bestill e-boka</a></div>
+  </div>
+</div></section>
+<section class="section alt"><div class="container">
+  <div class="grid cols-2">
+    <article class="card"><div class="card-body">
+      <span class="tag">English</span><h3>Go to the pages in English</h3>
+      <p>In these pages you will find links, videos, tools and templates that will speed up your learning. If you have questions or requirements, don't hesitate to contact us at <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>
+      <a class="more" href="{{r}}book-resources/systems-thinking-with-obeya/">English edition</a></div></article>
+    <article class="card"><div class="card-body">
+      <span class="tag">Norsk</span><h3>Systemtenkning med Obeya</h3>
+      <p>Her vil du finne videoer, linker til vitenskapelige publikasjoner, maler og læreeksempler. Tips og spørsmål: kontakt oss på <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>
+      <a class="more" href="{{r}}book-resources/systemtenkning-med-obeya/">Norsk utgave</a></div></article>
   </div>
 </div></section>
 {CTA}
 """
-    page("upcoming-webinars/", "Upcoming Webinars", "Upcoming ILO webinars on systems thinking, Lean and learning culture.", upcoming)
+    page("obeya/", "Systems Thinking with Obeya", "Resource pages for Systems Thinking with Obeya by Bjarne Berg Wig, in English and Norwegian.", obeya)
 
-    workshops = f"""
-{page_hero("Workshops and Seminars", "Collaborate and transform.", "obeya-day-seminar.jpg", "Events")}
+    # ---------- Trippel L ----------
+    cal = [
+        ("Modul 1. Lean og systemtenkning", ["Januar – selvstudier", "1. februar – nettbasert oppstartsamling", "27. februar – nettbasert samling", "13.–14. mars – lunsj-til-lunsj-samling på Aker Tranby ved Drammen"]),
+        ("Modul 2. Læringskultur og Obeya", ["20. mars – nettbasert samling", "4. april – nettbasert samling", "17. og 18. april – samling hos Toyota Jæger Automobil i Bergen", "Utvikling av egen strategisk Obeya"]),
+        ("Modul 3. Lærende lederskap", ["22. mai – nettbasert samling", "13.–14. juni – fysisk samling hos Flowit i Haugesund", "Oppgaveinnlevering", "12.–13. september – offisiell utdeling av sertifikater på Lean-konferansen i Stavanger (frivillig)"]),
+    ]
+    calhtml = "".join(f'<div class="pdf-group"><h3>{m}</h3><ul>' + "".join(f"<li>{x}</li>" for x in items) + "</ul></div>" for m, items in cal)
+    trippel = f"""
+{page_hero("Trippel L – Lærende lederskap", "Et kurs i samarbeid mellom Institute for Learning Organizations og Flowit.", "training-session.jpg")}
+<section class="section"><div class="container"><div class="prose">
+  <p class="note">Kurset ble gjennomført fra desember 2023 til juni 2024. Ta kontakt for å høre om neste gjennomføring.</p>
+  <p class="lead">Mer enn noen gang trenger vi å forbedre kvalitet i vårt lederskap. Lærende lederskap utløser en kjedereaksjon av forbedringer og læring. Alle virksomheter er «komplekse tilpasningssystemer» der raskere felles læring er nøkkelen til suksess. Det starter med hvordan vi tenker: utvikling av mentale modeller som er tettere på hvordan virkeligheten egentlig er. Dette kurset handler om å forstå systemer og å forstå og forbedre vår tenkning.</p>
+  <p>Programmet er et samarbeid mellom Institute for Learning Organizations og Flowit. Det faglige innholdet er blant annet utviklet som del av et «PhD»-program som Bjarne Berg Wig har gått i regi av Cabrera Research Lab i Boston, og som del av to F&amp;U-programmer støttet av Norges forskningsråd. Det første programmet (2020–2022) resulterte i metodikk for å identifisere sterke adaptive læringskulturer (LOS-speilet). Det andre F&amp;U-programmet, ALIOS (akselerert læring i organisasjoner og samfunn), skal utvikle metoder for bedre tenkemodenhet, systemtenkning og systemledelse, der vi knytter an til verdens ledende forskning på området. Gjesteforelesere kommer fra F&amp;U-teamet i ALIOS: Sidsel W. Storaas, Johannes Borge, Kari Heggholmen, Einar Jørgensen og John Richard Hansen.</p>
+  <p>Kurset gir deg et betydelig løft videre, både individuelt ved at du tenker bedre og mer bevisst, og for din virksomhet ved at ditt lederskap får langt større virkning. Som på tidligere Lean-kurs knytter vi læring til de konkrete utfordringene dere står i, så kurset gir dobbel virkning. Alle deltakerne har flere år med Lean og kontinuerlig forbedring i egen virksomhet. Trippel L-programmet skal utløse potensial i deg og dine medarbeidere som du nesten ikke trodde var mulig.</p>
+  <p>En vesentlig nytteverdi for deg vil være å studere sammen med noen av Norges beste på området.</p>
+  <h2>Kalender</h2>
+</div>
+  <div class="grid cols-3" style="margin-top:24px">{calhtml}</div>
+  <div class="prose" style="margin-top:32px">
+  <p>Lærebøker sendes ut når dere har meldt dere på. Alt materiell er tilgjengelig på egen kursportal 24/7. Sertifikat deles ut på Lean-konferansen i september.</p>
+  <p><strong>Bjarne Berg Wig</strong>, Institute for Learning Organizations · <strong>Thorleif K. Sire</strong>, Flowit</p>
+  </div>
+</div></section>
+{CTA}
+"""
+    page("trippel-l/", "Trippel L – Lærende lederskap", "Trippel L – Lærende lederskap: kurs i systemtenkning, læringskultur og Obeya fra Institute for Learning Organizations og Flowit.", trippel, "nb")
+
+    # ---------- Obeya dagseminar ----------
+    seminar = f"""
+{page_hero("Obeya dagseminar", "Obeya – raskere felles læring.", "obeya-day-seminar.jpg", "Events")}
 <section class="section"><div class="container split">
   <div>
-    <p class="lead">Attend hands-on workshops that offer practical tools, real-world applications and networking opportunities.</p>
-    <h2>Obeya Day Seminar</h2>
-    <p>Our Obeya Day seminars focus on rapid collective learning through visual collaboration – Obeya as an architecture for better cooperation.</p>
-    <p class="note">No workshops are scheduled right now. Contact us to hear about the next one, or to arrange a seminar for your organization.</p>
-    <div class="btn-row"><a class="btn" href="{{r}}contact/">Contact Us</a></div>
+    <p class="note">Seminaret ble holdt i Bergen 17. oktober 2024. Ta kontakt for å høre om neste Obeya-seminar.</p>
+    <h2>Obeya – raskere felles læring</h2>
+    <p class="lead">Obeya er et visuelt rom for samarbeid mellom ulike funksjoner i en virksomhet. Obeya er arkitektur for radikalt bedre samspill på tvers.</p>
+    <p>Ved å visualisere (se sammen), reflektere og prøve ut løsninger skapes raskere læring, og vi reduserer tidssløsing med papirer som sendes hit og dit. Obeya er også rommet for å utvikle bedre forståelse for systemer, bedre systemtenkning.</p>
+    <p>På fagseminarer lærer vi om Obeya og deler erfaringer mellom ulike virksomheter. Vi er bare i begynnelsen på denne neste Lean-reisen, som vil gi oss dramatisk bedre læring.</p>
+    <div class="btn-row"><a class="btn" href="{{r}}contact/">Kontakt oss</a></div>
   </div>
-  <img src="{{r}}assets/img/obeya-day-seminar.jpg" alt="Obeya Day seminar in Bergen" loading="lazy">
+  <img src="{{r}}assets/img/obeya-day-seminar.jpg" alt="Obeya dagseminar i Bergen" loading="lazy">
 </div></section>
 {CTA}
 """
-    page("workshops-and-webinars/", "Workshops and Seminars", "Hands-on ILO workshops and Obeya Day seminars.", workshops)
+    page("obeya-dagseminar/", "Obeya dagseminar", "Obeya dagseminar: Obeya – raskere felles læring. Fagseminar om Obeya fra Institute for Learning Organizations.", seminar, "nb")
 
+    # ---------- Past events ----------
     past = f"""
-{page_hero("Past Events", "Look back at recent symposiums, conferences and seminars.", "obeya-wall.jpg", "Events")}
+{page_hero("Past Events", "Look back at our seminars, study trips and conferences.", "obeya-wall.jpg", "Events")}
 <section class="section"><div class="container">
   {past_events()}
 </div></section>
 {CTA}
 """
-    page("past-events/", "Past Events", "Past ILO events, conferences and presentations.", past)
+    page("past-events/", "Past Events", "Past ILO events, seminars and study trips.", past)
 
     # ---------- Contact ----------
     contact = f"""
-{page_hero("Contact", "Connect with us.", "hero-coffee.jpg")}
+{page_hero("Contact", "Let us know how we can help you.", "hero-coffee.jpg")}
 <section class="section"><div class="container">
-  <div class="section-head"><p class="lead">Want to learn more about our offerings? Have specific challenges to address? Reach out to us, and let's start the conversation.</p></div>
+  <div class="section-head"><p class="lead">Schedule a complimentary consultation with Institute for Learning Organizations, or ask us about mentorship, e-learning, training and books.</p></div>
   <div class="contact-grid">
-    <div class="contact-item"><div class="label">Post address</div><p>Kongens gate 20A<br>3717 Skien, Norway</p></div>
-    <div class="contact-item"><div class="label">Phone</div><a href="tel:{PHONE_TEL}">{PHONE}</a></div>
     <div class="contact-item"><div class="label">Email</div><a href="mailto:{EMAIL}">{EMAIL}</a></div>
+    <div class="contact-item"><div class="label">Phone</div><a href="tel:{PHONE_TEL}">{PHONE}</a></div>
+    <div class="contact-item"><div class="label">Books and resources</div><a href="mailto:post@learnorg.global">post@learnorg.global</a></div>
   </div>
   <div class="btn-row" style="margin-top:40px"><a class="btn" href="mailto:{EMAIL}">Send us an email</a></div>
 </div></section>
 """
-    page("contact/", "Contact", "Contact the Institute for Learning Organizations in Skien, Norway.", contact)
+    page("contact/", "Contact", "Contact the Institute for Learning Organizations.", contact)
 
 
 build()
