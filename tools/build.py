@@ -66,7 +66,7 @@ def nav_html(r, current):
 def page(path, title, description, body, lang="en"):
     depth = path.count("/")
     r = "../" * depth
-    full_title = "Institute for Learning Organizations (ILO)" if not path else f"{title} | Institute for Learning Organizations"
+    full_title = "ILO" if not path else f"{title} | ILO"
     html = f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -76,7 +76,7 @@ def page(path, title, description, body, lang="en"):
 <meta name="description" content="{description}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Institute for Learning Organizations">
-<meta property="og:title" content="{title if path else full_title}">
+<meta property="og:title" content="{title if path else "Institute for Learning Organizations (ILO)"}">
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{SITE_URL}{path}">
 <meta property="og:locale" content="{"nb_NO" if lang == "nb" else "en_GB"}">
@@ -183,7 +183,7 @@ def redirect(old, new):
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Page moved | Institute for Learning Organizations</title>
+<title>Page moved | ILO</title>
 <meta name="robots" content="noindex">
 <meta http-equiv="refresh" content="0; url={target}">
 <script>location.replace("{target}")</script>
