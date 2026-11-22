@@ -66,7 +66,8 @@ def nav_html(r, current):
 def page(path, title, description, body, lang="en"):
     depth = path.count("/")
     r = "../" * depth
-    full_title = "ILO" if not path else f"{title} | ILO"
+    # The home tab shows only the favicon: U+2800 is a blank character browsers keep, unlike an empty title
+    full_title = "&#x2800;" if not path else title
     html = f"""<!doctype html>
 <html lang="{lang}">
 <head>
