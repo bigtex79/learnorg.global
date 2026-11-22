@@ -6,6 +6,10 @@ PHONE = "+47 48 28 70 00"
 PHONE_TEL = "+4748287000"
 ADDRESS = "Kongens gate 20A, 3717 Skien, Norway"
 
+ICON_PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>'
+ICON_MAIL = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.4 7H4v.6l8 5.5 8-5.5V7h-.4L12 12.2z"/></svg>'
+ICON_PHONE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
+
 NAV = [
     ("Home", ""),
     ("Services", "services/", [
@@ -68,14 +72,19 @@ def page(path, title, description, body, lang="en"):
 <link rel="icon" href="{r}assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{r}assets/css/style.css">
 <script src="{r}assets/js/main.js" defer></script>
 </head>
 <body>
 <div class="topbar"><div class="container">
-  <a href="mailto:{EMAIL}">{EMAIL}</a>
-  <a href="tel:{PHONE_TEL}">{PHONE}</a>
+  <div class="group">
+    <span class="item hide-sm">{ICON_PIN}<b>Location</b> Skien, Norway</span>
+    <span class="item">{ICON_MAIL}<b>Email</b> <a href="mailto:{EMAIL}">{EMAIL}</a></span>
+  </div>
+  <div class="group">
+    <span class="item">{ICON_PHONE}<b>Phone</b> <a href="tel:{PHONE_TEL}">{PHONE}</a></span>
+  </div>
 </div></div>
 <header class="site-header"><div class="container">
   <a class="brand" href="{r or './'}">
@@ -85,7 +94,7 @@ def page(path, title, description, body, lang="en"):
   <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="nav" aria-label="Main">
     {nav_html(r, path)}
-    <a class="btn nav-cta" href="{r}contact/">Contact Us</a>
+    <a class="btn nav-cta" href="{r}contact/">Get In Touch</a>
   </nav>
 </div></header>
 <main>
@@ -141,9 +150,9 @@ def page(path, title, description, body, lang="en"):
 def page_hero(title, sub, img, crumb=None):
     c = f'<a href="{{r}}">Home</a> / {crumb + " / " if crumb else ""}{title}'
     return f"""<section class="page-hero" style="background-image:url('{{r}}assets/img/{img}')"><div class="container">
-  <div class="crumbs">{c}</div>
   <h1>{title}</h1>
   <p>{sub}</p>
+  <div class="crumbs">{c}</div>
 </div></section>"""
 
 
