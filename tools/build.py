@@ -147,6 +147,37 @@ def page(path, title, description, body, lang="en"):
         f.write(html)
 
 
+# Old URLs (from the WordPress version) and where they now live
+REDIRECTS = {
+    "about-us/": "#meet-ilo",
+    "open-resources/": "e-resources/",
+    "courses/": "training/",
+    "upcoming-webinars/": "obeya-dagseminar/",
+    "workshops-and-webinars/": "past-events/",
+    "estore/": "e-learning-services/",
+}
+
+
+def redirect(old, new):
+    target = "../" * old.count("/") + new
+    html = f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Page moved | Institute for Learning Organizations</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={target}">
+<script>location.replace("{target}")</script>
+</head>
+<body><p>This page has moved. <a href="{target}">Continue to the new page</a>.</p></body>
+</html>
+"""
+    d = os.path.join(OUT, old)
+    os.makedirs(d, exist_ok=True)
+    with open(os.path.join(d, "index.html"), "w") as f:
+        f.write(html)
+
+
 def page_hero(title, sub, img, crumb=None):
     c = f'<a href="{{r}}">Home</a> / {crumb + " / " if crumb else ""}{title}'
     return f"""<section class="page-hero" style="background-image:url('{{r}}assets/img/{img}')"><div class="container">
@@ -482,7 +513,7 @@ def build():
   <div class="grid cols-3">{clients}</div>
 </div></section>
 
-<section class="section"><div class="container split">
+<section class="section" id="meet-ilo"><div class="container split">
   <img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy">
   <div>
     <span class="eyebrow">Meet ILO</span>
@@ -805,6 +836,10 @@ def build():
 </div></section>
 """
     page("contact/", "Contact", "Contact the Institute for Learning Organizations.", contact)
+
+    # ---------- Redirects for pages the Wix rebuild renamed or removed ----------
+    for old, new in REDIRECTS.items():
+        redirect(old, new)
 
 
 build()
