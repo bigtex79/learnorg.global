@@ -86,9 +86,9 @@ def page(path, title, description, body, lang="en"):
 <meta property="og:image:alt" content="Institute for Learning Organizations: shaping the future with better learning">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{SITE_URL}{path}">
-<link rel="icon" href="{r}favicon.ico?v=3" sizes="any">
-<link rel="icon" type="image/png" href="{r}assets/img/favicon.png?v=3">
-<link rel="apple-touch-icon" href="{r}assets/img/apple-touch-icon.png?v=3">
+<link rel="icon" href="{r}favicon.ico?v=4" sizes="any">
+<link rel="icon" type="image/png" href="{r}assets/img/favicon.png?v=4">
+<link rel="apple-touch-icon" href="{r}assets/img/apple-touch-icon.png?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
