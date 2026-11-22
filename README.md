@@ -1,5 +1,7 @@
 # learnorg.global — rebuilt static site
 
+**22 Nov 2026: the client asked for the site to use the old Wix site's content (learnorg-backup.zip) instead of the WordPress text.** The main pages, menu and contact details now follow the Wix site: Home, Services (Sensei Mentorship, Training, Off-site Training, Books and e-learning, Learning Culture), Obeya, E-resources, Trippel L, Events (Obeya dagseminar, Past Events) and Contact. The WordPress-only pages (About ILO, eStore, Open Resources, Upcoming Webinars, Workshops) were removed. The design is to be restyled with the Creote theme next.
+
 Rebuilt on 2026-11-18 from Wayback Machine captures of learnorg.global. The live site has shown a "Site is undergoing maintenance" page since Nov 2025, and its HTTPS currently fails.
 
 - **Text source:** the last full WordPress version, captured 9 Oct 2025.
@@ -41,4 +43,4 @@ These were restored from the earlier Wix version of the site (2020–2024):
 - **Not available:** "Ressurser" and "Ressurser modul 2" were behind a login on Wix, so neither the archive nor the backup holds their content. The Obeya Day sign-up form ("påmelding") was for a past event and needs a backend, so it was not rebuilt.
 
 ## Pages
-`/`, `/about-us/`, `/services/`, `/sensei-mentorship/`, `/learning-culture/`, `/e-learning-services/`, `/courses/`, `/open-resources/`, `/estore/`, `/upcoming-webinars/`, `/workshops-and-webinars/`, `/past-events/`, `/contact/`, `/book-resources/` (with `systems-thinking-with-obeya/`, `systemtenkning-med-obeya/`, `lean-ledelse/`, `laerende-organisasjoner/` and `laerende-organisasjoner/kapittel-1/` … `kapittel-12/`)
+`/`, `/services/`, `/sensei-mentorship/`, `/training/`, `/off-site-training/`, `/e-learning-services/`, `/learning-culture/`, `/obeya/`, `/e-resources/`, `/det-er-ledelse/`, `/trippel-l/`, `/obeya-dagseminar/`, `/past-events/`, `/contact/`, `/book-resources/` (with `systems-thinking-with-obeya/`, `systemtenkning-med-obeya/`, `lean-ledelse/`, `laerende-organisasjoner/` and `laerende-organisasjoner/kapittel-1/` … `kapittel-12/`)
