@@ -267,6 +267,9 @@ p { margin: 0 0 1em; }
   .grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
   .grid.cols-3 { grid-template-columns: repeat(2, 1fr); }
   .site-footer .cols { grid-template-columns: 1fr 1fr; }
+}
+/* Menu collapses earlier so the longer Norwegian labels never wrap */
+@media (max-width: 1240px) {
   .site-header { backdrop-filter: none; background: #fff; }
   .menu-btn { display: block; }
   .brand, .menu-btn { position: relative; z-index: 2; }
@@ -395,3 +398,26 @@ p { margin: 0 0 1em; }
 .person-card .more-link{margin-top:12px;font-size:.9rem}
 @media(max-width:860px){.people{grid-template-columns:1fr}}
 @media(max-width:480px){.person-card{grid-template-columns:1fr}.person-card img{width:120px;height:120px}}
+
+/* Language switch, top right of the header (Nov 2026) */
+.lang-switch{display:inline-flex;align-items:center;gap:2px;margin-left:18px;padding:3px;border:1px solid #d5dde3;border-radius:999px;font:600 .78rem/1 Inter,system-ui,sans-serif;flex-shrink:0}
+.lang-switch a{padding:6px 9px;border-radius:999px;color:var(--ink);text-decoration:none;letter-spacing:.04em}
+.lang-switch a[href]:hover{background:var(--teal-soft)}
+.lang-switch a[aria-current]{background:var(--teal);color:#fff}
+.lang-switch a:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.nav a, .nav button.sub-toggle, .brand-text strong { white-space: nowrap; }
+@media (min-width:1241px){
+  .nav a, .nav button.sub-toggle { padding: 10px 8px; font-size: 14.5px; }
+  .nav-cta { margin-left: 8px; }
+  .nav a.btn { padding: 0 16px; }
+  .brand { gap: 10px; }
+  .brand-text strong { font-size: 1.02rem; }
+  .brand-text span { font-size: .66rem; }
+  .lang-switch { margin-left: 12px; }
+}
+@media (max-width:1240px){
+  .site-header .container{gap:10px}
+  .lang-switch{order:2;margin-left:auto;position:relative;z-index:2}
+  .menu-btn{order:3}
+}
+@media (max-width:560px){ .brand-text strong { white-space: normal; } }

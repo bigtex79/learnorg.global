@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "5"
+CSS_VERSION = "7"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -37,7 +37,7 @@ NAV = [
     ]),
     ("Trippel L", "trippel-l/"),
     ("Events", None, [
-        ("Obeya dagseminar", "obeya-dagseminar/"),
+        ("Obeya Day Seminar", "obeya-dagseminar/"),
         ("Past Events", "past-events/"),
     ]),
 ]
@@ -114,6 +114,7 @@ def page(path, title, description, body, lang="en"):
     {nav_html(r, path)}
     <a class="btn nav-cta" href="{r}contact/">Get In Touch</a>
   </nav>
+  <!--LANGSWITCH-->
 </div></header>
 <main>
 {body.replace("{r}", r)}
@@ -197,7 +198,7 @@ def redirect(old, new):
 
 
 def page_hero(title, sub, img, crumb=None):
-    c = f'<a href="{{r}}">Home</a> / {crumb + " / " if crumb else ""}{title}'
+    c = f'<a href="{{r}}">Home</a> / {"<span>" + crumb + "</span> / " if crumb else ""}<span>{title}</span>'
     return f"""<section class="page-hero" style="background-image:url('{{r}}assets/img/{img}')"><div class="container">
   <h1>{title}</h1>
   <p>{sub}</p>
