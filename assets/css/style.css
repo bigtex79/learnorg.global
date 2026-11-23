@@ -612,3 +612,5 @@ p { margin: 0 0 1em; }
 /* Eyebrows: hero text style everywhere, no gold dash */
 .eyebrow { font-size: .9rem; font-weight: 600; letter-spacing: .08em; gap: 0; }
 .eyebrow::before, .section-head.center .eyebrow::before { display: none; content: none; }
+.eyebrow { padding: 7px 14px 5px; border: 1px solid var(--accent); border-top: 0; border-right: 0; border-radius: 0 0 0 10px; background: rgba(7,133,134,.08); margin-bottom: 1.1rem; }
+.hero .eyebrow, .page-hero .eyebrow, .feature-band .eyebrow, .section.teal .eyebrow, .numbers .eyebrow, .cta-full .eyebrow { background: rgba(7,133,134,.18); }
