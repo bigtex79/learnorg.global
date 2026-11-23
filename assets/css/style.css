@@ -569,3 +569,10 @@ p { margin: 0 0 1em; }
 .page-hero .btn.light { background: #fff; color: var(--teal-dark); border-color: #fff; }
 .page-hero .btn.light:hover { background: var(--accent-soft); color: var(--ink); }
 @media (max-width: 760px) { .page-hero .container { padding-top: 60px; padding-bottom: 60px; } }
+
+/* Closing banner: full width, sitting flush on the footer */
+.cta-full { position: relative; overflow: hidden; background: linear-gradient(115deg, #0a9a9b 0%, #078586 38%, #0b5d6b 72%, #1f3a4d 100%); margin-top: 24px; }
+.cta-full .cta-band.cta-v2 { position: static; background: none; border-radius: 0; padding: 72px 0; overflow: visible; }
+.cta-full .cta-v2 .cta-petals { right: 4%; bottom: -90px; width: 380px; }
+.cta-full + .site-footer, .cta-full ~ .site-footer { margin-top: 0; }
+@media (max-width: 760px) { .cta-full .cta-band.cta-v2 { padding: 48px 0; } .cta-full .cta-v2 .cta-petals { width: 240px; right: -40px; bottom: -60px; } }
