@@ -13,7 +13,8 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "3"
+CSS_VERSION = "4"
+TAGLINE = "New lenses for leadership"
 
 NAV = [
     ("Home", ""),
@@ -106,7 +107,7 @@ def page(path, title, description, body, lang="en"):
 <header class="site-header"><div class="container">
   <a class="brand" href="{r or './'}">
     <span class="brand-mark">ILO</span>
-    <span class="brand-text"><strong>Learn</strong><span>Institute for Learning Organizations</span></span>
+    <span class="brand-text"><strong>Institute for Learning Organizations</strong><span>{TAGLINE}</span></span>
   </a>
   <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="nav" aria-label="Main">

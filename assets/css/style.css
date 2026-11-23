@@ -364,3 +364,8 @@ p { margin: 0 0 1em; }
 .chips span{background:#fff;border:1px solid #dde4e9;border-radius:999px;padding:8px 16px;font-size:14px;font-weight:500}
 .partners-line{margin-top:30px;color:#5b6670}
 .more-link{display:inline-block;margin-top:22px;font-weight:600;color:#078586}
+
+/* Logo: full name on top, tagline underneath (Nov 2026) */
+.brand-text strong { font-size: 1.2rem; letter-spacing: -.005em; }
+.brand-text span { display: block; margin-top: 5px; color: var(--teal, #078586); }
+@media (max-width: 560px) { .brand-text strong { font-size: .98rem; } .brand-text span { font-size: .64rem; } }
