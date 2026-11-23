@@ -612,7 +612,7 @@ def build():
 <section class="section books-section"><div class="container">
   <div class="section-head center">
     <span class="eyebrow">E-resources</span>
-    <h2>Free resources for our books</h2>
+    <h2>Free companion resources for Bjarne's books</h2>
     <p class="lead">Chapter notes, templates, videos and downloads.</p>
   </div>
   <div class="books-row">{book_html}</div>
