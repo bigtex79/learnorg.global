@@ -614,3 +614,10 @@ p { margin: 0 0 1em; }
 .eyebrow::before, .section-head.center .eyebrow::before { display: none; content: none; }
 .eyebrow { padding: 7px 14px 5px; border: 1px solid var(--accent); border-top: 0; border-right: 0; border-radius: 0 0 0 10px; background: rgba(7,133,134,.08); margin-bottom: 1.1rem; }
 .hero .eyebrow, .page-hero .eyebrow, .feature-band .eyebrow, .section.teal .eyebrow, .numbers .eyebrow, .cta-full .eyebrow { background: rgba(7,133,134,.18); }
+
+/* Bigger menu text (Nov 2026) */
+@media (min-width:1241px){
+  .nav a, .nav button.sub-toggle { font-size: clamp(15px, 1.2vw, 17px); padding: 10px clamp(6px, .6vw, 11px); }
+  .nav .sub a { font-size: 15.5px; }
+  .nav a.btn { font-size: 16px; }
+}
