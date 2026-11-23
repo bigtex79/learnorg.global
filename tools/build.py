@@ -544,7 +544,7 @@ def build():
 <section class="section alt"><div class="container">
   <div class="section-head center">
     <span class="eyebrow">How we can contribute</span>
-    <h2>We challenge and train, by giving new lenses</h2>
+    <h2>We challenge your thinking and transform your organization</h2>
   </div>
   <div class="grid cols-3">{svc}</div>
 </div></section>
