@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "8"
+CSS_VERSION = "9"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -481,13 +481,27 @@ def build():
         ("det-er-ledelse/", "book-det-er-ledelse.jpg", "Det er Ledelse", "Norsk · e-bok"),
     ]
     book_html = "".join(f'<a href="{{r}}{h}"><img src="{{r}}assets/img/{img}" alt="" loading="lazy"><b>{t}</b><small>{l}</small></a>' for h, img, t, l in books)
-    trust = [
-        ("UDI", "The Directorate of Immigration", "A learning-organization plan built on the Norwegian co-operation model, with top management and unions."),
-        ("Equinor Mongstad", "Refinery and oil supply base", "Lean practices strengthened through sensei dialogue and training."),
-        ("Yara ASA", "Global fertilizer company", "An ambitious improvement program, with a management system based on Lean thinking."),
-        ("Avinor", "Norway's main airports", "Effective Lean practices, with training for top and middle managers."),
+    # Client logos: drop a file named <slug>.svg or <slug>.png into assets/img/clients/
+    # and it replaces the name tile on the next build.
+    clients_wall = [
+        ("udi", "UDI", "Immigration"),
+        ("equinor", "Equinor Mongstad", "Energy"),
+        ("yara", "Yara", "Fertilizer"),
+        ("avinor", "Avinor", "Airports"),
+        ("eramet", "Eramet Norway", "Manganese"),
+        ("delta-group", "Delta Group", "Work and skills"),
+        ("trondheim-kommune", "Trondheim Kommune", "Municipality"),
+        ("vestre-toten-kommune", "Vestre Toten Kommune", "Municipality"),
+        ("hennig-olsen", "Hennig-Olsen Is", "Ice cream"),
+        ("sophies-minde", "Sophies Minde Ortopedi", "Orthopedics"),
+        ("kristiansand-dyrepark", "Kristiansand Dyrepark", "Amusement park"),
     ]
-    trust_html = "".join(f'<div class="trust-item"><b>{n}</b><small>{w}</small><p>{d}</p></div>' for n, w, d in trust)
+    def logo_tile(slug, name, sector):
+        for ext in ("svg", "png", "webp", "jpg"):
+            if os.path.exists(os.path.join(OUT, "assets", "img", "clients", f"{slug}.{ext}")):
+                return f'<figure class="logo-tile"><img src="{{r}}assets/img/clients/{slug}.{ext}" alt="{name}" loading="lazy"><figcaption>{sector}</figcaption></figure>'
+        return f'<figure class="logo-tile no-logo"><span class="wordmark">{name}</span><figcaption>{sector}</figcaption></figure>'
+    logo_html = "".join(logo_tile(*c) for c in clients_wall)
     home = f"""
 <section class="hero hero-home" style="background-image:url('{{r}}assets/img/hero-laptop.jpg')"><div class="container">
   <span class="eyebrow">Institute for Learning Organizations</span>
@@ -503,8 +517,7 @@ def build():
 
 <section class="section trust"><div class="container">
   <p class="trust-label">Trusted by leading Norwegian organizations</p>
-  <div class="trust-grid">{trust_html}</div>
-  <p class="trust-more">Also: Eramet Norway · Delta Group · Trondheim Kommune · Vestre Toten Kommune · Hennig-Olsen Is · Sophies Minde Ortopedi · Kristiansand Dyrepark</p>
+  <div class="logo-wall">{logo_html}</div>
 </div></section>
 
 <section class="section"><div class="container mission">

@@ -428,3 +428,14 @@ p { margin: 0 0 1em; }
 .bio img { width: 100%; aspect-ratio: 1; object-fit: cover; }
 .bio h2 { margin-top: 6px; }
 @media (max-width: 860px) { .bio, .split.reverse.bio { grid-template-columns: 1fr; } .bio img { max-width: 320px; } .split.reverse.bio > :first-child { order: 0; } }
+
+/* Client logo wall (Nov 2026) */
+.logo-wall{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+.logo-tile{margin:0;flex:0 1 calc((100% - 5*16px)/6);min-width:150px;background:#fff;border:1px solid #e3e8ec;border-radius:10px;padding:18px 14px 12px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:10px;min-height:118px;transition:border-color .15s,box-shadow .15s}
+.logo-tile:hover{border-color:var(--teal);box-shadow:0 8px 22px rgba(20,30,40,.08)}
+.logo-tile img{max-height:48px;max-width:140px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.8;transition:filter .2s,opacity .2s}
+.logo-tile:hover img{filter:none;opacity:1}
+.logo-tile .wordmark{font:700 1.02rem/1.2 var(--serif);color:var(--ink);text-align:center;flex:1;display:flex;align-items:center}
+.logo-tile figcaption{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center}
+@media(max-width:900px){.logo-tile{flex-basis:calc((100% - 2*16px)/3)}}
+@media(max-width:520px){.logo-tile{flex-basis:calc((100% - 16px)/2);min-width:0}}
