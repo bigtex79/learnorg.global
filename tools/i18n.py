@@ -23,7 +23,7 @@ SITE_URL = "https://bigtex79.github.io/learnorg.global/"
 # Pages written in English that get a Norwegian copy under /no/
 EN_SRC = ["", "services/", "sensei-mentorship/", "training/", "off-site-training/",
           "e-learning-services/", "learning-culture/", "obeya/", "e-resources/",
-          "past-events/", "contact/", "book-resources/"]
+          "past-events/", "contact/", "book-resources/", "about-us/"]
 # Pages written in Norwegian: the root copy becomes English, the /no/ copy keeps the Norwegian text
 NO_SRC = ["trippel-l/", "obeya-dagseminar/", "det-er-ledelse/"]
 # Norwegian book companion pages: one copy, Norwegian menu, EN switch goes to the English counterpart

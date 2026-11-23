@@ -421,3 +421,10 @@ p { margin: 0 0 1em; }
   .menu-btn{order:3}
 }
 @media (max-width:560px){ .brand-text strong { white-space: normal; } }
+
+/* About Us bios (Nov 2026) */
+.bio { grid-template-columns: 360px 1fr; align-items: start; }
+.split.reverse.bio { grid-template-columns: 1fr 360px; }
+.bio img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.bio h2 { margin-top: 6px; }
+@media (max-width: 860px) { .bio, .split.reverse.bio { grid-template-columns: 1fr; } .bio img { max-width: 320px; } .split.reverse.bio > :first-child { order: 0; } }

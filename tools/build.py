@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "7"
+CSS_VERSION = "8"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -129,6 +129,7 @@ def page(path, title, description, body, lang="en"):
       <h4>Quick Links</h4>
       <ul>
         <li><a href="{r or './'}">Home</a></li>
+        <li><a href="{r}about-us/">About Us</a></li>
         <li><a href="{r}obeya/">Obeya</a></li>
         <li><a href="{r}e-resources/">E-resources</a></li>
         <li><a href="{r}trippel-l/">Trippel L</a></li>
@@ -168,7 +169,6 @@ def page(path, title, description, body, lang="en"):
 
 # Old URLs (from the WordPress version) and where they now live
 REDIRECTS = {
-    "about-us/": "#meet-ilo",
     "open-resources/": "e-resources/",
     "courses/": "training/",
     "upcoming-webinars/": "obeya-dagseminar/",
@@ -563,8 +563,8 @@ def build():
     <p class="lead">ILO evolved from TQM Center Norway. Our two resident experts help employees and leaders become systems thinkers through mentorship, on-site training and e-learning.</p>
   </div>
   <div class="people">
-    <article class="person-card"><img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy"><div><span class="role">Author · Sensei</span><h3>Bjarne Berg Wig</h3><p>More than 30 years in quality management and Lean, including as Quality and Innovation Manager at Hydro Agri Europe (now Yara). He has written 7 professional books and is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p><a class="more-link" href="mailto:bjarne@learnorg.global">bjarne@learnorg.global</a></div></article>
-    <article class="person-card"><img src="{{r}}assets/img/samer-hamadeh.jpg" alt="Samer Hamadeh" loading="lazy"><div><span class="role">Resident expert</span><h3>Samer Hamadeh</h3><p>Specialist in learning culture transformation. Samer works alongside Bjarne on ILO's mentorship, training and seminars, helping organizations build a culture where everyone learns and improves.</p><a class="more-link" href="{{r}}contact/">Contact ILO</a></div></article>
+    <article class="person-card"><img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy"><div><span class="role">Author · Sensei</span><h3>Bjarne Berg Wig</h3><p>More than 30 years in quality management and Lean, including as Quality and Innovation Manager at Hydro Agri Europe (now Yara). He has written 7 professional books and is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p><a class="more-link" href="{{r}}about-us/#bjarne-berg-wig">Read full bio →</a></div></article>
+    <article class="person-card"><img src="{{r}}assets/img/samer-hamadeh.jpg" alt="Samer Hamadeh" loading="lazy"><div><span class="role">Resident expert</span><h3>Samer Hamadeh</h3><p>Specialist in learning culture transformation. Samer works alongside Bjarne on ILO's mentorship, training and seminars, helping organizations build a culture where everyone learns and improves.</p><a class="more-link" href="{{r}}about-us/#samer-hamadeh">Read full bio →</a></div></article>
   </div>
 </div></section>
 {CTA}
@@ -863,6 +863,44 @@ def build():
 {CTA}
 """
     page("past-events/", "Past Events", "Past ILO events, seminars and study trips.", past)
+
+    # ---------- About Us ----------
+    about = f"""
+{page_hero("About Us", "The people behind the Institute for Learning Organizations.", "obeya-wall.jpg")}
+<section class="section"><div class="container">
+  <div class="section-head center">
+    <span class="eyebrow">Who we are</span>
+    <h2>Making systems thinking affordable and accessible</h2>
+    <p class="lead">The Institute for Learning Organizations (ILO) was created to make the knowledge of systems thinking affordable and accessible. It evolved from TQM Center Norway. ILO has two resident experts, Bjarne Berg Wig and Samer Hamadeh. Together they offer over 30 years of experience in continuous improvement and developing real learning organizations.</p>
+    <p class="lead">Their focus is to help employees and leaders become systems thinkers, and to practically apply this thinking within their organizations, through a combination of mentorship, on-site training and e-learning.</p>
+  </div>
+</div></section>
+
+<section class="section alt" id="bjarne-berg-wig"><div class="container split bio">
+  <img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy">
+  <div>
+    <span class="eyebrow">Author · Sensei</span>
+    <h2>Bjarne Berg Wig</h2>
+    <p>Author and sensei Bjarne Berg Wig has more than 30 years of experience in quality management and Lean. He was Quality and Innovation Manager at Hydro Agri Europe (now Yara).</p>
+    <p>For the last 20 years, Bjarne has helped many Norwegian and international private and public companies transform into learning organizations. He has developed academic programs with Bergen University College in Quality Management and Lean leadership. Several hundred leaders have gone through his practical training, with high impact on many companies and municipalities in Norway.</p>
+    <p>He has written 7 professional books, which are used both in industry and in academic programs. Bjarne is a founder of LOS Norge, the Society for Learning Organizations in Norway, and is regarded as one of the "gurus" of learning organizations in Europe.</p>
+    <div class="btn-row"><a class="btn" href="mailto:bjarne@learnorg.global">Email Bjarne</a><a class="btn ghost" href="{{r}}e-learning-services/#books">His books</a></div>
+  </div>
+</div></section>
+
+<section class="section" id="samer-hamadeh"><div class="container split reverse bio">
+  <img src="{{r}}assets/img/samer-hamadeh.jpg" alt="Samer Hamadeh" loading="lazy">
+  <div>
+    <span class="eyebrow">Resident expert</span>
+    <h2>Samer Hamadeh</h2>
+    <p>Samer Hamadeh is a specialist in learning culture transformation: the shift from seeing work as execution to seeing work as continuous learning and improvement.</p>
+    <p>Samer works alongside Bjarne on ILO's mentorship, training and seminars, helping organizations build a culture where everyone learns and improves every day. He has spoken on learning culture transformation at the Manufacturing and Supply Chain Conference in Dublin, and co-hosts ILO's webinars on how to frame the transformation to a learning culture.</p>
+    <div class="btn-row"><a class="btn" href="{{r}}contact/">Contact ILO</a><a class="btn ghost" href="{{r}}learning-culture/">Learning Culture</a></div>
+  </div>
+</div></section>
+{CTA}
+"""
+    page("about-us/", "About Us", "Meet the Institute for Learning Organizations: Bjarne Berg Wig and Samer Hamadeh.", about)
 
     # ---------- Contact ----------
     contact = f"""
