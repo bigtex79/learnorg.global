@@ -332,3 +332,35 @@ p { margin: 0 0 1em; }
 .prose .downloads h2 { margin: 0 0 12px; font-size: 1.3rem; }
 .downloads ul { margin: 0; }
 .downloads li { margin: 6px 0; }
+
+/* ---------- Home page redesign (Nov 2026) ---------- */
+.hero-home{padding-bottom:120px}
+.tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:-56px;position:relative;z-index:2}
+.tile{background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(20,30,40,.12);padding:20px 16px;text-decoration:none;color:#232a33;display:flex;flex-direction:column;gap:6px;border-top:3px solid #078586;transition:transform .15s}
+.tile:hover{transform:translateY(-3px)}
+.tile b{font:600 17px/1.2 'League Spartan',Inter,sans-serif}
+.tile span{font-size:13px;color:#5b6670;line-height:1.4}
+.tile i{font-style:normal;color:#078586;font-size:13px;font-weight:600;margin-top:auto}
+@media(max-width:1000px){.tiles{grid-template-columns:repeat(2,1fr);margin-top:24px}}
+.card-cta{background:#078586}
+.card-cta .card-body{display:flex;flex-direction:column;justify-content:center;height:100%}
+.card-cta h3{color:#fff}
+.card.card-cta .card-body p{color:#e3f3f3}
+.card-cta .btn{align-self:flex-start;margin-top:10px}
+.feature-band{background:#1f2a33;color:#fff}
+.feature-band h2{color:#fff}
+.feature-band p{color:#cfd6dd;max-width:560px}
+.feature-band .btn.ghost{color:#fff;border-color:#fff}
+.feature{display:grid;grid-template-columns:320px 1fr;gap:56px;align-items:center}
+.feature img{border-radius:10px;box-shadow:0 20px 40px rgba(0,0,0,.25);max-width:280px}
+@media(max-width:800px){.feature{grid-template-columns:1fr;gap:28px}.feature img{max-width:200px}}
+.books-row{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.books-row a{text-decoration:none;color:#232a33;text-align:center}
+.books-row img{height:210px;width:auto;margin:0 auto 12px;box-shadow:0 10px 22px rgba(0,0,0,.15);border-radius:4px}
+.books-row b{display:block;font-size:15px}
+.books-row small{color:#078586;font-weight:600}
+@media(max-width:800px){.books-row{grid-template-columns:repeat(2,1fr)}.books-row img{height:150px}}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.chips span{background:#fff;border:1px solid #dde4e9;border-radius:999px;padding:8px 16px;font-size:14px;font-weight:500}
+.partners-line{margin-top:30px;color:#5b6670}
+.more-link{display:inline-block;margin-top:22px;font-weight:600;color:#078586}
