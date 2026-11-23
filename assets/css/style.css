@@ -608,3 +608,7 @@ p { margin: 0 0 1em; }
 .tile:hover, .tile:focus-visible { background: var(--teal); border-top-color: var(--teal); color: #fff; transform: translateY(-4px); box-shadow: 0 16px 34px rgba(7,133,134,.28); }
 .tile:hover b, .tile:hover span, .tile:hover .tile-icon, .tile:focus-visible b, .tile:focus-visible span, .tile:focus-visible .tile-icon { color: #fff; }
 .tile:hover i, .tile:focus-visible i { color: #ffd38a; transform: translateX(4px); }
+
+/* Eyebrows: hero text style everywhere, no gold dash */
+.eyebrow { font-size: .9rem; font-weight: 600; letter-spacing: .08em; gap: 0; }
+.eyebrow::before, .section-head.center .eyebrow::before { display: none; content: none; }
