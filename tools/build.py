@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "11"
+CSS_VERSION = "12"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -107,8 +107,7 @@ def page(path, title, description, body, lang="en"):
 </div></div>
 <header class="site-header"><div class="container">
   <a class="brand" href="{r or './'}">
-    <img class="brand-petals" src="{r}assets/img/ilo-petals.png" alt="" width="44" height="39">
-    <span class="brand-text"><strong>Institute for Learning Organizations</strong><span>{TAGLINE}</span></span>
+    <img class="brand-logo" src="{r}assets/img/logo-ilo.png" alt="ILO – Institute for Learning Organizations" width="132" height="58">
   </a>
   <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="nav" aria-label="Main">
