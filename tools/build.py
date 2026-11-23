@@ -804,8 +804,8 @@ def build():
       <a class="more" href="https://educate.potential.com/courses/laerende-hverdag/" target="_blank" rel="noopener">Register now</a>
     </div></article>
     <article class="card"><img class="card-img" src="{{r}}assets/img/butterflies.jpg" alt="" loading="lazy"><div class="card-body">
-      <span class="tag">E-books</span><h3>Lærende hverdag</h3>
-      <p>Read and download our e-books online.</p>
+      <span class="tag">E-books</span><h3>Lærende hverdag: Everyday Learning</h3>
+      <p>A practical e-book by Bjarne Berg Wig on making learning part of the working day. Available in Norwegian.</p>
       <a class="more" href="https://issuu.com/tqm2/docs/l_rende_hverdag_e-bok_versjon_1.0" target="_blank" rel="noopener">View e-book</a>
     </div></article>
     <article class="card"><img class="card-img" src="{{r}}assets/img/cafe-laptop.jpg" alt="" loading="lazy"><div class="card-body">
