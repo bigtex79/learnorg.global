@@ -458,3 +458,9 @@ p { margin: 0 0 1em; }
   .brand-mark-img { height: 38px; }
   .brand-name { margin-left: 50px; font-size: 10px; }
 }
+/* Logo option 2: name beside the mark, after a divider (stacked on phones) */
+@media (min-width: 640px) {
+  .site-header .brand { flex-direction: row; align-items: center; gap: 14px; }
+  .brand-mark-img { height: 46px; }
+  .brand-name { margin-left: 0; padding-left: 14px; border-left: 1px solid #cfd6dc; font-size: 13px; line-height: 1.3; letter-spacing: .05em; }
+}
