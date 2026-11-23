@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "20"
+CSS_VERSION = "21"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -42,6 +42,24 @@ NAV = [
         ("Past Events", "past-events/"),
     ]),
 ]
+
+
+ICONS = {
+    "mentoring": '<path d="M4 5h11a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M19 9h1a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-1v3l-4-3h-3"/>',
+    "training": '<rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20l4-4 4 4M7 9h6M7 12h4"/>',
+    "offsite": '<path d="M3 19l6-10 4 6 3-4 5 8z"/><circle cx="17" cy="6" r="2"/>',
+    "elearning": '<rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20M10 9l4 1.5-4 1.5z"/>',
+    "culture": '<path d="M20 12a8 8 0 1 1-3-6.2"/><path d="M20 4v5h-5"/><path d="M12 8v4l3 2"/>',
+    "obeya": '<rect x="3" y="4" width="18" height="15" rx="1.5"/><path d="M3 9h18M9 9v10M15 9v10"/>',
+    "resources": '<path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M8 7h6"/>',
+    "layers": '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+    "calendar": '<rect x="3" y="5" width="18" height="16" rx="1.5"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    "people": '<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15 20a5 5 0 0 1 7-4.5"/>',
+}
+
+
+def icon(name, cls="icon"):
+    return f'<svg class="{cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONS[name]}</svg>'
 
 
 # First item in a dropdown that links to the section page; default "All <section>"
@@ -202,12 +220,14 @@ def redirect(old, new):
         f.write(html)
 
 
-def page_hero(title, sub, img, crumb=None):
+def page_hero(title, sub, img, crumb=None, cta=True):
     c = f'<a href="{{r}}">Home</a> / {"<span>" + crumb + "</span> / " if crumb else ""}<span>{title}</span>'
+    button = '<div class="btn-row"><a class="btn light" href="{r}contact/">Book a free consultation</a></div>' if cta else ""
     return f"""<section class="page-hero" style="background-image:url('{{r}}assets/img/{img}')"><div class="container">
+  <div class="crumbs">{c}</div>
   <h1>{title}</h1>
   <p>{sub}</p>
-  <div class="crumbs">{c}</div>
+  {button}
 </div></section>"""
 
 
@@ -479,25 +499,28 @@ def build():
 
     # ---------- Home (text from the old Wix site, learnorg-backup.zip; redesigned layout Nov 2026) ----------
     tiles = [
-        ("sensei-mentorship/", "Sensei Mentorship", "Leadership through dialogue"),
-        ("training/", "Training", "On-site and off-site programs"),
-        ("obeya/", "Obeya", "The book and the method"),
-        ("e-resources/", "E-resources", "Books, videos and downloads"),
-        ("trippel-l/", "Trippel L", "Lean, learning, leadership"),
-        ("past-events/", "Events", "Seminars and study trips"),
+        ("sensei-mentorship/", "Sensei Mentorship", "Leadership through dialogue", "mentoring"),
+        ("training/", "Training", "On-site and off-site programs", "training"),
+        ("obeya/", "Obeya", "The book and the method", "obeya"),
+        ("e-resources/", "E-resources", "Books, videos and downloads", "resources"),
+        ("trippel-l/", "Trippel L", "Lean, learning, leadership", "layers"),
+        ("past-events/", "Events", "Seminars and study trips", "calendar"),
     ]
-    tile_html = "".join(f'<a class="tile" href="{{r}}{h}"><b>{t}</b><span>{d}</span><i>Explore →</i></a>' for h, t, d in tiles)
+    tile_html = "".join(f'<a class="tile" href="{{r}}{h}">{icon(ic, "tile-icon")}<b>{t}</b><span>{d}</span><i>Explore →</i></a>' for h, t, d, ic in tiles)
     services = [
-        ("training-session.jpg", "Sensei Mentorship", "Leaders learn faster through challenge and dialogue with an experienced sensei mentor.", "sensei-mentorship/"),
-        ("gemba-team.jpg", "Training", "Site training linked to the practical challenges of developing a learning and improvement culture, with Gemba learning trips.", "training/"),
-        ("piemonte.jpg", "Off-site Training", "A change of scenery opens the mind: bring your team to our countryside retreat in Piemonte, Italy.", "off-site-training/"),
-        ("team-laptops.jpg", "Books and e-learning", "E-books, e-courses and webinars that are affordable, available 24/7 and can be tailored to your organisation.", "e-learning-services/"),
-        ("pdsa", "Learning Culture", "Coaching and a video library to build a culture where everyone learns and improves every day.", "learning-culture/"),
+        ("training-session.jpg|mentoring", "Sensei Mentorship", "Leaders learn faster through challenge and dialogue with an experienced sensei mentor.", "sensei-mentorship/"),
+        ("gemba-team.jpg|training", "Training", "Site training linked to the practical challenges of developing a learning and improvement culture, with Gemba learning trips.", "training/"),
+        ("piemonte.jpg|offsite", "Off-site Training", "A change of scenery opens the mind: bring your team to our countryside retreat in Piemonte, Italy.", "off-site-training/"),
+        ("team-laptops.jpg|elearning", "Books and e-learning", "E-books, e-courses and webinars that are affordable, available 24/7 and can be tailored to your organisation.", "e-learning-services/"),
+        ("pdsa|culture", "Learning Culture", "Coaching and a video library to build a culture where everyone learns and improves every day.", "learning-culture/"),
     ]
     def card_img(img):
+        img, ic = img.split("|")
+        badge = f'<span class="card-icon">{icon(ic)}</span>'
         if img == "pdsa":
-            return '<div class="card-img card-art">' + pdsa_svg + '</div>'
-        return f'<img class="card-img" src="{{r}}assets/img/{img}" alt="" loading="lazy">'
+            return '<div class="card-media"><div class="card-img card-art">' + pdsa_svg + '</div>' + badge + '</div>'
+        return f'<div class="card-media"><img class="card-img" src="{{r}}assets/img/{img}" alt="" loading="lazy">{badge}</div>'
+    home_services = services
     svc = "".join(
         f'<article class="card">{card_img(img)}<div class="card-body"><h3>{t}</h3><p>{d}</p><a class="more" href="{{r}}{h}">Learn more</a></div></article>'
         for img, t, d, h in services
@@ -622,15 +645,20 @@ def build():
         ("team-laptops.jpg", "E-learning", "What you need, when you need it, how you need it.", "ILO provides e-books, e-courses and webinars for learning organisations. These digital resources reflect the best knowledge available on learning leadership. It's affordable and available 24/7. We can also create customized e-learning programs and webinars for learning organisations.", "e-learning-services/"),
         ("piemonte.jpg", "Training", "Make your workplace the primary campus.", "We tailor site training linked to the practical challenges of developing a learning and improvement culture. We also do training with gemba learning trips to leading Norwegian companies and municipalities. A change of scenery helps open the mind to new ways of thinking: we can also bring your team to our countryside retreat in Italy for our off-site program.", "training/"),
     ]
-    rows = ""
-    for i, (img, t, sub, d, h) in enumerate(svc_rows):
-        rows += f"""<div class="split{' reverse' if i % 2 else ''}" style="margin-bottom:80px">
-  <img src="{{r}}assets/img/{img}" alt="" loading="lazy">
-  <div><span class="eyebrow">{sub}</span><h2>{t}</h2><p class="lead">{d}</p><div class="btn-row"><a class="btn" href="{{r}}{h}">Learn more</a></div></div>
-</div>"""
+    svc_cards = "".join(
+        f'<article class="card">{card_img(img)}<div class="card-body"><h3>{t}</h3><p>{d}</p><a class="more" href="{{r}}{h}">Learn more</a></div></article>'
+        for img, t, d, h in home_services
+    ) + '<article class="card">' + card_img("obeya-wall.jpg|obeya") + '<div class="card-body"><h3>Obeya</h3><p>Use the Obeya room to see the whole system, align leaders and learn faster together.</p><a class="more" href="{r}obeya/">Learn more</a></div></article>'
     services_page = f"""
 {page_hero("Services", "Sensei mentorship, e-learning and training for learning organisations.", "gemba-team.jpg")}
-<section class="section"><div class="container">{rows}</div></section>
+<section class="section"><div class="container">
+  <div class="section-head center">
+    <span class="eyebrow">What we offer</span>
+    <h2>Ways to work with us</h2>
+    <p class="lead">Every programme is tailored to your organisation, from a single sensei conversation to a full learning-culture transformation.</p>
+  </div>
+  <div class="grid cols-3">{svc_cards}</div>
+</div></section>
 {CTA}
 """
     page("services/", "Services", "Sensei mentorship, e-learning and training from the Institute for Learning Organizations.", services_page)
@@ -959,7 +987,7 @@ def build():
 
     # ---------- Contact ----------
     contact = f"""
-{page_hero("Contact", "Let us know how we can help you.", "hero-coffee.jpg")}
+{page_hero("Contact", "Let us know how we can help you.", "hero-coffee.jpg", cta=False)}
 <section class="section"><div class="container">
   <div class="section-head"><p class="lead">Schedule a complimentary consultation with Institute for Learning Organizations, or ask us about mentorship, e-learning, training and books.</p></div>
   <div class="contact-grid">

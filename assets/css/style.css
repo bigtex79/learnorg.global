@@ -9,7 +9,11 @@
   --muted: #4a4e56;
   --line: #e4e7ee;
   --bg: #ffffff;
-  --bg-alt: #f0f3f9;
+  --bg-alt: #eef6f6;
+  --accent: #f0a23b;
+  --accent-dark: #b9741a;
+  --accent-soft: #fdf0dc;
+  --deep: #0b4f5c;
   --radius: 10px;
   --shadow: 0 10px 40px rgba(40,47,59,.08);
   --max: 1200px;
@@ -525,3 +529,43 @@ p { margin: 0 0 1em; }
 .book-card .book-info { align-items: center; text-align: center; }
 .book-card .book-lang { align-self: center; }
 .book-card .book-desc { margin: 0; }
+
+/* ===== Site-wide look (Nov 2026): rhythm, accent, icons, page headers ===== */
+/* Accent: amber, used sparingly */
+.eyebrow::before { content: ""; display: inline-block; width: 18px; height: 3px; border-radius: 2px; background: var(--accent); margin-right: 8px; vertical-align: middle; }
+.section-head.center .eyebrow::before { display: none; }
+.numbers-row strong { color: #ffd38a; }
+.book-card .book-lang { color: var(--accent-dark); background: var(--accent-soft); }
+.tile:hover { border-top-color: var(--accent); }
+.hero .eyebrow { border-color: var(--accent); }
+
+/* Deep-teal band for the featured book */
+.feature-band { background: linear-gradient(120deg, var(--deep) 0%, #0d6b6f 60%, var(--teal) 100%); }
+.feature-band .eyebrow { color: #ffd38a; }
+.feature-band .eyebrow::before { background: #ffd38a; }
+
+/* Icons */
+.tile .tile-icon { width: 30px; height: 30px; color: var(--teal); margin-bottom: 4px; }
+.card-media { position: relative; }
+.card-media .card-img { display: block; }
+.card-icon { position: absolute; left: 20px; bottom: -22px; width: 48px; height: 48px; border-radius: 12px; background: var(--teal); color: #fff; display: grid; place-items: center; box-shadow: 0 8px 18px rgba(7,133,134,.3); }
+.card-icon .icon { width: 26px; height: 26px; }
+.card-media + .card-body { padding-top: 34px; }
+
+/* Inner pages: alternate soft-teal panels so long pages have rhythm */
+.section:not(.alt) > .container > .split:nth-child(even) { background: var(--bg-alt); border-radius: 18px; padding: 48px; }
+.section > .container > .split { margin-bottom: 56px !important; }
+.section > .container > .split:last-child { margin-bottom: 0 !important; }
+@media (max-width: 760px) { .section:not(.alt) > .container > .split:nth-child(even) { padding: 28px 20px; } }
+
+/* Page headers: photo with a teal-to-ink overlay, left-aligned intro and a call to action */
+.page-hero { text-align: left; background-position: center; }
+.page-hero::before { background: linear-gradient(100deg, rgba(31,37,48,.92) 0%, rgba(11,79,92,.82) 45%, rgba(7,133,134,.35) 100%); opacity: 1; }
+.page-hero .container { padding-top: 88px; padding-bottom: 88px; }
+.page-hero h1 { max-width: 760px; }
+.page-hero p { margin: 0 0 4px; max-width: 620px; color: #e3eef0; }
+.page-hero .crumbs { display: inline-block; margin: 0 0 18px; background: rgba(255,255,255,.1); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; }
+.page-hero .btn-row { margin-top: 26px; }
+.page-hero .btn.light { background: #fff; color: var(--teal-dark); border-color: #fff; }
+.page-hero .btn.light:hover { background: var(--accent-soft); color: var(--ink); }
+@media (max-width: 760px) { .page-hero .container { padding-top: 60px; padding-bottom: 60px; } }

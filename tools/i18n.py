@@ -153,7 +153,12 @@ def rewrite_links(text, src_path, dst_path, to_no):
         if new == "":
             new = "./"
         return f'{attr}="{new}{qs}{query}{sep}{frag}"'
-    return re.sub(r'(href|src)="([^"]*)"', fix, text)
+    text = re.sub(r'(href|src)="([^"]*)"', fix, text)
+    # background images in inline styles: url('...')
+    def fix_url(m):
+        fixed = fix(re.match(r'(x)="([^"]*)"', 'x="' + m.group(1) + '"'))
+        return "url('" + fixed[3:-1] + "')"
+    return re.sub(r"url\('([^']*)'\)", fix_url, text)
 
 
 def switch(cur, en_href, no_href):
