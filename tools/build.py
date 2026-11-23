@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "19"
+CSS_VERSION = "20"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -112,7 +112,7 @@ def page(path, title, description, body, lang="en"):
 <header class="site-header"><div class="container">
   <a class="brand" href="{r or './'}">
     <img class="brand-mark-img" src="{r}assets/img/ilo-mark.png" alt="ILO" width="136" height="44">
-    <span class="brand-name">Institute for Learning<br>Organisations</span>
+    <span class="brand-name">Institute for Learning<br>Organizations</span>
   </a>
   <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="nav" aria-label="Main">
@@ -504,12 +504,15 @@ def build():
     )
     svc += '<article class="card card-cta"><div class="card-body"><h3>Not sure where to start?</h3><p>Book a free consultation and we will help you find the right path.</p><a class="btn light" href="{r}contact/">Get in touch</a></div></article>'
     books = [
-        ("book-resources/systems-thinking-with-obeya/", "book-obeya.jpg", "Systems Thinking with Obeya", "English"),
-        ("book-resources/laerende-organisasjoner/", "book-laerende-organisasjoner.jpg", "Lærende organisasjoner", "Norsk"),
-        ("book-resources/lean-ledelse/", "book-lean-ledelse.jpg", "LEAN Ledelse", "Norsk"),
-        ("det-er-ledelse/", "book-det-er-ledelse.jpg", "Det er Ledelse", "Norsk · e-bok"),
+        ("book-resources/systems-thinking-with-obeya/", "book-obeya.jpg", "Systems Thinking with Obeya", "English", "Chapter resources, articles and templates.", "green"),
+        ("book-resources/laerende-organisasjoner/", "book-laerende-organisasjoner.jpg", "Lærende organisasjoner", "Norsk", "Resources for chapters 1–12.", "teal"),
+        ("book-resources/lean-ledelse/", "book-lean-ledelse.jpg", "LEAN Ledelse", "Norsk", "Course material and templates.", "red"),
+        ("det-er-ledelse/", "book-det-er-ledelse.jpg", "Det er Ledelse", "Norsk · e-bok", "Quality management for the 21st century.", "blue"),
     ]
-    book_html = "".join(f'<a href="{{r}}{h}"><img src="{{r}}assets/img/{img}" alt="" loading="lazy"><b>{t}</b><small>{l}</small></a>' for h, img, t, l in books)
+    book_html = "".join(
+        f'<a class="book-card tint-{tint}" href="{{r}}{h}"><span class="book-cover"><img src="{{r}}assets/img/{img}" alt="" loading="lazy"></span>'
+        f'<div class="book-info"><small class="book-lang">{l}</small><b>{t}</b><p class="book-desc">{d}</p><small class="book-go">View resources →</small></div></a>'
+        for h, img, t, l, d, tint in books)
     # Client logos: drop a file named <slug>.svg or <slug>.png into assets/img/clients/
     # and it replaces the name tile on the next build.
     clients_wall = [
@@ -583,7 +586,7 @@ def build():
   </div>
 </div></section>
 
-<section class="section"><div class="container">
+<section class="section books-section"><div class="container">
   <div class="section-head center">
     <span class="eyebrow">E-resources</span>
     <h2>Free resources for our books</h2>
