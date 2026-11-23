@@ -483,3 +483,16 @@ p { margin: 0 0 1em; }
 .card .card-art { display: flex; align-items: center; justify-content: center; background: var(--teal-soft); overflow: hidden; }
 .card .card-art .pdsa { width: 58%; height: auto; }
 .card-cta .btn.light { background: #fff; color: var(--teal); border-color: #fff; }
+
+/* Closing banner v2 (Nov 2026) */
+.cta-section { padding-top: 24px; padding-bottom: 72px; }
+.cta-band.cta-v2 { position: relative; overflow: hidden; padding: 56px 64px; }
+.cta-v2 > * { position: relative; z-index: 1; }
+.cta-v2 .cta-petals { position: absolute; z-index: 0; right: -40px; bottom: -70px; width: 320px; opacity: .12; pointer-events: none; }
+.cta-v2 .cta-text { flex: 1 1 380px; }
+.cta-v2 .cta-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.cta-v2 .cta-btn { background: #fff; color: var(--teal); border-color: #fff; font-weight: 700; }
+.cta-v2 .cta-btn:hover { background: var(--teal-soft); color: var(--ink); }
+.cta-v2 .cta-alt { font-size: .9rem; color: #c9d1da; }
+.cta-v2 .cta-alt a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) { .cta-band.cta-v2 { padding: 40px 24px; } .cta-v2 .cta-petals { width: 220px; right: -50px; bottom: -60px; } }
