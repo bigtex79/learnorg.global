@@ -519,11 +519,6 @@ def build():
 
 <div class="container"><nav class="tiles" aria-label="Explore the site">{tile_html}</nav></div>
 
-<section class="section trust"><div class="container">
-  <p class="trust-label">Trusted by leading Norwegian organizations</p>
-  <div class="logo-wall">{logo_html}</div>
-</div></section>
-
 <section class="section"><div class="container mission">
   <div>
     <span class="eyebrow">Our Purpose</span>
@@ -539,6 +534,11 @@ def build():
   <div><strong>7</strong><span>professional books, used in industry and universities</span></div>
   <div><strong>100s</strong><span>of leaders trained through practical programs</span></div>
   <div><strong>11</strong><span>major Norwegian organizations as clients</span></div>
+</div></section>
+
+<section class="section trust"><div class="container">
+  <p class="trust-label">Trusted by leading Norwegian organizations</p>
+  <div class="logo-wall">{logo_html}</div>
 </div></section>
 
 <section class="section alt"><div class="container">
