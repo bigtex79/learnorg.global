@@ -369,3 +369,29 @@ p { margin: 0 0 1em; }
 .brand-text strong { font-size: 1.2rem; letter-spacing: -.005em; }
 .brand-text span { display: block; margin-top: 5px; color: var(--teal, #078586); }
 @media (max-width: 560px) { .brand-text strong { font-size: .98rem; } .brand-text span { font-size: .64rem; } }
+
+/* Credibility strip, numbers row, leadership cards (Nov 2026) */
+.trust{padding-top:56px;padding-bottom:40px}
+.trust-label{text-align:center;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 24px}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.trust-item{border-left:2px solid var(--teal);padding-left:16px}
+.trust-item b{display:block;font-family:var(--serif);font-size:1.25rem;color:var(--ink)}
+.trust-item small{display:block;font-size:.78rem;color:var(--muted);margin:2px 0 8px}
+.trust-item p{font-size:.92rem;margin:0;line-height:1.5}
+.trust-more{text-align:center;font-size:.85rem;color:var(--muted);margin:28px 0 0}
+@media(max-width:900px){.trust-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.trust-grid{grid-template-columns:1fr}}
+.numbers{background:var(--teal);color:#fff;padding:48px 0}
+.numbers-row{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.numbers-row strong{display:block;font-family:var(--serif);font-size:3rem;line-height:1;font-weight:700}
+.numbers-row span{display:block;margin-top:8px;font-size:.92rem;color:#d9efef;line-height:1.4}
+@media(max-width:800px){.numbers-row{grid-template-columns:repeat(2,1fr)}.numbers-row strong{font-size:2.4rem}}
+.people{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:1000px;margin:0 auto}
+.person-card{display:grid;grid-template-columns:160px 1fr;gap:22px;background:#fff;border-radius:12px;padding:22px;box-shadow:0 8px 26px rgba(20,30,40,.08);align-items:start}
+.person-card img{width:160px;height:160px;object-fit:cover;border-radius:10px}
+.person-card .role{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.person-card h3{margin:4px 0 8px}
+.person-card p{font-size:.93rem;margin:0}
+.person-card .more-link{margin-top:12px;font-size:.9rem}
+@media(max-width:860px){.people{grid-template-columns:1fr}}
+@media(max-width:480px){.person-card{grid-template-columns:1fr}.person-card img{width:120px;height:120px}}

@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "4"
+CSS_VERSION = "5"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -480,7 +480,13 @@ def build():
         ("det-er-ledelse/", "book-det-er-ledelse.jpg", "Det er Ledelse", "Norsk · e-bok"),
     ]
     book_html = "".join(f'<a href="{{r}}{h}"><img src="{{r}}assets/img/{img}" alt="" loading="lazy"><b>{t}</b><small>{l}</small></a>' for h, img, t, l in books)
-    client_chips = "".join(f"<span>{n}</span>" for n, d in CLIENTS)
+    trust = [
+        ("UDI", "The Directorate of Immigration", "A learning-organization plan built on the Norwegian co-operation model, with top management and unions."),
+        ("Equinor Mongstad", "Refinery and oil supply base", "Lean practices strengthened through sensei dialogue and training."),
+        ("Yara ASA", "Global fertilizer company", "An ambitious improvement program, with a management system based on Lean thinking."),
+        ("Avinor", "Norway's main airports", "Effective Lean practices, with training for top and middle managers."),
+    ]
+    trust_html = "".join(f'<div class="trust-item"><b>{n}</b><small>{w}</small><p>{d}</p></div>' for n, w, d in trust)
     home = f"""
 <section class="hero hero-home" style="background-image:url('{{r}}assets/img/hero-laptop.jpg')"><div class="container">
   <span class="eyebrow">Institute for Learning Organizations</span>
@@ -494,15 +500,27 @@ def build():
 
 <div class="container"><nav class="tiles" aria-label="Explore the site">{tile_html}</nav></div>
 
+<section class="section trust"><div class="container">
+  <p class="trust-label">Trusted by leading Norwegian organizations</p>
+  <div class="trust-grid">{trust_html}</div>
+  <p class="trust-more">Also: Eramet Norway · Delta Group · Trondheim Kommune · Vestre Toten Kommune · Hennig-Olsen Is · Sophies Minde Ortopedi · Kristiansand Dyrepark</p>
+</div></section>
+
 <section class="section"><div class="container mission">
   <div>
     <span class="eyebrow">Our Purpose</span>
     <h2>Millions of improvement culture leaders</h2>
     <p class="lead">All organizations wanting to survive in a complex and rapidly changing environment need to transform into a real learning organization. Learning organizations are a system of people who master the art of learning together.</p>
-    <div class="stat"><strong>30+</strong><span>years of experience in continuous improvement and developing real learning organizations.</span></div>
     <a class="more-link" href="#meet-ilo">Meet the team →</a>
   </div>
   <img class="media" src="{{r}}assets/img/obeya-wall.jpg" alt="Obeya room with visual management boards" loading="lazy">
+</div></section>
+
+<section class="numbers"><div class="container numbers-row">
+  <div><strong>30+</strong><span>years in continuous improvement and learning organizations</span></div>
+  <div><strong>7</strong><span>professional books, used in industry and universities</span></div>
+  <div><strong>100s</strong><span>of leaders trained through practical programs</span></div>
+  <div><strong>11</strong><span>major Norwegian organizations as clients</span></div>
 </div></section>
 
 <section class="section alt"><div class="container">
@@ -537,23 +555,15 @@ def build():
   <p class="center"><a class="more-link" href="{{r}}e-resources/#library">Browse the download library →</a></p>
 </div></section>
 
-<section class="section alt"><div class="container">
+<section class="section" id="meet-ilo"><div class="container">
   <div class="section-head center">
-    <span class="eyebrow">Trusted by</span>
-    <h2>Organizations we have trained</h2>
-  </div>
-  <div class="chips">{client_chips}</div>
-  <p class="center partners-line">In partnership with <b>Flowit</b> · <b>LOS Norge</b> · <b>DigiLEAN</b> · <b>Leonardo Group Americas</b></p>
-</div></section>
-
-<section class="section" id="meet-ilo"><div class="container split">
-  <img src="{{r}}assets/img/bjarne-and-samer.jpg" alt="Bjarne Berg Wig and Samer Hamadeh" loading="lazy">
-  <div>
     <span class="eyebrow">Meet ILO</span>
     <h2>Making systems thinking affordable and accessible</h2>
-    <p>The Institute for Learning Organizations (ILO) was created to make the knowledge of systems thinking affordable and accessible. It evolved from TQM Center Norway. ILO has two resident experts, Bjarne Berg Wig and Samer Hamadeh. Together they offer over 30 years of experience in continuous improvement and developing real learning organizations, through a combination of mentorship, on-site training and e-learning.</p>
-    <p>Author and sensei Bjarne Berg Wig has written 7 professional books, used both in industry and in academic programs. He is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p>
-    <div class="btn-row"><a class="btn" href="{{r}}contact/">Contact us</a><a class="btn ghost" href="{{r}}services/">Our services</a></div>
+    <p class="lead">ILO evolved from TQM Center Norway. Our two resident experts help employees and leaders become systems thinkers through mentorship, on-site training and e-learning.</p>
+  </div>
+  <div class="people">
+    <article class="person-card"><img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy"><div><span class="role">Author · Sensei</span><h3>Bjarne Berg Wig</h3><p>More than 30 years in quality management and Lean, including as Quality and Innovation Manager at Hydro Agri Europe (now Yara). He has written 7 professional books and is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p><a class="more-link" href="mailto:bjarne@learnorg.global">bjarne@learnorg.global</a></div></article>
+    <article class="person-card"><img src="{{r}}assets/img/samer-hamadeh.jpg" alt="Samer Hamadeh" loading="lazy"><div><span class="role">Resident expert</span><h3>Samer Hamadeh</h3><p>Specialist in learning culture transformation. Samer works alongside Bjarne on ILO's mentorship, training and seminars, helping organizations build a culture where everyone learns and improves.</p><a class="more-link" href="{{r}}contact/">Contact ILO</a></div></article>
   </div>
 </div></section>
 {CTA}
