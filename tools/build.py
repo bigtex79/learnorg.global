@@ -510,7 +510,7 @@ def build():
 <section class="hero hero-home" style="background-image:url('{{r}}assets/img/hero-laptop.jpg')"><div class="container">
   <span class="eyebrow">LEAN · LEARNING · LEADERSHIP</span>
   <h1>Shaping the future with better learning</h1>
-  <p>Sensei mentorship, training and e-resources that help leaders build real learning organizations.</p>
+  <p>We help leaders and teams build real learning organizations through sensei mentorship, training and e-learning.</p>
   <div class="btn-row">
     <a class="btn light" href="{{r}}services/">Explore our services</a>
     <a class="btn ghost" style="color:#fff;border-color:#fff" href="{{r}}contact/">Free consultation</a>
