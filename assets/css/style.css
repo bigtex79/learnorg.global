@@ -496,3 +496,9 @@ p { margin: 0 0 1em; }
 .cta-v2 .cta-alt { font-size: .9rem; color: #c9d1da; }
 .cta-v2 .cta-alt a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 760px) { .cta-band.cta-v2 { padding: 40px 24px; } .cta-v2 .cta-petals { width: 220px; right: -50px; bottom: -60px; } }
+/* Closing banner: more colour */
+.cta-band.cta-v2 { background: linear-gradient(115deg, #0a9a9b 0%, #078586 38%, #0b5d6b 72%, #1f3a4d 100%); }
+.cta-v2 .cta-petals { opacity: .22; filter: brightness(0) invert(1); }
+.cta-v2 .cta-text p { color: #e6f4f4; }
+.cta-v2 .cta-alt { color: #d7eeee; }
+.cta-v2 .cta-btn { color: #066c6d; box-shadow: 0 8px 22px rgba(0,0,0,.18); }
