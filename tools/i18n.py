@@ -208,7 +208,8 @@ def run():
     out = {}
     for p in EN_SRC:
         src = read(p)
-        out[p] = finish(src, p, "en", p, "no/" + p)
+        # English copy: any Norwegian text left in the source is put into English
+        out[p] = finish(translate(src, EN), p, "en", p, "no/" + p)
         no = rewrite_links(translate(src, NB, miss_nb), p, "no/" + p, True)
         if p == "":
             # Norwegian home: the Obeya book card goes to the Norwegian edition
@@ -232,7 +233,7 @@ def run():
         no = rewrite_links(translate(src, NB, miss_nb), p, p, True)
         out[p] = finish(no, p, "nb", en_target, p)
     for p, no_target in EN_PAIR.items():
-        out[p] = finish(read(p), p, "en", p, no_target)
+        out[p] = finish(translate(read(p), EN), p, "en", p, no_target)
     if MISSING:
         json.dump({"nb": sorted(miss_nb, key=len), "en": sorted(miss_en, key=len)},
                   sys.stdout, ensure_ascii=False, indent=1)

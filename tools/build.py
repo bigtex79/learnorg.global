@@ -403,7 +403,7 @@ def book_pages():
   <div class="section-head"><p class="lead">Videos, links, templates and reading that go with each chapter. These pages were first published on the earlier learnorg.global site and have been restored here. Most of the material is in Norwegian.</p></div>
   <div class="grid cols-3">
     <article class="card"><img class="card-img" src="{{r}}assets/img/book-obeya.jpg" alt="Systems Thinking with Obeya cover" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
-      <span class="tag">English · Norsk</span><h3>Systems Thinking with Obeya</h3>
+      <span class="tag">English · Norwegian</span><h3>Systems Thinking with Obeya</h3>
       <p>Chapter resources for the English edition and the Norwegian edition, <em>Systemtenkning med Obeya</em>.</p>
       <a class="more" href="{{r}}{base}systems-thinking-with-obeya/">English pages</a>
       <a class="more" href="{{r}}{base}systemtenkning-med-obeya/" style="margin-top:8px">Norske sider</a></div></article>
