@@ -558,7 +558,7 @@ def build():
         return f'<figure class="logo-tile no-logo"><span class="wordmark">{name}</span><figcaption>{sector}</figcaption></figure>'
     logo_html = "".join(logo_tile(*c) for c in clients_wall)
     home = f"""
-<section class="hero hero-home" style="background-image:url('{{r}}assets/img/hero-laptop.jpg')"><div class="container">
+<section class="hero hero-home" style="background-image:url('{{r}}assets/img/obeya-wall.jpg')"><div class="container">
   <span class="eyebrow">INSTITUTE FOR LEARNING ORGANIZATIONS · NORWAY</span>
   <h1>We help organisations learn faster and improve every day</h1>
   <p>Sensei mentoring, hands-on training and e-learning in Lean and systems thinking, for leaders and teams in businesses and municipalities.</p>
