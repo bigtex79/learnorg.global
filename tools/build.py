@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "30"
+CSS_VERSION = "32"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -521,10 +521,10 @@ def build():
             return '<div class="card-media"><div class="card-img card-art">' + pdsa_svg + '</div>' + badge + '</div>'
         return f'<div class="card-media"><img class="card-img" src="{{r}}assets/img/{img}" alt="" loading="lazy">{badge}</div>'
     home_services = services
-    svc = "".join(
-        f'<article class="card">{card_img(img)}<div class="card-body"><h3>{t}</h3><p>{d}</p><a class="more" href="{{r}}{h}">Learn more</a></div></article>'
-        for img, t, d, h in services
-    )
+    def svc_card(n, img, t, d, h):
+        return (f'<article class="card svc-card"><span class="card-num" aria-hidden="true">{n:02d}</span>{card_img(img)}'
+                f'<div class="card-body"><h3><a href="{{r}}{h}">{t}</a></h3><p>{d}</p><a class="more" href="{{r}}{h}">Learn more</a></div></article>')
+    svc = "".join(svc_card(n, *row) for n, row in enumerate(services, 1))
     svc += '<article class="card card-cta"><div class="card-body"><h3>Not sure where to start?</h3><p>Book a free consultation and we will help you find the right path.</p><a class="btn light" href="{r}contact/">Get in touch</a></div></article>'
     books = [
         ("book-resources/systems-thinking-with-obeya/", "book-obeya.jpg", "Systems Thinking with Obeya", "English", "Chapter resources, articles and templates.", "green"),
@@ -557,6 +557,24 @@ def build():
                 return f'<figure class="logo-tile"><img src="{{r}}assets/img/clients/{slug}.{ext}" alt="{name}" loading="lazy"><figcaption>{sector}</figcaption></figure>'
         return f'<figure class="logo-tile no-logo"><span class="wordmark">{name}</span><figcaption>{sector}</figcaption></figure>'
     logo_html = "".join(logo_tile(*c) for c in clients_wall)
+    # Testimonials: add real client quotes here as (quote, name, role and organisation).
+    # Until there are quotes, the preview shows marked placeholder slots; set SHOW_TESTIMONIAL_SLOTS = False before launch.
+    TESTIMONIALS = []
+    SHOW_TESTIMONIAL_SLOTS = True
+    quote_mark = '<svg class="quote-mark" viewBox="0 0 48 36" aria-hidden="true"><path fill="currentColor" d="M0 36V21C0 9 6 2 18 0l2 5C13 7 10 11 10 17h9v19H0zm28 0V21c0-12 6-19 18-21l2 5c-7 2-10 6-10 12h9v19H28z"/></svg>'
+    if TESTIMONIALS:
+        t_cards = "".join(f'<figure class="testimonial">{quote_mark}<blockquote>{q}</blockquote><figcaption><b>{n}</b><span>{r_}</span></figcaption></figure>' for q, n, r_ in TESTIMONIALS)
+    elif SHOW_TESTIMONIAL_SLOTS:
+        t_cards = "".join(f'<figure class="testimonial is-placeholder">{quote_mark}<blockquote>Client quote to come: two or three sentences about what changed after working with ILO.</blockquote><figcaption><b>Client name</b><span>Role, organisation</span></figcaption></figure>' for _ in range(3))
+    else:
+        t_cards = ""
+    testimonials_html = f"""<section class="section alt testimonials"><div class="container">
+  <div class="section-head center">
+    <span class="eyebrow">Testimonials</span>
+    <h2>What our clients say</h2>
+  </div>
+  <div class="grid cols-3">{t_cards}</div>
+</div></section>""" if t_cards else ""
     home = f"""
 <section class="hero hero-home" style="background-image:url('{{r}}assets/img/obeya-wall.jpg')"><div class="container">
   <span class="eyebrow">INSTITUTE FOR LEARNING ORGANIZATIONS · NORWAY</span>
@@ -593,7 +611,7 @@ def build():
   <div><strong>11</strong><span>major Norwegian organisations as clients</span></div>
 </div></section>
 
-<section class="section alt"><div class="container">
+<section class="section alt svc-section"><img class="svc-petals" src="{{r}}assets/img/ilo-petals.png" alt="" aria-hidden="true"><div class="container">
   <div class="section-head center">
     <span class="eyebrow">How we help</span>
     <h2>We challenge your thinking and transform your organisation</h2>
@@ -637,6 +655,7 @@ def build():
   </div>
 </div></section>
 
+{testimonials_html}
 <section class="section trust"><div class="container">
   <p class="trust-label">Trusted by leading Norwegian organisations</p>
   <div class="logo-wall">{logo_html}</div>
@@ -651,10 +670,8 @@ def build():
         ("team-laptops.jpg", "E-learning", "What you need, when you need it, how you need it.", "ILO provides e-books, e-courses and webinars for learning organisations. These digital resources reflect the best knowledge available on learning leadership. It's affordable and available 24/7. We can also create customized e-learning programs and webinars for learning organisations.", "e-learning-services/"),
         ("piemonte.jpg", "Training", "Make your workplace the primary campus.", "We tailor site training linked to the practical challenges of developing a learning and improvement culture. We also do training with gemba learning trips to leading Norwegian companies and municipalities. A change of scenery helps open the mind to new ways of thinking: we can also bring your team to our countryside retreat in Italy for our off-site program.", "training/"),
     ]
-    svc_cards = "".join(
-        f'<article class="card">{card_img(img)}<div class="card-body"><h3>{t}</h3><p>{d}</p><a class="more" href="{{r}}{h}">Learn more</a></div></article>'
-        for img, t, d, h in home_services
-    ) + '<article class="card">' + card_img("obeya-wall.jpg|obeya") + '<div class="card-body"><h3>Obeya</h3><p>Use the Obeya room to see the whole system, align leaders and learn faster together.</p><a class="more" href="{r}obeya/">Learn more</a></div></article>'
+    svc_cards = "".join(svc_card(n, *row) for n, row in enumerate(home_services, 1)) + svc_card(
+        len(home_services) + 1, "obeya-wall.jpg|obeya", "Obeya", "Use the Obeya room to see the whole system, align leaders and learn faster together.", "obeya/")
     services_page = f"""
 {page_hero("Services", "Sensei mentorship, e-learning and training for learning organisations.", "gemba-team.jpg")}
 <section class="section"><div class="container">
@@ -677,6 +694,13 @@ def build():
         ("Act", "Adopt the change, abandon it, or run through the cycle again."),
     ]
     steps_html = "".join(f'<li><b>{t}</b><span>{d}</span></li>' for t, d in pdsa_steps)
+    process = [
+        ("Talk", "A free consultation: tell us where you are today and what you want to change."),
+        ("Plan", "Together we agree the goals, the people involved and how we will learn."),
+        ("Mentor", "Regular sensei sessions: challenge, dialogue and practice in your own workplace."),
+        ("Review", "We study the results together and decide the next step."),
+    ]
+    process_html = "".join(f'<li><span class="process-num">{n}</span><b>{t}</b><p>{d}</p></li>' for n, (t, d) in enumerate(process, 1))
     sensei = f"""
 {page_hero("Sensei Mentorship", "Transformation through challenge and dialogue.", "hero-coffee.jpg", '<a href="{r}services/">Services</a>')}
 <section class="section"><div class="container split">
@@ -691,6 +715,13 @@ def build():
     {pdsa_svg}
     <ol class="pdsa-steps">{steps_html}</ol>
   </figure>
+</div></section>
+<section class="section alt"><div class="container">
+  <div class="section-head center">
+    <span class="eyebrow">How we work</span>
+    <h2>From first conversation to lasting change</h2>
+  </div>
+  <ol class="process">{process_html}</ol>
 </div></section>
 {CTA}
 """
@@ -894,6 +925,13 @@ def build():
       <a class="more" href="{{r}}book-resources/systemtenkning-med-obeya/">Norsk utgave</a></div></article>
   </div>
 </div></section>
+<section class="section"><div class="container">
+  <a class="video-block" href="https://www.youtube.com/watch?v=Vy8tfaOHzAo" target="_blank" rel="noopener">
+    <img src="{{r}}assets/img/obeya-wall.jpg" alt="" loading="lazy">
+    <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span>
+    <div class="video-caption"><span class="eyebrow">Watch on YouTube</span><b>The building blocks of systems thinking (DSRP)</b></div>
+  </a>
+</div></section>
 {CTA}
 """
     page("obeya/", "Systems Thinking with Obeya", "Resource pages for Systems Thinking with Obeya by Bjarne Berg Wig, in English and Norwegian.", obeya)
@@ -966,7 +1004,7 @@ def build():
 </div></section>
 
 <section class="section alt" id="bjarne-berg-wig"><div class="container split bio">
-  <img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy">
+  <figure class="team-photo"><img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy"><figcaption><span><b>30+</b> years in Lean</span><span><b>7</b> books</span></figcaption></figure>
   <div>
     <span class="eyebrow">Author · Sensei</span>
     <h2>Bjarne Berg Wig</h2>
@@ -978,7 +1016,7 @@ def build():
 </div></section>
 
 <section class="section" id="samer-hamadeh"><div class="container split reverse bio">
-  <img src="{{r}}assets/img/samer-hamadeh.jpg" alt="Samer Hamadeh" loading="lazy">
+  <figure class="team-photo"><img src="{{r}}assets/img/samer-hamadeh.jpg" alt="Samer Hamadeh" loading="lazy"><figcaption><span>Learning culture specialist</span></figcaption></figure>
   <div>
     <span class="eyebrow">Resident expert</span>
     <h2>Samer Hamadeh</h2>
