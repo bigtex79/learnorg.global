@@ -505,7 +505,7 @@ def build():
     logo_html = "".join(logo_tile(*c) for c in clients_wall)
     home = f"""
 <section class="hero hero-home" style="background-image:url('{{r}}assets/img/hero-laptop.jpg')"><div class="container">
-  <span class="eyebrow">Institute for Learning Organizations</span>
+  <span class="eyebrow">LEAN · LEARNING · LEADERSHIP</span>
   <h1>Shaping the future with better learning</h1>
   <p>Sensei mentorship, training and e-resources that help leaders build real learning organizations.</p>
   <div class="btn-row">
