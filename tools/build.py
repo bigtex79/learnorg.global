@@ -629,7 +629,7 @@ def build():
   <div class="section-head center">
     <span class="eyebrow">Meet ILO</span>
     <h2>Making systems thinking affordable and accessible</h2>
-    <p class="lead">ILO evolved from TQM Center Norway. Our two resident experts help employees and leaders become systems thinkers through mentorship, on-site training and e-learning.</p>
+    <p class="lead">ILO evolved from the Total Quality Management Center Norway. Our two resident experts help employees and leaders become systems thinkers through mentorship, on-site training and e-learning.</p>
   </div>
   <div class="people">
     <article class="person-card"><img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy"><div><span class="role">Author · Sensei</span><h3>Bjarne Berg Wig</h3><p>More than 30 years in quality management and Lean, including as Quality and Innovation Manager at Hydro Agri Europe (now Yara). He has written 7 professional books and is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p><a class="more-link" href="{{r}}about-us/#bjarne-berg-wig">Read full bio →</a></div></article>
@@ -960,7 +960,7 @@ def build():
   <div class="section-head center">
     <span class="eyebrow">Who we are</span>
     <h2>Making systems thinking affordable and accessible</h2>
-    <p class="lead">The Institute for Learning Organizations (ILO) was created to make the knowledge of systems thinking affordable and accessible. It evolved from TQM Center Norway. ILO has two resident experts, Bjarne Berg Wig and Samer Hamadeh. Together they offer over 30 years of experience in continuous improvement and developing real learning organisations.</p>
+    <p class="lead">The Institute for Learning Organizations (ILO) was created to make the knowledge of systems thinking affordable and accessible. It evolved from the Total Quality Management Center Norway. ILO has two resident experts, Bjarne Berg Wig and Samer Hamadeh. Together they offer over 30 years of experience in continuous improvement and developing real learning organisations.</p>
     <p class="lead">Their focus is to help employees and leaders become systems thinkers, and to practically apply this thinking within their organisations, through a combination of mentorship, on-site training and e-learning.</p>
   </div>
 </div></section>
