@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "15"
+CSS_VERSION = "17"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -455,6 +455,22 @@ def book_pages():
 
 
 def build():
+    pdsa_svg = """<svg class="pdsa" viewBox="0 0 320 320" role="img" aria-labelledby="pdsa-title">
+  <title id="pdsa-title">The Plan–Do–Study–Act learning cycle</title>
+  <defs><marker id="pdsa-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#078586"/></marker></defs>
+  <circle cx="160" cy="160" r="112" fill="none" stroke="#e5f2f2" stroke-width="36"/>
+  <path d="M175 49 A112 112 0 0 1 271 145" fill="none" stroke="#078586" stroke-width="6" marker-end="url(#pdsa-arrow)"/>
+  <path d="M271 175 A112 112 0 0 1 175 271" fill="none" stroke="#078586" stroke-width="6" marker-end="url(#pdsa-arrow)"/>
+  <path d="M145 271 A112 112 0 0 1 49 175" fill="none" stroke="#078586" stroke-width="6" marker-end="url(#pdsa-arrow)"/>
+  <path d="M49 145 A112 112 0 0 1 145 49" fill="none" stroke="#078586" stroke-width="6" marker-end="url(#pdsa-arrow)"/>
+  <g font-family="League Spartan, Inter, sans-serif" font-weight="700" text-anchor="middle" fill="#282f3b" font-size="16">
+    <text x="198" y="122">Plan</text>
+    <text x="198" y="212">Do</text>
+    <text x="122" y="212">Study</text>
+    <text x="122" y="122">Act</text>
+  </g>
+  <text x="160" y="164" text-anchor="middle" font-family="League Spartan, Inter, sans-serif" font-weight="700" font-size="24" fill="#078586">PDSA</text>
+  </svg>"""
     book_pages()
 
     # ---------- Home (text from the old Wix site, learnorg-backup.zip; redesigned layout Nov 2026) ----------
@@ -472,10 +488,14 @@ def build():
         ("gemba-team.jpg", "Training", "Site training linked to the practical challenges of developing a learning and improvement culture, with Gemba learning trips.", "training/"),
         ("piemonte.jpg", "Off-site Training", "A change of scenery opens the mind: bring your team to our countryside retreat in Piemonte, Italy.", "off-site-training/"),
         ("team-laptops.jpg", "Books and e-learning", "E-books, e-courses and webinars that are affordable, available 24/7 and can be tailored to your organization.", "e-learning-services/"),
-        ("pdca-sketch.jpg", "Learning Culture", "Coaching and a video library to build a culture where everyone learns and improves every day.", "learning-culture/"),
+        ("pdsa", "Learning Culture", "Coaching and a video library to build a culture where everyone learns and improves every day.", "learning-culture/"),
     ]
+    def card_img(img):
+        if img == "pdsa":
+            return '<div class="card-img card-art">' + pdsa_svg + '</div>'
+        return f'<img class="card-img" src="{{r}}assets/img/{img}" alt="" loading="lazy">'
     svc = "".join(
-        f'<article class="card"><img class="card-img" src="{{r}}assets/img/{img}" alt="" loading="lazy"><div class="card-body"><h3>{t}</h3><p>{d}</p><a class="more" href="{{r}}{h}">Learn more</a></div></article>'
+        f'<article class="card">{card_img(img)}<div class="card-body"><h3>{t}</h3><p>{d}</p><a class="more" href="{{r}}{h}">Learn more</a></div></article>'
         for img, t, d, h in services
     )
     svc += '<article class="card card-cta"><div class="card-body"><h3>Not sure where to start?</h3><p>Book a free consultation and we will help you find the right path.</p><a class="btn light" href="{r}contact/">Get in touch</a></div></article>'
@@ -609,22 +629,6 @@ def build():
     page("services/", "Services", "Sensei mentorship, e-learning and training from the Institute for Learning Organizations.", services_page)
 
     # ---------- Sensei ----------
-    pdsa_svg = """<svg class="pdsa" viewBox="0 0 320 320" role="img" aria-labelledby="pdsa-title">
-  <title id="pdsa-title">The Plan–Do–Study–Act learning cycle</title>
-  <defs><marker id="pdsa-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#078586"/></marker></defs>
-  <circle cx="160" cy="160" r="112" fill="none" stroke="#e5f2f2" stroke-width="36"/>
-  <path d="M175 49 A112 112 0 0 1 271 145" fill="none" stroke="#078586" stroke-width="6" marker-end="url(#pdsa-arrow)"/>
-  <path d="M271 175 A112 112 0 0 1 175 271" fill="none" stroke="#078586" stroke-width="6" marker-end="url(#pdsa-arrow)"/>
-  <path d="M145 271 A112 112 0 0 1 49 175" fill="none" stroke="#078586" stroke-width="6" marker-end="url(#pdsa-arrow)"/>
-  <path d="M49 145 A112 112 0 0 1 145 49" fill="none" stroke="#078586" stroke-width="6" marker-end="url(#pdsa-arrow)"/>
-  <g font-family="League Spartan, Inter, sans-serif" font-weight="700" text-anchor="middle" fill="#282f3b" font-size="16">
-    <text x="198" y="122">Plan</text>
-    <text x="198" y="212">Do</text>
-    <text x="122" y="212">Study</text>
-    <text x="122" y="122">Act</text>
-  </g>
-  <text x="160" y="164" text-anchor="middle" font-family="League Spartan, Inter, sans-serif" font-weight="700" font-size="24" fill="#078586">PDSA</text>
-  </svg>"""
     pdsa_steps = [
         ("Plan", "Plan a change or a test aimed at improvement."),
         ("Do", "Carry it out, preferably on a small scale."),

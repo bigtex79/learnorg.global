@@ -480,3 +480,6 @@ p { margin: 0 0 1em; }
 .pdsa-card .pdsa { max-width: 300px; margin: 0 auto; }
 .pdsa-card .pdsa-steps { margin-top: 8px; gap: 0; }
 .pdsa-card .pdsa-steps li:last-child { border-bottom: 0; }
+.card .card-art { display: flex; align-items: center; justify-content: center; background: var(--teal-soft); overflow: hidden; }
+.card .card-art .pdsa { width: 58%; height: auto; }
+.card-cta .btn.light { background: #fff; color: var(--teal); border-color: #fff; }
