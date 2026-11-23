@@ -24,6 +24,7 @@ NAV = [
         ("Off-site Training", "off-site-training/"),
         ("Books and e-learning", "e-learning-services/"),
         ("Learning Culture", "learning-culture/"),
+        ("About Us", "about-us/"),
     ]),
     ("Obeya", "obeya/", [
         ("English edition", "book-resources/systems-thinking-with-obeya/"),
