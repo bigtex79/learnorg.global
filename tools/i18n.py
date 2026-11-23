@@ -210,6 +210,13 @@ def run():
         src = read(p)
         out[p] = finish(src, p, "en", p, "no/" + p)
         no = rewrite_links(translate(src, NB, miss_nb), p, "no/" + p, True)
+        if p == "":
+            # Norwegian home: the Obeya book card goes to the Norwegian edition
+            no = no.replace(
+                '<a class="book-card tint-green" href="../book-resources/systems-thinking-with-obeya/">',
+                '<a class="book-card tint-green" href="../book-resources/systemtenkning-med-obeya/">', 1)
+            no = re.sub(r'(tint-green".*?<small class="book-lang">)Engelsk(</small><b>)Systems Thinking with Obeya(</b>)',
+                        r"\1Norsk\2Systemtenkning med Obeya\3", no, count=1, flags=re.S)
         out["no/" + p] = finish(no, "no/" + p, "nb", p, "no/" + p)
     for p in NO_SRC:
         src = read(p)
