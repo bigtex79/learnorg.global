@@ -14,7 +14,7 @@ ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" ari
 
 # Bump when style.css changes so browsers fetch the new file
 CSS_VERSION = "4"
-TAGLINE = "New lenses for leadership"
+TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
     ("Home", ""),
