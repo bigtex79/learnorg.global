@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "25"
+CSS_VERSION = "26"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -570,14 +570,20 @@ def build():
 
 <div class="container"><nav class="tiles" aria-label="Explore the site">{tile_html}</nav></div>
 
-<section class="section"><div class="container mission">
+<section class="section purpose"><div class="container mission">
   <div>
     <span class="eyebrow">Our Purpose</span>
     <h2>Change is faster than ever. Learning has to be faster still.</h2>
     <p class="lead">Organisations that want to survive complex, rapid change need to become real learning organisations: systems of people who master the art of learning together. That’s what we help leaders build.</p>
-    <a class="more-link" href="#meet-ilo">Meet the team →</a>
+    <blockquote class="purpose-quote"><p>“Learning is a source of innovation.”</p><cite>W. Edwards Deming</cite></blockquote>
+    <ul class="purpose-points">
+      <li>{icon("obeya")}<span>See the whole system</span></li>
+      <li>{icon("culture")}<span>Learn by doing</span></li>
+      <li>{icon("mentoring")}<span>Lead through dialogue</span></li>
+    </ul>
+    <div class="btn-row"><a class="btn ghost" href="#meet-ilo">Meet the team</a></div>
   </div>
-  <img class="media" src="{{r}}assets/img/obeya-wall.jpg" alt="Obeya room with visual management boards" loading="lazy">
+  <figure class="purpose-figure"><img src="{{r}}assets/img/training-session.jpg" alt="Bjarne Berg Wig teaching systems thinking" loading="lazy"><figcaption>Bjarne Berg Wig teaching systems thinking</figcaption></figure>
 </div></section>
 
 <section class="numbers"><div class="container numbers-row">
