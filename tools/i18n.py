@@ -47,7 +47,7 @@ NB = load("nb.json")
 EN = load("en.json")
 
 BLOCK = r"(?:p|h[1-6]|li|div|section|ul|ol|article|nav|header|footer|main|figure|blockquote|table|tr|form)"
-SEG_TAGS = r"(p|div|h[1-6]|li|figcaption|blockquote|td|th|dt|dd|a|button|span|b|strong|small|i|em|label|title)"
+SEG_TAGS = r"(p|div|h[1-6]|li|figcaption|blockquote|td|th|dt|dd|a|button|span|b|strong|small|i|em|label|title|text)"
 SEG_RE = re.compile(rf"<{SEG_TAGS}(\s[^>]*)?>((?:(?!<{BLOCK}[\s>/]).)*?)</\1>", re.S)
 ATTR_RE = re.compile(r'(\s(?:alt|title|aria-label|content)=")([^"]*)(")')
 SKIP = re.compile(r"^(PDF|Word|Excel|PowerPoint) · |^[\s\d+().,:;·/–—-]*$|@|^https?:|^[A-Z]{2,4}$|^EN$|^NO$")

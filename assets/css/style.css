@@ -464,3 +464,19 @@ p { margin: 0 0 1em; }
   .brand-mark-img { height: 46px; }
   .brand-name { margin-left: 0; padding-left: 14px; border-left: 1px solid #cfd6dc; font-size: 13px; line-height: 1.3; letter-spacing: .05em; }
 }
+
+/* Sensei page: PDSA cycle (Nov 2026) */
+.pdsa-wrap { display: grid; grid-template-columns: minmax(260px, 420px) 1fr; gap: 64px; align-items: center; }
+.pdsa { width: 100%; height: auto; display: block; }
+.pdsa-steps { list-style: none; counter-reset: step; padding: 0; margin: 24px 0 0; display: grid; gap: 12px; }
+.pdsa-steps li { counter-increment: step; display: grid; grid-template-columns: 36px 80px 1fr; gap: 12px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid #e3e8ec; }
+.pdsa-steps li::before { content: counter(step); width: 28px; height: 28px; border-radius: 50%; background: var(--teal); color: #fff; font: 700 .85rem/28px var(--serif); text-align: center; }
+.pdsa-steps b { font-family: var(--serif); font-size: 1.05rem; }
+.pdsa-sketch { margin: 24px 0 0; display: flex; gap: 14px; align-items: center; }
+.pdsa-sketch img { width: 110px; border: 1px solid #e3e8ec; border-radius: 6px; }
+.pdsa-sketch figcaption { font-size: .85rem; color: var(--muted); }
+@media (max-width: 860px) { .pdsa-wrap { grid-template-columns: 1fr; gap: 32px; } .pdsa-figure { max-width: 340px; margin: 0 auto; } .pdsa-steps li { grid-template-columns: 36px 1fr; } .pdsa-steps li span { grid-column: 2; } }
+.pdsa-card { margin: 0; background: #fff; border: 1px solid #e3e8ec; border-radius: 14px; padding: 28px 28px 12px; box-shadow: var(--shadow); }
+.pdsa-card .pdsa { max-width: 300px; margin: 0 auto; }
+.pdsa-card .pdsa-steps { margin-top: 8px; gap: 0; }
+.pdsa-card .pdsa-steps li:last-child { border-bottom: 0; }
