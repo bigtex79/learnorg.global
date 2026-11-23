@@ -561,11 +561,6 @@ def build():
   <div><strong>11</strong><span>major Norwegian organizations as clients</span></div>
 </div></section>
 
-<section class="section trust"><div class="container">
-  <p class="trust-label">Trusted by leading Norwegian organizations</p>
-  <div class="logo-wall">{logo_html}</div>
-</div></section>
-
 <section class="section alt"><div class="container">
   <div class="section-head center">
     <span class="eyebrow">How we help</span>
@@ -608,6 +603,11 @@ def build():
     <article class="person-card"><img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy"><div><span class="role">Author · Sensei</span><h3>Bjarne Berg Wig</h3><p>More than 30 years in quality management and Lean, including as Quality and Innovation Manager at Hydro Agri Europe (now Yara). He has written 7 professional books and is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p><a class="more-link" href="{{r}}about-us/#bjarne-berg-wig">Read full bio →</a></div></article>
     <article class="person-card"><img src="{{r}}assets/img/samer-hamadeh.jpg" alt="Samer Hamadeh" loading="lazy"><div><span class="role">Resident expert</span><h3>Samer Hamadeh</h3><p>Specialist in learning culture transformation. Samer works alongside Bjarne on ILO's mentorship, training and seminars, helping organizations build a culture where everyone learns and improves.</p><a class="more-link" href="{{r}}about-us/#samer-hamadeh">Read full bio →</a></div></article>
   </div>
+</div></section>
+
+<section class="section trust"><div class="container">
+  <p class="trust-label">Trusted by leading Norwegian organizations</p>
+  <div class="logo-wall">{logo_html}</div>
 </div></section>
 {CTA}
 """
