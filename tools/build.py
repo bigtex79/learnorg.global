@@ -44,6 +44,10 @@ NAV = [
 ]
 
 
+# First item in a dropdown that links to the section page; default "All <section>"
+OVERVIEW_LABELS = {"Obeya": "About Obeya"}
+
+
 def nav_html(r, current):
     items = []
     for entry in NAV:
@@ -55,7 +59,7 @@ def nav_html(r, current):
                 f'<li><a href="{r}{h}"{" class=active" if h == current else ""}>{l}</a></li>' for l, h in subs
             )
             if href is not None:
-                sub = f'<li><a href="{r}{href}"{" class=active" if href == current else ""}>All {label.lower()}</a></li>' + sub
+                sub = f'<li><a href="{r}{href}"{" class=active" if href == current else ""}>{OVERVIEW_LABELS.get(label, "All " + label.lower())}</a></li>' + sub
             items.append(
                 f'<li><button class="sub-toggle{" active" if sub_active else ""}" aria-expanded="false">{label}<span class="caret">▾</span></button>'
                 f'<ul class="sub">{sub}</ul></li>'
