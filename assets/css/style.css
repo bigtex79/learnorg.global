@@ -449,3 +449,12 @@ p { margin: 0 0 1em; }
 /* Header: full ILO logo (Nov 2026) */
 .brand-logo { height: 58px; width: auto; display: block; }
 @media (max-width: 560px) { .brand-logo { height: 46px; } }
+
+/* Header logo rebuilt: petals + ILO as image, the full name as real text (Nov 2026) */
+.site-header .brand { flex-direction: column; align-items: flex-start; gap: 4px; line-height: 1; }
+.brand-mark-img { height: 44px; width: auto; display: block; }
+.brand-name { margin-left: 58px; font: 600 11px/1.25 var(--sans, Inter, system-ui, sans-serif); letter-spacing: .06em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+@media (max-width: 560px) {
+  .brand-mark-img { height: 38px; }
+  .brand-name { margin-left: 50px; font-size: 10px; }
+}
