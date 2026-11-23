@@ -576,3 +576,11 @@ p { margin: 0 0 1em; }
 .cta-full .cta-v2 .cta-petals { right: 4%; bottom: -90px; width: 380px; }
 .cta-full + .site-footer, .cta-full ~ .site-footer { margin-top: 0; }
 @media (max-width: 760px) { .cta-full .cta-band.cta-v2 { padding: 48px 0; } .cta-full .cta-v2 .cta-petals { width: 240px; right: -40px; bottom: -60px; } }
+
+/* Section labels, style B: small spaced capitals with an amber line (Nov 2026) */
+.eyebrow { font-family: var(--sans); font-size: .82rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--teal); display: inline-flex; align-items: center; gap: 12px; margin-bottom: .9rem; }
+.eyebrow::before { content: ""; width: 34px; height: 2px; border-radius: 2px; background: var(--accent); margin: 0; flex-shrink: 0; }
+.section-head.center .eyebrow::before { display: block; }
+.feature-band .eyebrow { color: #ffd38a; }
+.page-hero .eyebrow, .numbers .eyebrow { color: #e3eef0; }
+.hero .eyebrow { letter-spacing: .08em; font-size: .9rem; }
