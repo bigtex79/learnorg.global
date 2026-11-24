@@ -855,3 +855,5 @@ figure.keys-list .key svg { width: 22px; height: 22px; }
 .purpose-figure { margin-bottom: 40px; }
 @media (max-width: 1000px) { .purpose-ways { grid-template-columns: 1fr; } }
 @media (max-width: 860px) { .purpose-figure .purpose-quote { position: relative; left: 0; bottom: 0; max-width: none; margin-top: -30px; margin-left: 16px; margin-right: 16px; } }
+.svc-section { padding-top: 72px; }
+.svc-section .section-head { margin-bottom: 44px; }

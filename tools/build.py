@@ -15,7 +15,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "53"
+CSS_VERSION = "54"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -615,11 +615,11 @@ def build():
     ]
     tile_html = "".join(f'<a class="tile" href="{{r}}{h}">{icon(ic, "tile-icon")}<b>{t}</b><span>{d}</span><i>Explore →</i></a>' for h, t, d, ic in tiles)
     services = [
-        ("training-session.jpg|mentoring", "Sensei Mentorship", "Leaders learn faster through challenge and dialogue with an experienced sensei mentor.", "sensei-mentorship/"),
+        ("hero-coffee.jpg|mentoring", "Sensei Mentorship", "Leaders learn faster through challenge and dialogue with an experienced sensei mentor.", "sensei-mentorship/"),
         ("gemba-team.jpg|training", "Training", "Site training linked to the practical challenges of developing a learning and improvement culture, with Gemba learning trips.", "training/"),
         ("piemonte.jpg|offsite", "Off-site Training", "A change of scenery opens the mind: bring your team to our countryside retreat in Piemonte, Italy.", "training/#off-site"),
         ("team-laptops.jpg|elearning", "Books and e-learning", "E-books, e-courses and webinars that are affordable, available 24/7 and can be tailored to your organisation.", "e-learning/"),
-        ("pdsa|culture", "Learning Culture", "Coaching and a video library to build a culture where everyone learns and improves every day.", "learning-culture/"),
+        ("butterflies.jpg|culture", "Learning Culture", "Coaching and a video library to build a culture where everyone learns and improves every day.", "learning-culture/"),
     ]
     def card_img(img):
         img, ic = img.split("|")
@@ -722,6 +722,7 @@ def build():
   <div class="section-head center">
     <span class="eyebrow">How we help</span>
     <h2>We challenge your thinking and transform your organisation</h2>
+    <p class="lead">Five ways to work with us, from one conversation to a full transformation.</p>
   </div>
   <div class="grid cols-3">{svc}</div>
 </div></section>
