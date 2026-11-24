@@ -835,3 +835,7 @@ figure.keys-list .key svg { width: 22px; height: 22px; }
 .book-rec p { margin: 0 0 14px; }
 @media (max-width: 640px) { .chap .book-rec { grid-template-columns: 1fr; } .chap .prose .book-rec .book-rec-cover { width: 140px; } }
 .thinker-links .more-link { margin-top: 0; }
+/* Meet ILO: no background image, solid cards */
+.meet-split .meet-leaf { display: none; }
+.meet-split .person-card { background: #0f5f68; backdrop-filter: none; }
+.meet-split .person-card:hover { background: #126a74; }
