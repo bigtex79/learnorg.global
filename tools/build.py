@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "33"
+CSS_VERSION = "34"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -512,7 +512,7 @@ def build():
         return (f'<article class="card svc-card"><span class="card-num" aria-hidden="true">{n:02d}</span>{card_img(img)}'
                 f'<div class="card-body"><h3><a href="{{r}}{h}">{t}</a></h3><p>{d}</p><a class="more" href="{{r}}{h}">Learn more</a></div></article>')
     svc = "".join(svc_card(n, *row) for n, row in enumerate(services, 1))
-    svc += '<article class="card card-cta"><div class="card-body"><h3>Not sure where to start?</h3><p>Book a free consultation and we will help you find the right path.</p><a class="btn light" href="{r}contact/">Get in touch</a></div></article>'
+    svc += '<article class="card card-cta"><img class="cta-leaf" src="{r}assets/img/ilo-petals.png" alt="" aria-hidden="true"><div class="card-body"><span class="eyebrow">Free consultation</span><h3>Not sure where to start?</h3><p>Book a free consultation and we will help you find the right path.</p><a class="btn light" href="{r}contact/">Get in touch</a></div></article>'
     books = [
         ("book-resources/systems-thinking-with-obeya/", "book-obeya.jpg", "Systems Thinking with Obeya", "English", "Chapter resources, articles and templates.", "green"),
         ("book-resources/laerende-organisasjoner/", "book-laerende-organisasjoner.jpg", "Lærende organisasjoner", "Norsk", "Resources for chapters 1–12.", "teal"),
