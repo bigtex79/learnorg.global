@@ -735,7 +735,7 @@ def build():
   </div>
   <div class="split">
     <img src="{{r}}assets/img/gemba-team.jpg" alt="Team on a Gemba visit" loading="lazy">
-    <div><span class="eyebrow">Gemba Learning Trips</span><h2>Go and see</h2>
+    <div><span class="eyebrow">Gemba Learning Trips</span><h2>Learn from the people who make the change</h2>
       <p class="lead">Crucial to learning is to go and see, communicate and learn from practitioners.</p>
       <p>We provide training and learning in partnership with leading companies and municipalities in Norway, Italy and the UK in the field of Lean and learning culture. We organize visits to relevant organisations so participants get a chance to see how improvement and change are made, and discuss specific case studies with the transformation leaders behind them. This combined training and gemba walks provide the ultimate learning experience.</p>
       <div class="btn-row"><a class="btn" href="{{r}}contact/">Contact us</a></div></div>
