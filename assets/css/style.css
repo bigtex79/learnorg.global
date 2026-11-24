@@ -817,3 +817,4 @@ figure.keys-list .key svg { width: 22px; height: 22px; }
 .thinker .more-link { margin-top: 0; display: inline-block; }
 .thinker small { display: block; margin-top: 12px; color: var(--muted); font-size: .8rem; }
 @media (max-width: 640px) { .chap .thinker { grid-template-columns: 1fr; } .chap .prose .thinker img { width: 160px; } }
+.thinker-links { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
