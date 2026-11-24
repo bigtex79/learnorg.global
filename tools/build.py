@@ -1,4 +1,4 @@
-import os, sys, json
+import os, sys, json, re
 
 OUT = sys.argv[1]
 EMAIL = "gabi@learnorg.global"
@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "37"
+CSS_VERSION = "39"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -447,6 +447,68 @@ LO_PARTS = [
 LO_LATE = {13: "Morgengry eller solnedgang?", 14: "Organisasjon som levende systemer", 15: "Om å lede fra framtida"}
 
 
+
+def chapter_guide(path, title, desc, frag, lang, lead, buttons, other_label):
+    """Book companion page laid out as a chapter guide: book header, sticky contents list, one card per chapter."""
+    nb = lang == "nb"
+    L = {"contents": "Innhold" if nb else "Contents", "chapter": "Kapittel" if nb else "Chapter",
+         "glance": "Boka i korte trekk" if nb else "The book at a glance", "eyebrow": "Ressurssider" if nb else "Companion pages",
+         "chapters": "kapitler" if nb else "chapters", "downloads": "nedlastinger" if nb else "downloads", "videos": "videoer" if nb else "videos"}
+    # Drop the old text contents list at the top (the sticky list replaces it); keep the figure
+    pre, _, rest = frag.partition("<h2>")
+    figs = "".join(re.findall(r"<figure.*?</figure>", pre, re.S))
+    parts = re.split(r"<h2>(.*?)</h2>", "<h2>" + rest) if rest else [""]
+    articles, nav, seen, nch = [], [], {}, 0
+    def add(label, num, heading, body, part=None):
+        key = re.sub(r"[^a-z0-9]+", "-", (num or heading).lower()).strip("-") or "section"
+        seen[key] = seen.get(key, 0) + 1
+        aid = key if seen[key] == 1 else f"{key}-{seen[key]}"
+        nav.append(f'<a href="#{aid}"><span>{num.split()[-1] if num else "·"}</span>{heading}</a>')
+        eyebrow = f'<span class="num">{num}</span>' if num else ""
+        articles.append(f'<article class="chap" id="{aid}">{eyebrow}<h2>{heading}</h2><div class="prose">{body}</div></article>')
+    if figs:
+        add(L["glance"], "", L["glance"], figs)
+    i = 1
+    while i < len(parts):
+        h, body = parts[i].strip(), parts[i + 1]
+        i += 2
+        # sub-sections like "1. Learning loops" belong to the chapter before
+        while i < len(parts) and re.match(r"^\d+\.\s", parts[i].strip()):
+            body += f"<h3>{parts[i].strip()}</h3>" + parts[i + 1]
+            i += 2
+        m = re.match(r"^(Chapter|Kapittel)\s*(\d+)\.?\s*[-–:]?\s*(.+)$", h)
+        if m:
+            nch += 1
+            add(None, f'{L["chapter"]} {m.group(2)}', m.group(3).replace(" - ", ": "), body)
+        elif re.match(r"^(Part|Del)\s+II", h):
+            nav.append(f'<b class="part">{h}</b>')
+            if re.sub(r"<[^>]+>|\s", "", body) or "<img" in body:
+                articles.append(f'<div class="chap-part"><span>{h}</span>{body}</div>')
+            else:
+                articles.append(f'<div class="chap-part"><span>{h}</span></div>')
+        else:
+            add(None, "", h, body)
+    downloads = len(re.findall(r'href="[^"]+\.(?:pdf|docx|pptx|xlsx)"', frag))
+    videos = len(set(re.findall(r"(?:youtube(?:-nocookie)?\.com/(?:embed/|watch\?v=)|youtu\.be/)([\w-]{11})", frag)))
+    chips = f'<span>{nch} {L["chapters"]}</span>' + (f'<span>{downloads} {L["downloads"]}</span>' if downloads else "") + (f'<span>{videos} {L["videos"]}</span>' if videos else "") + "<span>English · Norsk</span>"
+    nav_html = f'<nav class="chap-nav" aria-label="{L["contents"]}"><b>{L["contents"]}</b>' + "".join(nav) + "</nav>"
+    body = f"""
+<section class="book-head"><img class="band-leaf" src="{{r}}assets/img/ilo-petals.png" alt="" aria-hidden="true"><div class="container">
+  <div class="crumbs"><a href="{{r}}">{"Hjem" if nb else "Home"}</a> / <span><a href="{{r}}resources/">{"Bøker og ressurser" if nb else "Books &amp; Resources"}</a></span> / <span>{title}</span></div>
+  <div class="book-head-grid">
+    <img class="book-head-cover" src="{{r}}assets/img/book-obeya.jpg" alt="{title}">
+    <div><span class="eyebrow">{L["eyebrow"]}</span><h1>{title}</h1><p class="lead">{lead}</p>
+      <div class="book-chips">{chips}</div>{buttons}</div>
+  </div>
+</div></section>
+<section class="section alt chap-section"><div class="container chap-layout">
+  {nav_html}
+  <div class="chap-list">{"".join(articles)}</div>
+</div></section>
+{CTA}
+"""
+    page(path, title, desc, body, lang)
+
 def book_pages():
     lo_titles = {int(k): v for k, v in json.load(open(os.path.join(BOOKS_DIR, "_chapters.json"))).items()}
     base = "book-resources/"
@@ -462,12 +524,18 @@ def book_pages():
         page(path, title, desc, body, lang)
 
     order = f'<div class="btn-row"><a class="btn" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the English book</a><a class="btn ghost" href="https://www.amazon.com/Systemtenkning-Obeya-Norwegian-Bjarne-Berg-ebook/dp/B0CG67C74W" target="_blank" rel="noopener">Norsk e-bok</a></div>'
-    prose_page(base + "systems-thinking-with-obeya/", "Systems Thinking with Obeya", "Resources for the book, chapter by chapter.", "obeya-wall.jpg", '<a href="{r}resources/">Books &amp; Resources</a>',
-               "Links, videos, tools and templates for Systems Thinking with Obeya by Bjarne Berg Wig.",
-               '<p class="lead">Welcome to the resource pages for the book. Here you will find links, videos, tools and templates that will speed up your learning. The pages are continually improved with new resources, and an e-course with a 9-step guide to developing Obeya in your organisation is in the works. Questions, ideas or resources to share: <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>' + order + fragment("obeya-en"), "en")
-    prose_page(base + "systemtenkning-med-obeya/", "Systemtenkning med Obeya", "Ressurser til boka, kapittel for kapittel.", "obeya-wall.jpg", '<a href="{r}resources/">Books &amp; Resources</a>',
-               "Videoer, lenker, maler og læreeksempler til Systemtenkning med Obeya av Bjarne Berg Wig.",
-               '<p class="lead">Her finner du videoer, lenker til vitenskapelige publikasjoner, maler og læreeksempler. Tips og spørsmål: <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>' + order + fragment("obeya-no"), "nb")
+    en_btns = '<div class="btn-row"><a class="btn light" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the book</a><a class="btn ghost" href="{r}book-resources/systemtenkning-med-obeya/">Norsk utgave</a></div>'
+    no_btns = '<div class="btn-row"><a class="btn light" href="https://www.amazon.com/Systemtenkning-Obeya-Norwegian-Bjarne-Berg-ebook/dp/B0CG67C74W" target="_blank" rel="noopener">Bestill e-boka</a><a class="btn ghost" href="{r}book-resources/systems-thinking-with-obeya/">English edition</a></div>'
+    chapter_guide(base + "systems-thinking-with-obeya/", "Systems Thinking with Obeya",
+                  "Links, videos, tools and templates for Systems Thinking with Obeya by Bjarne Berg Wig, chapter by chapter.",
+                  fragment("obeya-en"), "en",
+                  "Free resources that follow Bjarne Berg Wig's book chapter by chapter: videos, articles, templates and downloads. Questions, ideas or resources to share: <a href=\"mailto:post@learnorg.global\">post@learnorg.global</a>.",
+                  en_btns, "Norsk utgave")
+    chapter_guide(base + "systemtenkning-med-obeya/", "Systemtenkning med Obeya",
+                  "Videoer, lenker, maler og læreeksempler til Systemtenkning med Obeya av Bjarne Berg Wig, kapittel for kapittel.",
+                  fragment("obeya-no"), "nb",
+                  "Gratis ressurser som følger Bjarne Berg Wigs bok kapittel for kapittel: videoer, lenker til vitenskapelige publikasjoner, maler og læreeksempler. Tips og spørsmål: <a href=\"mailto:post@learnorg.global\">post@learnorg.global</a>.",
+                  no_btns, "English edition")
     prose_page(base + "lean-ledelse/", "LEAN – Ledelse for lærende organisasjoner", "Ressurser til boka.", "gemba-team.jpg", '<a href="{r}resources/">Books &amp; Resources</a>',
                "Kursmateriell og ressurser til LEAN – Ledelse for lærende organisasjoner av Bjarne Berg Wig.",
                fragment("lean-ledelse"), "nb")

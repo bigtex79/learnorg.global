@@ -749,3 +749,44 @@ p { margin: 0 0 1em; }
 .prose figure.vmcl, figure.vmcl { margin: 40px auto; max-width: 860px; background: linear-gradient(180deg, #f6fbfb, #eef6f6); border-radius: 18px 0 18px 0; padding: 28px 24px 18px; }
 figure.vmcl svg { display: block; width: 100%; height: auto; }
 figure.vmcl figcaption { text-align: center; font-size: .9rem; color: var(--muted); margin-top: 6px; }
+
+/* Book companion pages as a chapter guide (Nov 2026) */
+.book-head { position: relative; overflow: hidden; background: radial-gradient(120% 120% at 100% 0%, #0b6f73 0%, #0b4f5c 60%); color: #fff; padding: 56px 0 72px; }
+.book-head > .container { position: relative; z-index: 1; }
+.book-head .crumbs { display: inline-block; margin-bottom: 30px; font-size: .9rem; color: #d6ecec; background: rgba(255,255,255,.08); border-left: 3px solid var(--accent); padding: 8px 14px; }
+.book-head .crumbs a { color: #fff; text-decoration: none; }
+.book-head-grid { display: grid; grid-template-columns: 220px 1fr; gap: 56px; align-items: center; }
+.book-head-cover { width: 220px; border-radius: 6px; box-shadow: 0 24px 50px rgba(0,0,0,.35); }
+.book-head h1 { color: #fff; font-size: clamp(2rem, 4vw, 3.1rem); margin: .2em 0 .3em; }
+.book-head .lead { color: #d6ecec; max-width: 640px; }
+.book-head .lead a { color: #ffd38a; }
+.book-head .eyebrow { color: #ffd38a; background: rgba(255,255,255,.08); }
+.book-chips { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 26px; }
+.book-chips span { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); padding: 6px 12px; border-radius: 999px; font-size: .85rem; }
+.book-head .btn.light { background: #fff; color: var(--teal); border-color: #fff; }
+.book-head .btn.ghost { color: #fff; border-color: rgba(255,255,255,.8); background: transparent; }
+.chap-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 48px; align-items: start; }
+.chap-nav { position: sticky; top: 110px; max-height: calc(100vh - 130px); overflow-y: auto; background: #fff; border-radius: 14px 0 14px 0; box-shadow: var(--shadow); padding: 18px; }
+.chap-nav b { display: block; font: 700 .78rem var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin: 6px 8px 10px; }
+.chap-nav b.part { margin-top: 16px; padding-top: 14px; border-top: 1px solid #e3eeee; }
+.chap-nav a { display: flex; gap: 10px; padding: 7px 8px; border-radius: 8px; color: var(--ink); text-decoration: none; font-size: .92rem; line-height: 1.35; }
+.chap-nav a span { color: var(--muted); width: 22px; flex: none; font-weight: 600; }
+.chap-nav a:hover { background: var(--bg-alt); }
+.chap-nav a.on { background: var(--teal); color: #fff; }
+.chap-nav a.on span { color: #ffd38a; }
+.chap { background: #fff; border-radius: 14px 0 14px 0; box-shadow: var(--shadow); padding: 34px 40px; margin-bottom: 24px; scroll-margin-top: 110px; }
+.chap .num { font: 800 .82rem var(--sans); letter-spacing: .14em; color: var(--accent-dark); text-transform: uppercase; }
+.chap > h2 { margin: .25em 0 .6em; font-size: clamp(1.5rem, 2.4vw, 2rem); }
+.chap .prose { max-width: none; }
+.chap .prose img { border-radius: 8px; }
+.chap .prose a[href$=".pdf"], .chap .prose a[href$=".docx"], .chap .prose a[href$=".pptx"], .chap .prose a[href$=".xlsx"] { font-weight: 600; }
+.chap-part { margin: 40px 0 20px; }
+.chap-part > span { display: block; font: 700 .85rem var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.chap-part img { margin-top: 16px; border-radius: 10px; }
+@media (max-width: 960px) {
+  .chap-layout { grid-template-columns: 1fr; gap: 24px; }
+  .chap-nav { position: static; max-height: 340px; }
+  .book-head-grid { grid-template-columns: 1fr; gap: 28px; }
+  .book-head-cover { width: 160px; }
+  .chap { padding: 26px 22px; }
+}

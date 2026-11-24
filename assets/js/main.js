@@ -45,6 +45,22 @@ document.addEventListener('DOMContentLoaded', function () {
       io.observe(el);
     });
   }
+  // Chapter guide: highlight the chapter being read in the sticky contents list
+  var chapLinks = document.querySelectorAll('.chap-nav a[href^="#"]');
+  var chaps = document.querySelectorAll('.chap[id]');
+  if (chapLinks.length && chaps.length) {
+    var current = null, ticking = false;
+    var update = function () {
+      ticking = false;
+      var id = chaps[0].id;
+      chaps.forEach(function (c) { if (c.getBoundingClientRect().top < 180) id = c.id; });
+      if (id === current) return;
+      current = id;
+      chapLinks.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + id); });
+    };
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    update();
+  }
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 });
