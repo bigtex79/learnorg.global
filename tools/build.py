@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "36"
+CSS_VERSION = "37"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -392,9 +392,51 @@ def past_events():
 BOOKS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "content", "books")
 
 
+def vmcl_svg(lang):
+    """The VMCL cycle (vision & mission, systems, learning), redrawn in the site's colours."""
+    T = {"en": ("Vision &amp; Mission", "Systems", "Learning", "Focus on", "Choose areas for", "To achieve", "To improve",
+                "The VMCL framework: vision and mission, systems and learning"),
+         "nb": ("Visjon og oppdrag", "Systemer", "Læring", "Fokus på", "Velge områder for", "For å nå", "For å forbedre",
+                "VMCL-rammeverket: visjon og oppdrag, systemer og læring")}[lang]
+    def box(cx, fill, label, n):
+        x, y, w, h, r = cx - 100, 160, 200, 140, 22
+        lines = label.split(" og ") if lang == "nb" and " og " in label else [label]
+        if len(lines) == 2:
+            lines = [lines[0], "og " + lines[1]]
+        elif "&amp;" in label:
+            lines = label.replace(" &amp; ", " &amp;|").split("|")
+        ty = 230 - (len(lines) - 1) * 15
+        txt = "".join(f'<tspan x="{cx}" y="{ty + i * 30}">{l}</tspan>' for i, l in enumerate(lines))
+        return (f'<path d="M{x + r},{y} H{x + w} V{y + h - r} Q{x + w},{y + h} {x + w - r},{y + h} H{x} V{y + r} Q{x},{y} {x + r},{y} Z" fill="{fill}" filter="url(#vmcl-shadow)"/>'
+                f'<text text-anchor="middle" dominant-baseline="middle" font-family="League Spartan, Inter, sans-serif" font-weight="700" font-size="25" fill="#fff">{txt}</text>'
+                f'<circle cx="{x}" cy="{y}" r="19" fill="#fff" stroke="{fill}" stroke-width="3"/>'
+                f'<text x="{x}" y="{y + 1}" text-anchor="middle" dominant-baseline="middle" font-family="Inter, sans-serif" font-weight="700" font-size="17" fill="{fill}">{n}</text>')
+    def arc(x1, x2, top, label):
+        mid = (x1 + x2) / 2
+        if top:   # left box -> right box, arrow lands on the top edge of the right box
+            d = f'M{x1},{160} C{x1 + 10},{40} {x2 - 10},{40} {x2},{150}'
+        else:     # right box -> left box, arrow lands on the bottom edge of the left box
+            d = f'M{x2},{300} C{x2 - 10},{420} {x1 + 10},{420} {x1},{310}'
+        ly = 70 if top else 390
+        w = 18 + len(label) * 8.6
+        return (f'<path d="{d}" fill="none" stroke="#9cc3c4" stroke-width="3" stroke-linecap="round" marker-end="url(#vmcl-arrow)"/>'
+                f'<rect x="{mid - w / 2}" y="{ly - 19}" width="{w}" height="38" rx="19" fill="#fff" stroke="#cfe2e3" stroke-width="1.5"/>'
+                f'<text x="{mid}" y="{ly + 1}" text-anchor="middle" dominant-baseline="middle" font-family="Inter, sans-serif" font-weight="600" font-size="15" fill="#23303b">{label}</text>')
+    return (f'<figure class="vmcl"><svg viewBox="0 0 900 460" role="img" aria-label="{T[7]}">'
+            '<defs><marker id="vmcl-arrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#078586"/></marker>'
+            '<filter id="vmcl-shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0b4f5c" flood-opacity=".22"/></filter></defs>'
+            + box(150, "#0b4f5c", T[0], 1) + box(450, "#078586", T[1], 2) + box(750, "#b9741a", T[2], 3)
+            + arc(205, 395, True, T[3]) + arc(505, 695, True, T[4]) + arc(205, 395, False, T[5]) + arc(505, 695, False, T[6])
+            + f'</svg><figcaption>{T[7]}</figcaption></figure>')
+
+
 def fragment(name):
     with open(os.path.join(BOOKS_DIR, name + ".html")) as f:
-        return f.read()
+        text = f.read()
+    # Redrawn VMCL diagram replaces the old screenshot
+    text = text.replace('<figure><img src="{r}assets/img/books/b7ae7dcd4fe4.png" alt="" loading="lazy"></figure>', vmcl_svg("en"))
+    text = text.replace('<figure><img src="{r}assets/img/books/e3d7e0c144ec.png" alt="" loading="lazy"></figure>', vmcl_svg("nb"))
+    return text
 
 
 LO_PARTS = [

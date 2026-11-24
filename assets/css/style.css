@@ -745,3 +745,7 @@ p { margin: 0 0 1em; }
 .feature-band.leafy > .container { position: relative; z-index: 1; }
 .band-leaf { position: absolute; right: -120px; top: 50%; translate: 0 -50%; width: 620px; opacity: .09; filter: brightness(0) invert(1); pointer-events: none; }
 @media (max-width: 760px) { .band-leaf { width: 340px; right: -110px; top: auto; bottom: -80px; translate: none; } }
+/* VMCL diagram (book pages) */
+.prose figure.vmcl, figure.vmcl { margin: 40px auto; max-width: 860px; background: linear-gradient(180deg, #f6fbfb, #eef6f6); border-radius: 18px 0 18px 0; padding: 28px 24px 18px; }
+figure.vmcl svg { display: block; width: 100%; height: auto; }
+figure.vmcl figcaption { text-align: center; font-size: .9rem; color: var(--muted); margin-top: 6px; }
