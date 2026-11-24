@@ -228,6 +228,7 @@ def run():
                 '<a class="book-card tint-green" href="../book-resources/systemtenkning-med-obeya/">', 1)
             no = re.sub(r'(tint-green".*?<small class="book-lang">)Engelsk(</small><b>)Systems Thinking with Obeya(</b>)',
                         r"\1Norsk\2Systemtenkning med Obeya\3", no, count=1, flags=re.S)
+        no = re.sub(r'<small class="book-orig">[^<]*</small>', "", no)
         no = re.sub(r"<!--pdsa-->.*?<!--/pdsa-->", lambda m: deming_pdsa("nb"), no, flags=re.S)
         no = re.sub(r"<!--ring-->.*?<!--/ring-->", lambda m: pdsa_ring("nb"), no, flags=re.S)
         out["no/" + p] = finish(no, "no/" + p, "nb", p, "no/" + p)

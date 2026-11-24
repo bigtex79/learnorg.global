@@ -15,7 +15,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "54"
+CSS_VERSION = "55"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -633,16 +633,21 @@ def build():
                 f'<div class="card-body"><h3><a href="{{r}}{h}">{t}</a></h3><p>{d}</p><a class="more" href="{{r}}{h}">Learn more</a></div></article>')
     svc = "".join(svc_card(n, *row) for n, row in enumerate(services, 1))
     svc += '<article class="card card-cta"><img class="cta-leaf" src="{r}assets/img/ilo-petals.png" alt="" aria-hidden="true"><div class="card-body"><span class="eyebrow">Free consultation</span><h3>Not sure where to start?</h3><p>Book a free consultation and we will help you find the right path.</p><a class="btn light" href="{r}contact/">Get in touch</a></div></article>'
-    books = [
-        ("book-resources/systems-thinking-with-obeya/", "book-obeya.jpg", "Systems Thinking with Obeya", "English", "Chapter resources, articles and templates.", "green"),
-        ("book-resources/laerende-organisasjoner/", "book-laerende-organisasjoner.jpg", "Lærende organisasjoner", "Norsk", "Resources for chapters 1–12.", "teal"),
-        ("book-resources/lean-ledelse/", "book-lean-ledelse.jpg", "LEAN Ledelse", "Norsk", "Course material and templates.", "red"),
-        ("book-resources/det-er-ledelse/", "book-det-er-ledelse.jpg", "Det er Ledelse", "Norsk · e-bok", "Quality management for the 21st century.", "blue"),
+    shelf = [
+        ("book-resources/laerende-organisasjoner/", "book-laerende-organisasjoner.jpg", "Learning Organisations", "Lærende organisasjoner", "Norwegian", "Resources for chapters 1–12."),
+        ("book-resources/lean-ledelse/", "book-lean-ledelse.jpg", "Lean Leadership", "LEAN Ledelse", "Norwegian", "Course material and templates."),
+        ("book-resources/det-er-ledelse/", "book-det-er-ledelse.jpg", "It's Leadership", "Det er Ledelse", "Norwegian · E-book", "Quality management for the 21st century."),
     ]
-    book_html = "".join(
-        f'<a class="book-card tint-{tint}" href="{{r}}{h}"><span class="book-cover"><img src="{{r}}assets/img/{img}" alt="" loading="lazy"></span>'
-        f'<div class="book-info"><small class="book-lang">{l}</small><b>{t}</b><p class="book-desc">{d}</p><small class="book-go">View resources →</small></div></a>'
-        for h, img, t, l, d, tint in books)
+    book_html = (
+        '<div class="book-feature"><a class="book-3d" href="{r}book-resources/systems-thinking-with-obeya/"><img src="{r}assets/img/book-obeya.jpg" alt="Systems Thinking with Obeya book cover" loading="lazy"></a>'
+        '<div><small class="book-lang">English · Norwegian edition</small><h3>Systems Thinking with Obeya</h3>'
+        "<p>Bjarne Berg Wig's guide to using the Obeya room to see the whole system, align leaders and learn faster together. Chapter resources, articles and templates are free online.</p>"
+        '<div class="btn-row"><a class="btn" href="{r}book-resources/systems-thinking-with-obeya/">Chapter resources</a>'
+        '<a class="btn ghost" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the book</a></div></div></div>'
+        '<div class="book-shelf">' + "".join(
+            f'<a class="shelf-book" href="{{r}}{h}"><span class="book-3d"><img src="{{r}}assets/img/{img}" alt="" loading="lazy"></span>'
+            f'<small class="book-lang">{l}</small><b>{t}</b><small class="book-orig">{o}</small><span class="book-desc">{d}</span><span class="book-go">View resources →</span></a>'
+            for h, img, t, o, l, d in shelf) + '</div>')
     # Client logos: drop a file named <slug>.svg or <slug>.png into assets/img/clients/
     # and it replaces the name tile on the next build.
     clients_wall = [
@@ -727,28 +732,14 @@ def build():
   <div class="grid cols-3">{svc}</div>
 </div></section>
 
-<section class="section feature-band leafy"><img class="band-leaf" src="{{r}}assets/img/ilo-petals.png" alt="" aria-hidden="true"><div class="container feature">
-  <img src="{{r}}assets/img/book-obeya.jpg" alt="Systems Thinking with Obeya book cover" loading="lazy">
-  <div>
-    <span class="eyebrow">Featured book</span>
-    <h2>Systems Thinking with Obeya</h2>
-    <p>Bjarne Berg Wig's guide to using the Obeya room to see the whole system, align leaders and learn faster together. Chapter resources, articles and templates are free online.</p>
-    <div class="btn-row">
-      <a class="btn light" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the book</a>
-      <a class="btn ghost" href="{{r}}book-resources/systems-thinking-with-obeya/">Chapter resources</a>
-      <a class="btn ghost" href="{{r}}obeya/">Obeya for your organisation</a>
-    </div>
-  </div>
-</div></section>
-
 <section class="section books-section"><div class="container">
   <div class="section-head center">
-    <span class="eyebrow">E-resources</span>
+    <span class="eyebrow">Books &amp; Resources</span>
     <h2>Free companion resources for Bjarne's books</h2>
     <p class="lead">Chapter notes, templates, videos and downloads.</p>
   </div>
-  <div class="books-row">{book_html}</div>
-  <p class="center"><a class="more-link" href="{{r}}resources/#library">Browse the download library →</a></p>
+  {book_html}
+  <p class="center"><a class="more-link" href="{{r}}resources/">All books and free resources →</a></p>
 </div></section>
 
 <section class="section meet-split" id="meet-ilo"><div class="container">
