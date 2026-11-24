@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "40"
+CSS_VERSION = "41"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -91,7 +91,7 @@ def nav_html(r, current):
 def page(path, title, description, body, lang="en"):
     depth = path.count("/")
     r = "../" * depth
-    full_title = "Institute for Learning Organizations (ILO)" if not path else f"{title} | Institute for Learning Organizations"
+    full_title = "Institute for Learning Organisations (ILO)" if not path else f"{title} | Institute for Learning Organisations"
     html = f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -100,7 +100,7 @@ def page(path, title, description, body, lang="en"):
 <title>{full_title}</title>
 <meta name="description" content="{description}">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Institute for Learning Organizations">
+<meta property="og:site_name" content="Institute for Learning Organisations">
 <meta property="og:title" content="{title if path else full_title}">
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{SITE_URL}{path}">
@@ -108,7 +108,7 @@ def page(path, title, description, body, lang="en"):
 <meta property="og:image" content="{SITE_URL}assets/img/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Institute for Learning Organizations: shaping the future with better learning">
+<meta property="og:image:alt" content="Institute for Learning Organisations: shaping the future with better learning">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{SITE_URL}{path}">
 <link rel="icon" href="{r}assets/img/favicon.png?v=6">
@@ -131,7 +131,7 @@ def page(path, title, description, body, lang="en"):
 <header class="site-header"><div class="container">
   <a class="brand" href="{r or './'}">
     <img class="brand-mark-img" src="{r}assets/img/ilo-mark.png" alt="ILO" width="136" height="44">
-    <span class="brand-name">Institute for Learning<br>Organizations</span>
+    <span class="brand-name">Institute for Learning<br>Organisations</span>
   </a>
   <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="nav" aria-label="Main">
@@ -146,7 +146,7 @@ def page(path, title, description, body, lang="en"):
 <footer class="site-footer"><div class="container">
   <div class="cols">
     <div>
-      <img class="footer-logo" src="{r}assets/img/logo-ilo-light.png" alt="ILO – Institute for Learning Organizations">
+      <div class="footer-brand"><img class="footer-logo" src="{r}assets/img/ilo-mark-light.png" alt="ILO"><span>Institute for Learning<br>Organisations</span></div>
       <p>Better learning shapes the future. We challenge and train leaders, giving them new lenses to build a lasting culture of improvement.</p>
     </div>
     <div>
@@ -178,7 +178,7 @@ def page(path, title, description, body, lang="en"):
     </div>
   </div>
   <div class="bottom">
-    <span>© <span id="year">2025</span> Institute for Learning Organizations. All rights reserved.</span>
+    <span>© <span id="year">2025</span> Institute for Learning Organisations. All rights reserved.</span>
     <span>learnorg.global</span>
   </div>
 </div></footer>
@@ -218,7 +218,7 @@ def redirect(old, new):
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Page moved | Institute for Learning Organizations</title>
+<title>Page moved | Institute for Learning Organisations</title>
 <meta name="robots" content="noindex">
 <meta http-equiv="refresh" content="0; url={target}">
 <script>location.replace("{target}")</script>
@@ -255,7 +255,7 @@ CTA = """<section class="cta-full"><div class="container">
 </div></section>"""
 
 AFFILIATES = [
-    ("ALIOS", "ILO is a founder and projects manager of ALIOS – Accelerated Learning in Organizations and Society."),
+    ("ALIOS", "ILO is a founder and projects manager of ALIOS – Accelerated Learning in Organisations and Society."),
     ("Leonardo Group Americas", "Obeya for Operations – online training and coaching."),
     ("Obeya Association", "Knowledge creation and sharing."),
     ("Obeya.Global", "Founding member of Obeya.Global."),
@@ -365,17 +365,17 @@ PAST_EVENTS = [
     ("17", "Oct 2024", "Obeya dagseminaret i Bergen", "17 October 2024 · 08:30–18:00 · Høgskulen på Vestlandet, Inndalsveien 28, Bergen",
      "Obeya – raskere felles læring. Obeya er et visuelt rom for samarbeid mellom ulike funksjoner i en virksomhet, og arkitektur for radikalt bedre samspill på tvers. Ved å visualisere (se sammen), reflektere og prøve ut løsninger skapes raskere læring. På fagseminaret lærte vi om Obeya og delte erfaringer mellom ulike virksomheter.", "obeya-day-seminar.jpg"),
     ("9", "May 2024", "ALIOS Seminar in Piedmont", "9–13 May 2024 · Albergo del Vino, Castelnuovo Calcea, Italy",
-     "Accelerated Learning in Organizations and Society: the annual R&amp;D programme team meeting of ILO COEX, following up the ALIOS project.", "events/alios-seminar.png"),
+     "Accelerated Learning in Organisations and Society: the annual R&amp;D programme team meeting of ILO COEX, following up the ALIOS project.", "events/alios-seminar.png"),
     ("Dec", "2023", "Lærende lederskap (Trippel L)", "December 2023 – June 2024 · Online and in Drammen, Bergen and Haugesund",
-     "Course programme run by Institute for Learning Organizations and Flowit, in three modules: Lean and systems thinking, learning culture and Obeya, and learning leadership. Sessions were held at Aker Tranby near Drammen, Toyota Jæger Automobil in Bergen and Flowit in Haugesund, with certificates awarded at the Lean conference in Stavanger in September 2024.", None),
+     "Course programme run by Institute for Learning Organisations and Flowit, in three modules: Lean and systems thinking, learning culture and Obeya, and learning leadership. Sessions were held at Aker Tranby near Drammen, Toyota Jæger Automobil in Bergen and Flowit in Haugesund, with certificates awarded at the Lean conference in Stavanger in September 2024.", None),
     ("10", "Nov 2023", "Obeya Summit presentation", "November 10, 2023 · 09:00–11:00 · Utrecht, the Netherlands",
      "Bjarne Berg Wig presented the book <em>Systems Thinking with Obeya</em> at the 2023 symposium in Utrecht.", None),
     ("23", "Nov 2021", "Manufacturing and Supply Chain Conference", "November 23, 2021 · 10:00–13:00 · Dublin, Ireland",
      "Samer Hamadeh spoke on learning culture transformation.", None),
     ("4", "May 2021", "Studietur Piemonte – FlowIT", "4–8 May 2021 · Via Toetto 5, Castelnuovo Calcea, Italy",
-     "FlowIT and TPM Lean brukernettverket, together with Institute for Learning Organizations, invited participants on a study trip focused on systems leadership and coaching.", "piemonte.jpg"),
+     "FlowIT and TPM Lean brukernettverket, together with Institute for Learning Organisations, invited participants on a study trip focused on systems leadership and coaching.", "piemonte.jpg"),
     ("23", "Sep 2020", "Studietur Piemonte – Samarbeidsutvikling", "23–27 September 2020 · Albergo del Vino, Castelnuovo Calcea, Italy",
-     "Samarbeidsutvikling Norge and TPM Lean brukernettverket, together with Institute for Learning Organizations, invited participants on a study trip focused on coaching and systems thinking, for everyone who wants to develop in leadership and Lean.", None),
+     "Samarbeidsutvikling Norge and TPM Lean brukernettverket, together with Institute for Learning Organisations, invited participants on a study trip focused on coaching and systems thinking, for everyone who wants to develop in leadership and Lean.", None),
     ("4", "Feb 2020", "LOS-studiet 2020 – Lærende organisasjon, lærende system", "4–6 February 2020 (first of three sessions) · Norway",
      "A new course with three sessions, 12 days in total, during 2020.", None),
 ]
@@ -675,7 +675,7 @@ def build():
 </div></section>""" if t_cards else ""
     home = f"""
 <section class="hero hero-home" style="background-image:url('{{r}}assets/img/obeya-wall.jpg')"><div class="container">
-  <span class="eyebrow">INSTITUTE FOR LEARNING ORGANIZATIONS · NORWAY</span>
+  <span class="eyebrow">INSTITUTE FOR LEARNING ORGANISATIONS · NORWAY</span>
   <h1>We help organisations learn faster and improve every day</h1>
   <p>Sensei mentoring, hands-on training and e-learning in Lean and systems thinking, for leaders and teams in businesses and municipalities.</p>
   <div class="btn-row">
@@ -750,7 +750,7 @@ def build():
     <div class="btn-row"><a class="btn light" href="{{r}}about/">Meet the team</a></div>
   </div>
   <div class="people">
-    <article class="person-card"><img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy"><div><span class="role">Author · Sensei</span><h3>Bjarne Berg Wig</h3><p>More than 30 years in quality management and Lean, including as Quality and Innovation Manager at Hydro Agri Europe (now Yara). He has written 7 professional books and is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p><a class="more-link" href="{{r}}about/#bjarne-berg-wig">Read full bio →</a></div></article>
+    <article class="person-card"><img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy"><div><span class="role">Author · Sensei</span><h3>Bjarne Berg Wig</h3><p>More than 30 years in quality management and Lean, including as Quality and Innovation Manager at Hydro Agri Europe (now Yara). He has written 7 professional books and is a founder of LOS Norge, the Society for Learning Organisations in Norway.</p><a class="more-link" href="{{r}}about/#bjarne-berg-wig">Read full bio →</a></div></article>
     <article class="person-card"><img src="{{r}}assets/img/samer-hamadeh.jpg" alt="Samer Hamadeh" loading="lazy"><div><span class="role">Resident expert</span><h3>Samer Hamadeh</h3><p>Specialist in learning culture transformation. Samer works alongside Bjarne on ILO's mentorship, training and seminars, helping organisations build a culture where everyone learns and improves.</p><a class="more-link" href="{{r}}about/#samer-hamadeh">Read full bio →</a></div></article>
 </div></section>
 
@@ -761,7 +761,7 @@ def build():
 </div></section>
 {CTA}
 """
-    page("", "Home", "The Institute for Learning Organizations helps leaders and organisations become learning organisations through sensei mentorship, e-learning, training and Obeya.", home)
+    page("", "Home", "The Institute for Learning Organisations helps leaders and organisations become learning organisations through sensei mentorship, e-learning, training and Obeya.", home)
 
     # ---------- Services ----------
     svc_rows = [
@@ -1019,11 +1019,11 @@ def build():
     ]
     calhtml = "".join(f'<div class="pdf-group"><h3>{m}</h3><ul>' + "".join(f"<li>{x}</li>" for x in items) + "</ul></div>" for m, items in cal)
     trippel = f"""
-{page_hero("Trippel L – Lærende lederskap", "Et kurs i samarbeid mellom Institute for Learning Organizations og Flowit.", "training-session.jpg", '<a href="{r}events/">Kurs og arrangementer</a>')}
+{page_hero("Trippel L – Lærende lederskap", "Et kurs i samarbeid mellom Institute for Learning Organisations og Flowit.", "training-session.jpg", '<a href="{r}events/">Kurs og arrangementer</a>')}
 <section class="section"><div class="container"><div class="prose">
   <p class="note">Kurset ble gjennomført fra desember 2023 til juni 2024. Ta kontakt for å høre om neste gjennomføring.</p>
   <p class="lead">Mer enn noen gang trenger vi å forbedre kvalitet i vårt lederskap. Lærende lederskap utløser en kjedereaksjon av forbedringer og læring. Alle virksomheter er «komplekse tilpasningssystemer» der raskere felles læring er nøkkelen til suksess. Det starter med hvordan vi tenker: utvikling av mentale modeller som er tettere på hvordan virkeligheten egentlig er. Dette kurset handler om å forstå systemer og å forstå og forbedre vår tenkning.</p>
-  <p>Programmet er et samarbeid mellom Institute for Learning Organizations og Flowit. Det faglige innholdet er blant annet utviklet som del av et «PhD»-program som Bjarne Berg Wig har gått i regi av Cabrera Research Lab i Boston, og som del av to F&amp;U-programmer støttet av Norges forskningsråd. Det første programmet (2020–2022) resulterte i metodikk for å identifisere sterke adaptive læringskulturer (LOS-speilet). Det andre F&amp;U-programmet, ALIOS (akselerert læring i organisasjoner og samfunn), skal utvikle metoder for bedre tenkemodenhet, systemtenkning og systemledelse, der vi knytter an til verdens ledende forskning på området. Gjesteforelesere kommer fra F&amp;U-teamet i ALIOS: Sidsel W. Storaas, Johannes Borge, Kari Heggholmen, Einar Jørgensen og John Richard Hansen.</p>
+  <p>Programmet er et samarbeid mellom Institute for Learning Organisations og Flowit. Det faglige innholdet er blant annet utviklet som del av et «PhD»-program som Bjarne Berg Wig har gått i regi av Cabrera Research Lab i Boston, og som del av to F&amp;U-programmer støttet av Norges forskningsråd. Det første programmet (2020–2022) resulterte i metodikk for å identifisere sterke adaptive læringskulturer (LOS-speilet). Det andre F&amp;U-programmet, ALIOS (akselerert læring i organisasjoner og samfunn), skal utvikle metoder for bedre tenkemodenhet, systemtenkning og systemledelse, der vi knytter an til verdens ledende forskning på området. Gjesteforelesere kommer fra F&amp;U-teamet i ALIOS: Sidsel W. Storaas, Johannes Borge, Kari Heggholmen, Einar Jørgensen og John Richard Hansen.</p>
   <p>Kurset gir deg et betydelig løft videre, både individuelt ved at du tenker bedre og mer bevisst, og for din virksomhet ved at ditt lederskap får langt større virkning. Som på tidligere Lean-kurs knytter vi læring til de konkrete utfordringene dere står i, så kurset gir dobbel virkning. Alle deltakerne har flere år med Lean og kontinuerlig forbedring i egen virksomhet. Trippel L-programmet skal utløse potensial i deg og dine medarbeidere som du nesten ikke trodde var mulig.</p>
   <p>En vesentlig nytteverdi for deg vil være å studere sammen med noen av Norges beste på området.</p>
   <h2>Kalender</h2>
@@ -1031,12 +1031,12 @@ def build():
   <div class="grid cols-3" style="margin-top:24px">{calhtml}</div>
   <div class="prose" style="margin-top:32px">
   <p>Lærebøker sendes ut når dere har meldt dere på. Alt materiell er tilgjengelig på egen kursportal 24/7. Sertifikat deles ut på Lean-konferansen i september.</p>
-  <p><strong>Bjarne Berg Wig</strong>, Institute for Learning Organizations · <strong>Thorleif K. Sire</strong>, Flowit</p>
+  <p><strong>Bjarne Berg Wig</strong>, Institute for Learning Organisations · <strong>Thorleif K. Sire</strong>, Flowit</p>
   </div>
 </div></section>
 {CTA}
 """
-    page("events/trippel-l/", "Trippel L – Lærende lederskap", "Trippel L – Lærende lederskap: kurs i systemtenkning, læringskultur og Obeya fra Institute for Learning Organizations og Flowit.", trippel, "nb")
+    page("events/trippel-l/", "Trippel L – Lærende lederskap", "Trippel L – Lærende lederskap: kurs i systemtenkning, læringskultur og Obeya fra Institute for Learning Organisations og Flowit.", trippel, "nb")
 
     # ---------- Obeya dagseminar ----------
     seminar = f"""
@@ -1054,7 +1054,7 @@ def build():
 </div></section>
 {CTA}
 """
-    page("events/obeya-day-seminar/", "Obeya dagseminar", "Obeya dagseminar: Obeya – raskere felles læring. Fagseminar om Obeya fra Institute for Learning Organizations.", seminar, "nb")
+    page("events/obeya-day-seminar/", "Obeya dagseminar", "Obeya dagseminar: Obeya – raskere felles læring. Fagseminar om Obeya fra Institute for Learning Organisations.", seminar, "nb")
 
     # ---------- Past events ----------
     # Upcoming events: add (date, title, place, text, link) here; the section only shows when the list is not empty.
@@ -1079,16 +1079,16 @@ def build():
 </div></section>
 {CTA}
 """
-    page("events/", "Courses & Events", "Courses, seminars and events from the Institute for Learning Organizations, with past events, seminars and study trips.", past)
+    page("events/", "Courses & Events", "Courses, seminars and events from the Institute for Learning Organisations, with past events, seminars and study trips.", past)
 
     # ---------- About Us ----------
     about = f"""
-{page_hero("About ILO", "The people behind the Institute for Learning Organizations.", "obeya-wall.jpg")}
+{page_hero("About ILO", "The people behind the Institute for Learning Organisations.", "obeya-wall.jpg")}
 <section class="section"><div class="container">
   <div class="section-head center">
     <span class="eyebrow">Who we are</span>
     <h2>Making systems thinking affordable and accessible</h2>
-    <p class="lead">The Institute for Learning Organizations (ILO) was created to make the knowledge of systems thinking affordable and accessible. It evolved from the Total Quality Management Center Norway. ILO has two resident experts, Bjarne Berg Wig and Samer Hamadeh. Together they offer over 30 years of experience in continuous improvement and developing real learning organisations.</p>
+    <p class="lead">The Institute for Learning Organisations (ILO) was created to make the knowledge of systems thinking affordable and accessible. It evolved from the Total Quality Management Center Norway. ILO has two resident experts, Bjarne Berg Wig and Samer Hamadeh. Together they offer over 30 years of experience in continuous improvement and developing real learning organisations.</p>
     <p class="lead">Their focus is to help employees and leaders become systems thinkers, and to practically apply this thinking within their organisations, through a combination of mentorship, on-site training and e-learning.</p>
   </div>
 </div></section>
@@ -1100,7 +1100,7 @@ def build():
     <h2>Bjarne Berg Wig</h2>
     <p>Author and sensei Bjarne Berg Wig has more than 30 years of experience in quality management and Lean. He was Quality and Innovation Manager at Hydro Agri Europe (now Yara).</p>
     <p>For the last 20 years, Bjarne has helped many Norwegian and international private and public companies transform into learning organisations. He has developed academic programs with Bergen University College in Quality Management and Lean leadership. Several hundred leaders have gone through his practical training, with high impact on many companies and municipalities in Norway.</p>
-    <p>He has written 7 professional books, which are used both in industry and in academic programs. Bjarne is a founder of LOS Norge, the Society for Learning Organizations in Norway, and is regarded as one of the "gurus" of learning organisations in Europe.</p>
+    <p>He has written 7 professional books, which are used both in industry and in academic programs. Bjarne is a founder of LOS Norge, the Society for Learning Organisations in Norway, and is regarded as one of the "gurus" of learning organisations in Europe.</p>
     <div class="btn-row"><a class="btn" href="mailto:bjarne@learnorg.global">Email Bjarne</a><a class="btn ghost" href="{{r}}resources/#books">His books</a></div>
   </div>
 </div></section>
@@ -1126,13 +1126,13 @@ def build():
 {testimonials_html.replace('section alt testimonials', 'section testimonials')}
 {CTA}
 """
-    page("about/", "About ILO", "Meet the Institute for Learning Organizations: Bjarne Berg Wig and Samer Hamadeh.", about)
+    page("about/", "About ILO", "Meet the Institute for Learning Organisations: Bjarne Berg Wig and Samer Hamadeh.", about)
 
     # ---------- Contact ----------
     contact = f"""
 {page_hero("Contact", "Let us know how we can help you.", "hero-coffee.jpg", cta=False)}
 <section class="section"><div class="container">
-  <div class="section-head"><p class="lead">Schedule a complimentary consultation with Institute for Learning Organizations, or ask us about mentorship, e-learning, training and books.</p></div>
+  <div class="section-head"><p class="lead">Schedule a complimentary consultation with Institute for Learning Organisations, or ask us about mentorship, e-learning, training and books.</p></div>
   <div class="contact-grid">
     <div class="contact-item"><div class="label">Email</div><a href="mailto:{EMAIL}">{EMAIL}</a></div>
     <div class="contact-item"><div class="label">Phone</div><a href="tel:{PHONE_TEL}">{PHONE}</a></div>
@@ -1141,7 +1141,7 @@ def build():
   <div class="btn-row" style="margin-top:40px"><a class="btn" href="mailto:{EMAIL}">Send us an email</a></div>
 </div></section>
 """
-    page("contact/", "Contact", "Contact the Institute for Learning Organizations.", contact)
+    page("contact/", "Contact", "Contact the Institute for Learning Organisations.", contact)
 
     # ---------- Redirects for pages the Wix rebuild renamed or removed ----------
     for old, new in REDIRECTS.items():

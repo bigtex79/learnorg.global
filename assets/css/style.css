@@ -792,3 +792,7 @@ figure.vmcl figcaption { text-align: center; font-size: .9rem; color: var(--mute
 }
 /* Quote posters (Ackoff, Deming) on the Obeya book pages: smaller, centred */
 .chap img[src*="64d648925c17"], .chap img[src*="0c4bfa5cad8a"] { display: block; max-width: 420px; width: 100%; margin: 8px auto; border-radius: 12px 0 12px 0; box-shadow: var(--shadow); }
+/* Footer logo: mark as image, name as real text (spelled Organisations) */
+.footer-brand { margin-bottom: 18px; }
+.site-footer .footer-brand .footer-logo { width: 150px; margin-bottom: 10px; display: block; }
+.footer-brand span { display: block; font: 600 .82rem/1.3 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: #e6eef0; }
