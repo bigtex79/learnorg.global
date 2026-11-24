@@ -24,8 +24,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=32">
-<script src="../assets/js/main.js?v=32" defer></script>
+<link rel="stylesheet" href="../assets/css/style.css?v=33">
+<script src="../assets/js/main.js?v=33" defer></script>
 </head>
 <body>
 <div class="topbar"><div class="container">
@@ -44,7 +44,7 @@
   </a>
   <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="nav" aria-label="Main">
-    <ul><li><a href="../">Home</a></li><li><button class="sub-toggle active" aria-expanded="false">Services<span class="caret">▾</span></button><ul class="sub"><li><a href="../services/">All services</a></li><li><a href="../sensei-mentorship/">Sensei Mentorship</a></li><li><a href="../training/" class=active>Training</a></li><li><a href="../off-site-training/">Off-site Training</a></li><li><a href="../e-learning-services/">Books and e-learning</a></li><li><a href="../learning-culture/">Learning Culture</a></li><li><a href="../about-us/">About Us</a></li></ul></li><li><button class="sub-toggle" aria-expanded="false">Obeya<span class="caret">▾</span></button><ul class="sub"><li><a href="../obeya/">About Obeya</a></li><li><a href="../book-resources/systems-thinking-with-obeya/">English edition</a></li><li><a href="../book-resources/systemtenkning-med-obeya/">Norwegian edition</a></li></ul></li><li><button class="sub-toggle" aria-expanded="false">E-resources<span class="caret">▾</span></button><ul class="sub"><li><a href="../e-resources/">All e-resources</a></li><li><a href="../book-resources/laerende-organisasjoner/">Lærende organisasjoner</a></li><li><a href="../book-resources/lean-ledelse/">LEAN Ledelse</a></li><li><a href="../det-er-ledelse/">Det er Ledelse</a></li><li><a href="../e-resources/#library">Library</a></li></ul></li><li><a href="../trippel-l/">Trippel L</a></li><li><button class="sub-toggle" aria-expanded="false">Events<span class="caret">▾</span></button><ul class="sub"><li><a href="../obeya-dagseminar/">Obeya Day Seminar</a></li><li><a href="../past-events/">Past Events</a></li></ul></li></ul>
+    <ul><li><button class="sub-toggle active" aria-expanded="false">Services<span class="caret">▾</span></button><ul class="sub"><li><a href="../services/">All services</a></li><li><a href="../sensei-mentorship/">Sensei Mentorship</a></li><li><a href="../training/" class=active>Training</a></li><li><a href="../learning-culture/">Learning Culture</a></li><li><a href="../obeya/">Obeya</a></li></ul></li><li><button class="sub-toggle" aria-expanded="false">Books & Resources<span class="caret">▾</span></button><ul class="sub"><li><a href="../resources/">All books & resources</a></li><li><a href="../book-resources/systems-thinking-with-obeya/">Systems Thinking with Obeya</a></li><li><a href="../book-resources/laerende-organisasjoner/">Lærende organisasjoner</a></li><li><a href="../book-resources/lean-ledelse/">LEAN Ledelse</a></li><li><a href="../book-resources/det-er-ledelse/">Det er Ledelse</a></li><li><a href="../resources/#library">Download library</a></li><li><a href="../resources/#videos">Video library</a></li></ul></li><li><button class="sub-toggle" aria-expanded="false">Courses & Events<span class="caret">▾</span></button><ul class="sub"><li><a href="../events/">Upcoming & past events</a></li><li><a href="../e-learning/">E-learning & webinars</a></li><li><a href="../events/trippel-l/">Trippel L</a></li><li><a href="../events/obeya-day-seminar/">Obeya Day Seminar</a></li></ul></li><li><button class="sub-toggle" aria-expanded="false">About<span class="caret">▾</span></button><ul class="sub"><li><a href="../about/">About ILO</a></li><li><a href="../about/#bjarne-berg-wig">Bjarne Berg Wig</a></li><li><a href="../about/#samer-hamadeh">Samer Hamadeh</a></li><li><a href="../about/#clients">Clients</a></li></ul></li></ul>
     <a class="btn nav-cta" href="../contact/">Get In Touch</a>
   </nav>
   <div class="lang-switch" role="navigation" aria-label="Language / Språk"><a aria-current="true" lang="en">EN</a><a href="../no/training/" hreflang="nb" lang="nb" title="Norsk">NO</a></div>
@@ -65,13 +65,13 @@
       <p>We believe that the best way to learn is through a combination of learning together, e-learning and practical application. Our experts provide custom courses that are tailored to the needs of your company and team members.</p>
       <div class="btn-row"><a class="btn" href="../contact/">Contact us</a></div></div>
   </div>
-  <div class="split reverse" style="margin-bottom:96px">
+  <div class="split reverse" id="off-site" style="margin-bottom:96px;scroll-margin-top:120px">
     <img src="../assets/img/piemonte.jpg" alt="Vineyards in Piemonte, Italy" loading="lazy">
     <div><span class="eyebrow">Off-site Training</span><h2>A change of scenery helps open the mind</h2>
       <p class="lead">Take your team off-site to ILO's Albergo del Vino, surrounded by the vineyards of Piemonte, Italy.</p>
       <p>Here your team can fully focus on "learning how to learn together". Training programs are tailored to the needs of your organisation and cover all key concepts to help participants become systems thinkers. This off-site program is excellent for team building too.</p>
       <p>In advance of your visit we will discuss the goals and needs of your team. From this we will create a custom program so that your team receives exactly what it needs.</p>
-      <div class="btn-row"><a class="btn" href="../off-site-training/">Learn more</a></div></div>
+      <div class="btn-row"><a class="btn" href="../contact/">Plan an off-site programme</a></div></div>
   </div>
   <div class="split">
     <img src="../assets/img/gemba-team.jpg" alt="Team on a Gemba visit" loading="lazy">
@@ -103,10 +103,9 @@
       <h4>Quick Links</h4>
       <ul>
         <li><a href="../">Home</a></li>
-        <li><a href="../about-us/">About Us</a></li>
-        <li><a href="../obeya/">Obeya</a></li>
-        <li><a href="../e-resources/">E-resources</a></li>
-        <li><a href="../trippel-l/">Trippel L</a></li>
+        <li><a href="../about/">About ILO</a></li>
+        <li><a href="../resources/">Books &amp; Resources</a></li>
+        <li><a href="../events/">Courses &amp; Events</a></li>
         <li><a href="../contact/">Contact</a></li>
       </ul>
     </div>
@@ -114,9 +113,10 @@
       <h4>Services</h4>
       <ul>
         <li><a href="../sensei-mentorship/">Sensei Mentorship</a></li>
-        <li><a href="../e-learning-services/">E-learning</a></li>
         <li><a href="../training/">Training</a></li>
         <li><a href="../learning-culture/">Learning Culture</a></li>
+        <li><a href="../obeya/">Obeya</a></li>
+        <li><a href="../e-learning/">E-learning</a></li>
       </ul>
     </div>
     <div>

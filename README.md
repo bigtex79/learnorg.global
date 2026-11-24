@@ -57,3 +57,24 @@ These were restored from the earlier Wix version of the site (2020–2024):
 
 ## Pages
 `/`, `/services/`, `/sensei-mentorship/`, `/training/`, `/off-site-training/`, `/e-learning-services/`, `/learning-culture/`, `/obeya/`, `/e-resources/`, `/det-er-ledelse/`, `/trippel-l/`, `/obeya-dagseminar/`, `/past-events/`, `/contact/`, `/book-resources/` (with `systems-thinking-with-obeya/`, `systemtenkning-med-obeya/`, `lean-ledelse/`, `laerende-organisasjoner/` and `laerende-organisasjoner/kapittel-1/` … `kapittel-12/`)
+
+
+## Site structure (Nov 2026 information architecture)
+
+Menu: **Services** (Sensei Mentorship, Training, Learning Culture, Obeya) · **Books & Resources** (one page per book, download library, video library) · **Courses & Events** (E-learning & webinars, Trippel L, Obeya Day Seminar, past events) · **About** (Bjarne, Samer, Clients) · **Get in touch**. The logo links home.
+
+| Old address | New address |
+|---|---|
+| about-us/ | about/ |
+| off-site-training/ | training/#off-site (merged into Training) |
+| e-learning-services/ | e-learning/ |
+| e-resources/ | resources/ |
+| book-resources/ | resources/#books |
+| det-er-ledelse/ | book-resources/det-er-ledelse/ |
+| trippel-l/ | events/trippel-l/ |
+| obeya-dagseminar/ | events/obeya-day-seminar/ |
+| past-events/ | events/ |
+
+Every old address is a redirect page (see `REDIRECTS` in tools/build.py). `obeya/` is now the Obeya service page; the book lives at book-resources/systems-thinking-with-obeya/.
+Upcoming events: add them to `UPCOMING` in tools/build.py and a "Coming up" section appears on events/.
+Testimonials: add real quotes to `TESTIMONIALS`; set `SHOW_TESTIMONIAL_SLOTS = False` before launch if there are none.

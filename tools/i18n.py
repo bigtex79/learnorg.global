@@ -21,17 +21,16 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = "https://bigtex79.github.io/learnorg.global/"
 
 # Pages written in English that get a Norwegian copy under /no/
-EN_SRC = ["", "services/", "sensei-mentorship/", "training/", "off-site-training/",
-          "e-learning-services/", "learning-culture/", "obeya/", "e-resources/",
-          "past-events/", "contact/", "book-resources/", "about-us/"]
+EN_SRC = ["", "services/", "sensei-mentorship/", "training/", "learning-culture/", "obeya/",
+          "resources/", "e-learning/", "events/", "about/", "contact/"]
 # Pages written in Norwegian: the root copy becomes English, the /no/ copy keeps the Norwegian text
-NO_SRC = ["trippel-l/", "obeya-dagseminar/", "det-er-ledelse/"]
+NO_SRC = ["events/trippel-l/", "events/obeya-day-seminar/", "book-resources/det-er-ledelse/"]
 # Norwegian book companion pages: one copy, Norwegian menu, EN switch goes to the English counterpart
-NO_ONLY = {"book-resources/lean-ledelse/": "book-resources/",
-           "book-resources/laerende-organisasjoner/": "book-resources/",
+NO_ONLY = {"book-resources/lean-ledelse/": "resources/",
+           "book-resources/laerende-organisasjoner/": "resources/",
            "book-resources/systemtenkning-med-obeya/": "book-resources/systems-thinking-with-obeya/"}
 for i in range(1, 13):
-    NO_ONLY[f"book-resources/laerende-organisasjoner/kapittel-{i}/"] = "book-resources/"
+    NO_ONLY[f"book-resources/laerende-organisasjoner/kapittel-{i}/"] = "resources/"
 # English-only page with a Norwegian counterpart
 EN_PAIR = {"book-resources/systems-thinking-with-obeya/": "book-resources/systemtenkning-med-obeya/"}
 
@@ -211,6 +210,8 @@ def run():
         # English copy: any Norwegian text left in the source is put into English
         out[p] = finish(translate(src, EN), p, "en", p, "no/" + p)
         no = rewrite_links(translate(src, NB, miss_nb), p, "no/" + p, True)
+        no = re.sub(r'(<li><a href="[^"]*book-resources/)systems-thinking-with-obeya/("[^>]*>)Systems Thinking with Obeya</a>',
+                    r"\1systemtenkning-med-obeya/\2Systemtenkning med Obeya</a>", no)
         if p == "":
             # Norwegian home: the Obeya book card goes to the Norwegian edition
             no = no.replace(

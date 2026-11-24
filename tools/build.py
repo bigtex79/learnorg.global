@@ -13,33 +13,34 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "32"
+CSS_VERSION = "33"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
-    ("Home", ""),
+    # The logo links home, so there is no Home item (saves room for the longer menu labels)
     ("Services", "services/", [
         ("Sensei Mentorship", "sensei-mentorship/"),
         ("Training", "training/"),
-        ("Off-site Training", "off-site-training/"),
-        ("Books and e-learning", "e-learning-services/"),
         ("Learning Culture", "learning-culture/"),
-        ("About Us", "about-us/"),
+        ("Obeya", "obeya/"),
     ]),
-    ("Obeya", "obeya/", [
-        ("English edition", "book-resources/systems-thinking-with-obeya/"),
-        ("Norsk utgave", "book-resources/systemtenkning-med-obeya/"),
-    ]),
-    ("E-resources", "e-resources/", [
+    ("Books & Resources", "resources/", [
+        ("Systems Thinking with Obeya", "book-resources/systems-thinking-with-obeya/"),
         ("Lærende organisasjoner", "book-resources/laerende-organisasjoner/"),
         ("LEAN Ledelse", "book-resources/lean-ledelse/"),
-        ("Det er Ledelse", "det-er-ledelse/"),
-        ("Library", "e-resources/#library"),
+        ("Det er Ledelse", "book-resources/det-er-ledelse/"),
+        ("Download library", "resources/#library"),
+        ("Video library", "resources/#videos"),
     ]),
-    ("Trippel L", "trippel-l/"),
-    ("Events", None, [
-        ("Obeya Day Seminar", "obeya-dagseminar/"),
-        ("Past Events", "past-events/"),
+    ("Courses & Events", "events/", [
+        ("E-learning & webinars", "e-learning/"),
+        ("Trippel L", "events/trippel-l/"),
+        ("Obeya Day Seminar", "events/obeya-day-seminar/"),
+    ]),
+    ("About", "about/", [
+        ("Bjarne Berg Wig", "about/#bjarne-berg-wig"),
+        ("Samer Hamadeh", "about/#samer-hamadeh"),
+        ("Clients", "about/#clients"),
     ]),
 ]
 
@@ -63,7 +64,7 @@ def icon(name, cls="icon"):
 
 
 # First item in a dropdown that links to the section page; default "All <section>"
-OVERVIEW_LABELS = {"Obeya": "About Obeya"}
+OVERVIEW_LABELS = {"Books & Resources": "All books & resources", "Courses & Events": "Upcoming & past events", "About": "About ILO"}
 
 
 def nav_html(r, current):
@@ -152,10 +153,9 @@ def page(path, title, description, body, lang="en"):
       <h4>Quick Links</h4>
       <ul>
         <li><a href="{r or './'}">Home</a></li>
-        <li><a href="{r}about-us/">About Us</a></li>
-        <li><a href="{r}obeya/">Obeya</a></li>
-        <li><a href="{r}e-resources/">E-resources</a></li>
-        <li><a href="{r}trippel-l/">Trippel L</a></li>
+        <li><a href="{r}about/">About ILO</a></li>
+        <li><a href="{r}resources/">Books &amp; Resources</a></li>
+        <li><a href="{r}events/">Courses &amp; Events</a></li>
         <li><a href="{r}contact/">Contact</a></li>
       </ul>
     </div>
@@ -163,9 +163,10 @@ def page(path, title, description, body, lang="en"):
       <h4>Services</h4>
       <ul>
         <li><a href="{r}sensei-mentorship/">Sensei Mentorship</a></li>
-        <li><a href="{r}e-learning-services/">E-learning</a></li>
         <li><a href="{r}training/">Training</a></li>
         <li><a href="{r}learning-culture/">Learning Culture</a></li>
+        <li><a href="{r}obeya/">Obeya</a></li>
+        <li><a href="{r}e-learning/">E-learning</a></li>
       </ul>
     </div>
     <div>
@@ -192,11 +193,21 @@ def page(path, title, description, body, lang="en"):
 
 # Old URLs (from the WordPress version) and where they now live
 REDIRECTS = {
-    "open-resources/": "e-resources/",
+    "open-resources/": "resources/",
     "courses/": "training/",
-    "upcoming-webinars/": "obeya-dagseminar/",
-    "workshops-and-webinars/": "past-events/",
-    "estore/": "e-learning-services/",
+    "upcoming-webinars/": "events/",
+    "workshops-and-webinars/": "events/",
+    "estore/": "e-learning/",
+    # Nov 2026 information architecture: pages that moved or merged
+    "about-us/": "about/",
+    "off-site-training/": "training/#off-site",
+    "e-learning-services/": "e-learning/",
+    "e-resources/": "resources/",
+    "book-resources/": "resources/#books",
+    "det-er-ledelse/": "book-resources/det-er-ledelse/",
+    "trippel-l/": "events/trippel-l/",
+    "obeya-dagseminar/": "events/obeya-day-seminar/",
+    "past-events/": "events/",
 }
 
 
@@ -397,30 +408,6 @@ def book_pages():
     lo_titles = {int(k): v for k, v in json.load(open(os.path.join(BOOKS_DIR, "_chapters.json"))).items()}
     base = "book-resources/"
 
-    hub = f"""
-{page_hero("Book Resources", "Companion pages for Bjarne Berg Wig's books.", "desk-laptop.jpg", "E-resources")}
-<section class="section"><div class="container">
-  <div class="section-head"><p class="lead">Videos, links, templates and reading that go with each chapter. These pages were first published on the earlier learnorg.global site and have been restored here. Most of the material is in Norwegian.</p></div>
-  <div class="grid cols-3">
-    <article class="card"><img class="card-img" src="{{r}}assets/img/book-obeya.jpg" alt="Systems Thinking with Obeya cover" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
-      <span class="tag">English · Norwegian</span><h3>Systems Thinking with Obeya</h3>
-      <p>Chapter resources for the English edition and the Norwegian edition, <em>Systemtenkning med Obeya</em>.</p>
-      <a class="more" href="{{r}}{base}systems-thinking-with-obeya/">English pages</a>
-      <a class="more" href="{{r}}{base}systemtenkning-med-obeya/" style="margin-top:8px">Norske sider</a></div></article>
-    <article class="card"><img class="card-img" src="{{r}}assets/img/book-laerende-organisasjoner.jpg" alt="Lærende organisasjoner cover" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
-      <span class="tag">Norsk</span><h3>Lærende organisasjoner</h3>
-      <p>Ressurser kapittel for kapittel: videoer, artikler og refleksjonsspørsmål.</p>
-      <a class="more" href="{{r}}{base}laerende-organisasjoner/">Til ressurssidene</a></div></article>
-    <article class="card"><img class="card-img" src="{{r}}assets/img/book-lean-ledelse.jpg" alt="LEAN – Ledelse for lærende organisasjoner cover" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
-      <span class="tag">Norsk</span><h3>LEAN – Ledelse for lærende organisasjoner</h3>
-      <p>Del I Lederskap og kultur: forelesningsnotater, maler og kursmateriell.</p>
-      <a class="more" href="{{r}}{base}lean-ledelse/">Til ressurssidene</a></div></article>
-  </div>
-</div></section>
-{CTA}
-"""
-    page(base, "Book Resources", "Companion resources for the books by Bjarne Berg Wig: Systems Thinking with Obeya, Lærende organisasjoner and LEAN – Ledelse for lærende organisasjoner.", hub)
-
     def prose_page(path, title, sub, img, crumb, desc, frag, lang, extra=""):
         body = f"""
 {page_hero(title, sub, img, crumb)}
@@ -432,13 +419,13 @@ def book_pages():
         page(path, title, desc, body, lang)
 
     order = f'<div class="btn-row"><a class="btn" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the English book</a><a class="btn ghost" href="https://www.amazon.com/Systemtenkning-Obeya-Norwegian-Bjarne-Berg-ebook/dp/B0CG67C74W" target="_blank" rel="noopener">Norsk e-bok</a></div>'
-    prose_page(base + "systems-thinking-with-obeya/", "Systems Thinking with Obeya", "Resources for the book, chapter by chapter.", "obeya-wall.jpg", "Book Resources",
+    prose_page(base + "systems-thinking-with-obeya/", "Systems Thinking with Obeya", "Resources for the book, chapter by chapter.", "obeya-wall.jpg", '<a href="{r}resources/">Books &amp; Resources</a>',
                "Links, videos, tools and templates for Systems Thinking with Obeya by Bjarne Berg Wig.",
                '<p class="lead">Welcome to the resource pages for the book. Here you will find links, videos, tools and templates that will speed up your learning. The pages are continually improved with new resources, and an e-course with a 9-step guide to developing Obeya in your organisation is in the works. Questions, ideas or resources to share: <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>' + order + fragment("obeya-en"), "en")
-    prose_page(base + "systemtenkning-med-obeya/", "Systemtenkning med Obeya", "Ressurser til boka, kapittel for kapittel.", "obeya-wall.jpg", "Book Resources",
+    prose_page(base + "systemtenkning-med-obeya/", "Systemtenkning med Obeya", "Ressurser til boka, kapittel for kapittel.", "obeya-wall.jpg", '<a href="{r}resources/">Books &amp; Resources</a>',
                "Videoer, lenker, maler og læreeksempler til Systemtenkning med Obeya av Bjarne Berg Wig.",
                '<p class="lead">Her finner du videoer, lenker til vitenskapelige publikasjoner, maler og læreeksempler. Tips og spørsmål: <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>' + order + fragment("obeya-no"), "nb")
-    prose_page(base + "lean-ledelse/", "LEAN – Ledelse for lærende organisasjoner", "Ressurser til boka.", "gemba-team.jpg", "Book Resources",
+    prose_page(base + "lean-ledelse/", "LEAN – Ledelse for lærende organisasjoner", "Ressurser til boka.", "gemba-team.jpg", '<a href="{r}resources/">Books &amp; Resources</a>',
                "Kursmateriell og ressurser til LEAN – Ledelse for lærende organisasjoner av Bjarne Berg Wig.",
                fragment("lean-ledelse"), "nb")
 
@@ -453,7 +440,7 @@ def book_pages():
                 items += f'<li><a aria-disabled="true" style="pointer-events:none"><b>{n}</b>{LO_LATE[n]}<span class="soon">ikke publisert</span></a></li>'
         parts += f'<div><h2>{ptitle}</h2><p class="note">{pintro}</p><ul class="chapter-list">{items}</ul></div>'
     lo_hub = f"""
-{page_hero("Lærende organisasjoner", "Ressurser til boka, kapittel for kapittel.", "training-session.jpg", "Book Resources")}
+{page_hero("Lærende organisasjoner", "Ressurser til boka, kapittel for kapittel.", "training-session.jpg", '<a href="{r}resources/">Books &amp; Resources</a>')}
 <section class="section"><div class="container">
   <div class="split" style="margin-bottom:56px">
     <img src="{{r}}assets/img/book-laerende-organisasjoner.jpg" alt="Lærende organisasjoner" loading="lazy" style="max-width:300px;justify-self:center;box-shadow:none">
@@ -473,7 +460,7 @@ def book_pages():
     for i, n in enumerate(nums):
         prev = f'<a href="{{r}}{base}laerende-organisasjoner/kapittel-{nums[i-1]}/">← Kapittel {nums[i-1]}</a>' if i else '<span></span>'
         nxt = f'<a href="{{r}}{base}laerende-organisasjoner/kapittel-{nums[i+1]}/">Kapittel {nums[i+1]} →</a>' if i + 1 < len(nums) else f'<a href="{{r}}{base}laerende-organisasjoner/">Alle kapitler</a>'
-        prose_page(f"{base}laerende-organisasjoner/kapittel-{n}/", f"Kapittel {n}: {lo_titles[n]}", "Lærende organisasjoner – ressurser", "desk-laptop.jpg", "Book Resources",
+        prose_page(f"{base}laerende-organisasjoner/kapittel-{n}/", f"Kapittel {n}: {lo_titles[n]}", "Lærende organisasjoner – ressurser", "desk-laptop.jpg", '<a href="{r}resources/">Books &amp; Resources</a>',
                    f"Ressurser til kapittel {n} i Lærende organisasjoner: {lo_titles[n]}.", fragment(f"lo-kapittel-{n}"), "nb",
                    extra=f'<nav class="chapter-nav">{prev}{nxt}</nav>')
 
@@ -501,17 +488,17 @@ def build():
     tiles = [
         ("sensei-mentorship/", "Sensei Mentorship", "Leadership through dialogue", "mentoring"),
         ("training/", "Training", "On-site and off-site programs", "training"),
-        ("obeya/", "Obeya", "The book and the method", "obeya"),
-        ("e-resources/", "E-resources", "Books, videos and downloads", "resources"),
-        ("trippel-l/", "Trippel L", "Lean, learning, leadership", "layers"),
-        ("past-events/", "Events", "Seminars and study trips", "calendar"),
+        ("obeya/", "Obeya", "See the whole system together", "obeya"),
+        ("resources/", "Books & Resources", "Books, videos and downloads", "resources"),
+        ("e-learning/", "E-learning", "E-courses, e-books, webinars", "elearning"),
+        ("events/", "Courses & Events", "Seminars and programmes", "calendar"),
     ]
     tile_html = "".join(f'<a class="tile" href="{{r}}{h}">{icon(ic, "tile-icon")}<b>{t}</b><span>{d}</span><i>Explore →</i></a>' for h, t, d, ic in tiles)
     services = [
         ("training-session.jpg|mentoring", "Sensei Mentorship", "Leaders learn faster through challenge and dialogue with an experienced sensei mentor.", "sensei-mentorship/"),
         ("gemba-team.jpg|training", "Training", "Site training linked to the practical challenges of developing a learning and improvement culture, with Gemba learning trips.", "training/"),
-        ("piemonte.jpg|offsite", "Off-site Training", "A change of scenery opens the mind: bring your team to our countryside retreat in Piemonte, Italy.", "off-site-training/"),
-        ("team-laptops.jpg|elearning", "Books and e-learning", "E-books, e-courses and webinars that are affordable, available 24/7 and can be tailored to your organisation.", "e-learning-services/"),
+        ("piemonte.jpg|offsite", "Off-site Training", "A change of scenery opens the mind: bring your team to our countryside retreat in Piemonte, Italy.", "training/#off-site"),
+        ("team-laptops.jpg|elearning", "Books and e-learning", "E-books, e-courses and webinars that are affordable, available 24/7 and can be tailored to your organisation.", "e-learning/"),
         ("pdsa|culture", "Learning Culture", "Coaching and a video library to build a culture where everyone learns and improves every day.", "learning-culture/"),
     ]
     def card_img(img):
@@ -530,7 +517,7 @@ def build():
         ("book-resources/systems-thinking-with-obeya/", "book-obeya.jpg", "Systems Thinking with Obeya", "English", "Chapter resources, articles and templates.", "green"),
         ("book-resources/laerende-organisasjoner/", "book-laerende-organisasjoner.jpg", "Lærende organisasjoner", "Norsk", "Resources for chapters 1–12.", "teal"),
         ("book-resources/lean-ledelse/", "book-lean-ledelse.jpg", "LEAN Ledelse", "Norsk", "Course material and templates.", "red"),
-        ("det-er-ledelse/", "book-det-er-ledelse.jpg", "Det er Ledelse", "Norsk · e-bok", "Quality management for the 21st century.", "blue"),
+        ("book-resources/det-er-ledelse/", "book-det-er-ledelse.jpg", "Det er Ledelse", "Norsk · e-bok", "Quality management for the 21st century.", "blue"),
     ]
     book_html = "".join(
         f'<a class="book-card tint-{tint}" href="{{r}}{h}"><span class="book-cover"><img src="{{r}}assets/img/{img}" alt="" loading="lazy"></span>'
@@ -628,7 +615,7 @@ def build():
     <div class="btn-row">
       <a class="btn light" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the book</a>
       <a class="btn ghost" href="{{r}}book-resources/systems-thinking-with-obeya/">Chapter resources</a>
-      <a class="btn ghost" href="{{r}}obeya-dagseminar/">Obeya day seminar</a>
+      <a class="btn ghost" href="{{r}}obeya/">Obeya for your organisation</a>
     </div>
   </div>
 </div></section>
@@ -640,7 +627,7 @@ def build():
     <p class="lead">Chapter notes, templates, videos and downloads.</p>
   </div>
   <div class="books-row">{book_html}</div>
-  <p class="center"><a class="more-link" href="{{r}}e-resources/#library">Browse the download library →</a></p>
+  <p class="center"><a class="more-link" href="{{r}}resources/#library">Browse the download library →</a></p>
 </div></section>
 
 <section class="section" id="meet-ilo"><div class="container">
@@ -650,8 +637,8 @@ def build():
     <p class="lead">ILO evolved from the Total Quality Management Center Norway. Our two resident experts help employees and leaders become systems thinkers through mentorship, on-site training and e-learning.</p>
   </div>
   <div class="people">
-    <article class="person-card"><img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy"><div><span class="role">Author · Sensei</span><h3>Bjarne Berg Wig</h3><p>More than 30 years in quality management and Lean, including as Quality and Innovation Manager at Hydro Agri Europe (now Yara). He has written 7 professional books and is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p><a class="more-link" href="{{r}}about-us/#bjarne-berg-wig">Read full bio →</a></div></article>
-    <article class="person-card"><img src="{{r}}assets/img/samer-hamadeh.jpg" alt="Samer Hamadeh" loading="lazy"><div><span class="role">Resident expert</span><h3>Samer Hamadeh</h3><p>Specialist in learning culture transformation. Samer works alongside Bjarne on ILO's mentorship, training and seminars, helping organisations build a culture where everyone learns and improves.</p><a class="more-link" href="{{r}}about-us/#samer-hamadeh">Read full bio →</a></div></article>
+    <article class="person-card"><img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy"><div><span class="role">Author · Sensei</span><h3>Bjarne Berg Wig</h3><p>More than 30 years in quality management and Lean, including as Quality and Innovation Manager at Hydro Agri Europe (now Yara). He has written 7 professional books and is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p><a class="more-link" href="{{r}}about/#bjarne-berg-wig">Read full bio →</a></div></article>
+    <article class="person-card"><img src="{{r}}assets/img/samer-hamadeh.jpg" alt="Samer Hamadeh" loading="lazy"><div><span class="role">Resident expert</span><h3>Samer Hamadeh</h3><p>Specialist in learning culture transformation. Samer works alongside Bjarne on ILO's mentorship, training and seminars, helping organisations build a culture where everyone learns and improves.</p><a class="more-link" href="{{r}}about/#samer-hamadeh">Read full bio →</a></div></article>
   </div>
 </div></section>
 
@@ -667,7 +654,7 @@ def build():
     # ---------- Services ----------
     svc_rows = [
         ("hero-coffee.jpg", "Sensei Mentorship", "Transformation through challenge and dialogue", "Our sensei partnership is helping leaders to learn faster through challenging and dialogue. Leadership for complex systems needs systems thinking and deep understanding of the hidden drivers of improvement and innovation. Whether you are advanced in systems thinking or have just started, enlist the expertise of our sensei mentor to help you with learning and growing through your journey.", "sensei-mentorship/"),
-        ("team-laptops.jpg", "E-learning", "What you need, when you need it, how you need it.", "ILO provides e-books, e-courses and webinars for learning organisations. These digital resources reflect the best knowledge available on learning leadership. It's affordable and available 24/7. We can also create customized e-learning programs and webinars for learning organisations.", "e-learning-services/"),
+        ("team-laptops.jpg", "E-learning", "What you need, when you need it, how you need it.", "ILO provides e-books, e-courses and webinars for learning organisations. These digital resources reflect the best knowledge available on learning leadership. It's affordable and available 24/7. We can also create customized e-learning programs and webinars for learning organisations.", "e-learning/"),
         ("piemonte.jpg", "Training", "Make your workplace the primary campus.", "We tailor site training linked to the practical challenges of developing a learning and improvement culture. We also do training with gemba learning trips to leading Norwegian companies and municipalities. A change of scenery helps open the mind to new ways of thinking: we can also bring your team to our countryside retreat in Italy for our off-site program.", "training/"),
     ]
     svc_cards = "".join(svc_card(n, *row) for n, row in enumerate(home_services, 1)) + svc_card(
@@ -738,13 +725,13 @@ def build():
       <p>We believe that the best way to learn is through a combination of learning together, e-learning and practical application. Our experts provide custom courses that are tailored to the needs of your company and team members.</p>
       <div class="btn-row"><a class="btn" href="{{r}}contact/">Contact us</a></div></div>
   </div>
-  <div class="split reverse" style="margin-bottom:96px">
+  <div class="split reverse" id="off-site" style="margin-bottom:96px;scroll-margin-top:120px">
     <img src="{{r}}assets/img/piemonte.jpg" alt="Vineyards in Piemonte, Italy" loading="lazy">
     <div><span class="eyebrow">Off-site Training</span><h2>A change of scenery helps open the mind</h2>
       <p class="lead">Take your team off-site to ILO's Albergo del Vino, surrounded by the vineyards of Piemonte, Italy.</p>
       <p>Here your team can fully focus on "learning how to learn together". Training programs are tailored to the needs of your organisation and cover all key concepts to help participants become systems thinkers. This off-site program is excellent for team building too.</p>
       <p>In advance of your visit we will discuss the goals and needs of your team. From this we will create a custom program so that your team receives exactly what it needs.</p>
-      <div class="btn-row"><a class="btn" href="{{r}}off-site-training/">Learn more</a></div></div>
+      <div class="btn-row"><a class="btn" href="{{r}}contact/">Plan an off-site programme</a></div></div>
   </div>
   <div class="split">
     <img src="{{r}}assets/img/gemba-team.jpg" alt="Team on a Gemba visit" loading="lazy">
@@ -757,23 +744,6 @@ def build():
 {CTA}
 """
     page("training/", "Training", "On-site training, off-site training in Piemonte, Italy, and Gemba learning trips from ILO.", training)
-
-    offsite = f"""
-{page_hero("Off-site Training at Albergo del Vino", "A change of scenery helps open the mind to new ways of thinking.", "piemonte.jpg", '<a href="{r}services/">Services</a>')}
-<section class="section"><div class="container split">
-  <div>
-    <span class="eyebrow">Training</span>
-    <h2>Learning how to learn together</h2>
-    <p class="lead">Take your team off-site to ILO's Albergo del Vino, surrounded by the vineyards of Piemonte, Italy.</p>
-    <p>Here your team can fully focus on "learning how to learn together". Training programs are tailored to the needs of your organisation and cover all key concepts to help participants become systems thinkers. This off-site program is excellent for team building too.</p>
-    <p>In advance of your visit we will discuss the goals and needs of your team. From this we will create a custom program so that your team receives exactly what it needs.</p>
-    <div class="btn-row"><a class="btn" href="{{r}}contact/">Let us know how we can help you</a></div>
-  </div>
-  <img src="{{r}}assets/img/piemonte.jpg" alt="Vineyards around Albergo del Vino, Piemonte" loading="lazy">
-</div></section>
-{CTA}
-"""
-    page("off-site-training/", "Off-site Training", "Off-site training for your team at ILO's Albergo del Vino in Piemonte, Italy.", offsite)
 
     # ---------- Learning Culture (restored from the old Wix "coaching" and "about" pages) ----------
     videos = [
@@ -810,23 +780,25 @@ def build():
         ("book-laerende-organisasjoner.jpg", "Lærende organisasjoner", "Norwegian · Gyldendal", """<p>The book gives leaders, union representatives and other change leaders the knowledge needed to move from an outdated system of goal management, bureaucracy and hierarchy – to a society that removes waste of all forms and frees the vast and often hidden resources in all people.</p>
 <p>It describes the necessary shift from goal and result management to real learning organisations and learning systems, in three parts: <em>Past</em> asks why we ended up in this disorder and how we get out of it; <em>Present</em> is about going from “introducing Lean” and continuous improvement to becoming a true learning organisation; <em>Future</em> asks how we develop self-organizing and open, participatory organisations.</p>
 <p>A red thread throughout the book is systems thinking – awareness of how systems work and how we think about them. To transform organisations, we must change how we think. The book is for people who want to become better thinkers.</p>""",
-         '<a class="btn" href="https://www.gyldendal.no/Faglitteratur/OEkonomi-og-administrasjon/Samfunnsoekonomi/Laerende-organisasjoner" target="_blank" rel="noopener">Buy</a>'),
+         '<a class="btn" href="https://www.gyldendal.no/Faglitteratur/OEkonomi-og-administrasjon/Samfunnsoekonomi/Laerende-organisasjoner" target="_blank" rel="noopener">Buy</a><a class="btn ghost" href="{r}book-resources/laerende-organisasjoner/">Chapter resources</a>'),
         ("book-lean-ledelse.jpg", "LEAN – Ledelse for lærende organisasjoner", "Norwegian · Gyldendal", """<p>Lean is about creating products and services with the most value and least possible loss of resources, by focusing on flow, transparent processes and continuous improvement.</p>
 <p>This book and its digital resources are designed for a breakthrough for Lean: a turning point where continuous improvement and learning in the workplace become commonplace, and all managers and employees in municipalities and businesses are active in improvement and renewal. It is about moving from work as effective execution to seeing work as a learning process.</p>
 <p><strong>Part I</strong> explains how to develop a breakthrough strategy. <strong>Part II</strong> covers the methods and tools for introducing and developing Lean in a municipal or private enterprise. <strong>Part III</strong>, new in this edition, covers real learning organisations: learning leadership and the use of guidance, coaching and problem-solving dialogue – what remains after the term Lean goes into history.</p>""",
-         '<a class="btn" href="https://www.gyldendal.no/Faglitteratur/Arbeidsliv/Ledelse/Lean2" target="_blank" rel="noopener">Buy</a>'),
+         '<a class="btn" href="https://www.gyldendal.no/Faglitteratur/Arbeidsliv/Ledelse/Lean2" target="_blank" rel="noopener">Buy</a><a class="btn ghost" href="{r}book-resources/lean-ledelse/">Course material</a>'),
         ("book-quality-craft.jpg", "Quality Improvement as a Craft", "English · Handbook for practitioners", """<p><em>Quality Improvement as a Craft</em> (Hydro Media, 1996) was the main training material for continuous improvement teams in Norway for many years. It is still very valid and gives an overview of many of the methods and tools we know today under the name Lean. The book is still used in teaching at academic courses.</p>
 <p>Please contact us with your name and e-mail address and we will follow up on your book order.</p>""",
          '<a class="btn" href="{r}contact/">Contact Us</a>'),
         ("book-det-er-ledelse.jpg", "Det er ledelse", "Norwegian · E-book", """<p>E-bok «Det er ledelse» – kvalitetsledelse for det 21. århundret. Dette er læreboka i TKL/TQM ved flere høgskoler og universiteter. Her finner du også en mengde ressurser knyttet til opplæring i kvalitetsledelsesfaget.</p>""",
-         '<a class="btn" href="https://issuu.com/tqm2/docs/det_er_ledelse_8" target="_blank" rel="noopener">Kjøp boka og last den ned</a>'),
+         '<a class="btn" href="https://issuu.com/tqm2/docs/det_er_ledelse_8" target="_blank" rel="noopener">Kjøp boka og last den ned</a><a class="btn ghost" href="{r}book-resources/det-er-ledelse/">Read more</a>'),
     ]
+    books.insert(0, ("book-obeya.jpg", "Systems Thinking with Obeya", "English · Norwegian edition: Systemtenkning med Obeya", """<p>Bjarne Berg Wig's guide to using the Obeya room to see the whole system, align leaders and learn faster together. The free companion pages follow the book chapter by chapter, with videos, articles, tools and templates.</p>""",
+         '<a class="btn" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the book</a><a class="btn ghost" href="{r}book-resources/systems-thinking-with-obeya/">Chapter resources</a><a class="btn ghost" href="{r}book-resources/systemtenkning-med-obeya/">Norsk utgave</a>'))
     book_html = "".join(
         f'<div class="book"><img src="{{r}}assets/img/{img}" alt="Cover of {t}" loading="lazy"><div><span class="lang">{lang}</span><h3 style="font-size:1.6rem">{t}</h3>{d}<div class="btn-row">{btn}</div></div></div>'
         for img, t, lang, d, btn in books
     )
     elearn = f"""
-{page_hero("E-learning Services", "Key learning resources: what you need, when you need it, and how you need it.", "team-laptops.jpg", '<a href="{r}services/">Services</a>')}
+{page_hero("E-learning and Webinars", "Key learning resources: what you need, when you need it, and how you need it.", "team-laptops.jpg", '<a href="{r}events/">Courses &amp; Events</a>')}
 <section class="section"><div class="container">
   <div class="grid cols-3">
     <article class="card"><img class="card-img" src="{{r}}assets/img/desk-laptop.jpg" alt="" loading="lazy"><div class="card-body">
@@ -846,48 +818,39 @@ def build():
     </div></article>
   </div>
 </div></section>
-<section class="section alt" id="books"><div class="container">
-  <div class="section-head">
-    <span class="eyebrow">Books</span>
-    <h2>Books by Bjarne Berg Wig</h2>
-  </div>
-  {book_html}
+<section class="section alt"><div class="container center">
+  <span class="eyebrow">Books</span>
+  <h2>Looking for Bjarne's books?</h2>
+  <p class="lead">All of the books, with their chapter resources and downloads, are together under Books &amp; Resources.</p>
+  <div class="btn-row" style="justify-content:center"><a class="btn" href="{{r}}resources/#books">Go to Books &amp; Resources</a></div>
 </div></section>
 {CTA}
 """
-    page("e-learning-services/", "E-learning Services", "E-courses, e-books, webinars and books on Lean, systems thinking and learning organisations by Bjarne Berg Wig.", elearn)
+    page("e-learning/", "E-learning and Webinars", "E-courses, e-books, webinars and books on Lean, systems thinking and learning organisations by Bjarne Berg Wig.", elearn)
 
     # ---------- E-resources (videos from the old Wix "E-resources" page) ----------
     vids = "".join(f'<div><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/{v}" title="{t}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><h3>{t}</h3><p class="note">{d}</p></div>' for v, t, d in videos)
     eres = f"""
-{page_hero("E-resources", "Videos, book resources and downloads for learning organisations.", "desk-laptop.jpg")}
-<section class="section"><div class="container">
-  <div class="grid cols-3">
-    <article class="card"><img class="card-img" src="{{r}}assets/img/book-laerende-organisasjoner.jpg" alt="Lærende organisasjoner" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
-      <span class="tag">Norsk</span><h3>Lærende organisasjoner</h3>
-      <p>Ressurser til boka, kapittel for kapittel: Del I Fortid, Del II Nåtid, Del III Framtid.</p>
-      <a class="more" href="{{r}}book-resources/laerende-organisasjoner/">Til ressurssidene</a></div></article>
-    <article class="card"><img class="card-img" src="{{r}}assets/img/book-lean-ledelse.jpg" alt="LEAN Ledelse" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
-      <span class="tag">Norsk</span><h3>LEAN Ledelse for lærende organisasjoner</h3>
-      <p>Del I Lederskap og kultur: forelesningsnotater, maler og kursmateriell.</p>
-      <a class="more" href="{{r}}book-resources/lean-ledelse/">Til ressurssidene</a></div></article>
-    <article class="card"><img class="card-img" src="{{r}}assets/img/book-det-er-ledelse.jpg" alt="Det er Ledelse" loading="lazy" style="object-fit:contain;background:var(--bg-alt);padding:20px"><div class="card-body">
-      <span class="tag">Norsk · E-bok</span><h3>Det er Ledelse</h3>
-      <p>Kvalitetsledelse for det 21. århundret.</p>
-      <a class="more" href="{{r}}det-er-ledelse/">Les mer</a></div></article>
+{page_hero("Books & Resources", "Bjarne Berg Wig's books, with free companion pages, videos and downloads.", "desk-laptop.jpg")}
+<section class="section" id="books" style="scroll-margin-top:120px"><div class="container">
+  <div class="section-head">
+    <span class="eyebrow">Books</span>
+    <h2>Books by Bjarne Berg Wig</h2>
+    <p class="lead">Each book has free companion pages: chapter notes, videos, templates and downloads. Most of the material is in Norwegian.</p>
   </div>
+  {book_html}
 </div></section>
-<section class="section alt"><div class="container">
+<section class="section alt" id="videos" style="scroll-margin-top:120px"><div class="container">
   <div class="section-head"><span class="eyebrow">Video library</span><h2>Recommended videos</h2></div>
   <div class="video-grid">{vids}</div>
 </div></section>
 {pdf_library().replace('section alt', 'section')}
 {CTA}
 """
-    page("e-resources/", "E-resources", "Videos, book resources and downloadable material on learning organisations, Lean and systems thinking.", eres)
+    page("resources/", "Books & Resources", "Books by Bjarne Berg Wig with free companion resources, a video library and downloadable material on learning organisations, Lean and systems thinking.", eres)
 
     det = f"""
-{page_hero("Det er Ledelse", "Kvalitetsledelse for det 21. århundret.", "desk-laptop.jpg", '<a href="{r}e-resources/">E-resources</a>')}
+{page_hero("Det er Ledelse", "Kvalitetsledelse for det 21. århundret.", "desk-laptop.jpg", '<a href="{r}resources/">Books &amp; Resources</a>')}
 <section class="section"><div class="container split">
   <img src="{{r}}assets/img/book-det-er-ledelse.jpg" alt="Det er Ledelse" loading="lazy" style="max-width:320px;justify-self:center;box-shadow:none">
   <div>
@@ -900,41 +863,41 @@ def build():
 </div></section>
 {CTA}
 """
-    page("det-er-ledelse/", "Det er Ledelse", "E-boka Det er Ledelse – kvalitetsledelse for det 21. århundret, av Bjarne Berg Wig.", det, "nb")
+    page("book-resources/det-er-ledelse/", "Det er Ledelse", "E-boka Det er Ledelse – kvalitetsledelse for det 21. århundret, av Bjarne Berg Wig.", det, "nb")
 
     # ---------- Obeya ----------
     obeya = f"""
-{page_hero("Systems Thinking with Obeya", "Resource pages for the book.", "obeya-wall.jpg")}
+{page_hero("Obeya", "A room for seeing the whole system and learning faster together.", "obeya-wall.jpg", '<a href="{r}services/">Services</a>')}
 <section class="section"><div class="container split">
-  <img src="{{r}}assets/img/book-obeya.jpg" alt="Systems Thinking with Obeya" loading="lazy" style="max-width:340px;justify-self:center;box-shadow:none">
   <div>
-    <p class="lead">Welcome to the resource pages for the book! These pages are still "young" and will be continually improved with new resources.</p>
-    <p>We are also working on an e-course with a 9-step guide for successful development of Obeya in your organisation or community. Please help us develop these free resources: if you have ideas or resources, mail <a href="mailto:bjarne@learnorg.global">bjarne@learnorg.global</a>.</p>
-    <div class="btn-row"><a class="btn" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the English book</a><a class="btn ghost" href="https://www.amazon.com/Systemtenkning-Obeya-Norwegian-Bjarne-Berg-ebook/dp/B0CG67C74W" target="_blank" rel="noopener">Bestill e-boka</a></div>
+    <span class="eyebrow">Obeya for your organisation</span>
+    <h2>See together, think together, try together</h2>
+    <p class="lead">Obeya is a visual room for collaboration between the different functions of an organisation, and an architecture for radically better collaboration across boundaries.</p>
+    <p>By visualising (seeing together), reflecting and trying out solutions, we learn faster and waste less time on papers sent back and forth. Obeya is also the room for developing a better understanding of systems: better systems thinking.</p>
+    <p>ILO helps leadership teams set up and run their own strategic Obeya, through mentoring, training and day seminars where organisations share experience. We are also working on an e-course with a 9-step guide to developing Obeya in your organisation or community.</p>
+    <div class="btn-row"><a class="btn" href="{{r}}contact/">Talk to us about Obeya</a><a class="btn ghost" href="{{r}}events/obeya-day-seminar/">Obeya Day Seminar</a></div>
   </div>
+  <img src="{{r}}assets/img/obeya-day-seminar.jpg" alt="Obeya day seminar in Bergen" loading="lazy">
 </div></section>
 <section class="section alt"><div class="container">
-  <div class="grid cols-2">
-    <article class="card"><div class="card-body">
-      <span class="tag">English</span><h3>Go to the pages in English</h3>
-      <p>In these pages you will find links, videos, tools and templates that will speed up your learning. If you have questions or requirements, don't hesitate to contact us at <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>
-      <a class="more" href="{{r}}book-resources/systems-thinking-with-obeya/">English edition</a></div></article>
-    <article class="card"><div class="card-body">
-      <span class="tag">Norsk</span><h3>Systemtenkning med Obeya</h3>
-      <p>Her vil du finne videoer, linker til vitenskapelige publikasjoner, maler og læreeksempler. Tips og spørsmål: kontakt oss på <a href="mailto:post@learnorg.global">post@learnorg.global</a>.</p>
-      <a class="more" href="{{r}}book-resources/systemtenkning-med-obeya/">Norsk utgave</a></div></article>
-  </div>
-</div></section>
-<section class="section"><div class="container">
   <a class="video-block" href="https://www.youtube.com/watch?v=Vy8tfaOHzAo" target="_blank" rel="noopener">
     <img src="{{r}}assets/img/obeya-wall.jpg" alt="" loading="lazy">
     <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span>
     <div class="video-caption"><span class="eyebrow">Watch on YouTube</span><b>The building blocks of systems thinking (DSRP)</b></div>
   </a>
 </div></section>
+<section class="section"><div class="container split">
+  <img src="{{r}}assets/img/book-obeya.jpg" alt="Systems Thinking with Obeya book cover" loading="lazy" style="max-width:300px;justify-self:center;box-shadow:none">
+  <div>
+    <span class="eyebrow">The book</span>
+    <h2>Systems Thinking with Obeya</h2>
+    <p>Bjarne Berg Wig's book explains the method chapter by chapter, and its free companion pages add videos, articles, tools and templates. It is also available in Norwegian as <em>Systemtenkning med Obeya</em>.</p>
+    <div class="btn-row"><a class="btn" href="{{r}}book-resources/systems-thinking-with-obeya/">Chapter resources</a><a class="btn ghost" href="https://www.amazon.com/Systems-Thinking-Obeya-Bjarne-Berg/dp/826932891X" target="_blank" rel="noopener">Order the book</a></div>
+  </div>
+</div></section>
 {CTA}
 """
-    page("obeya/", "Systems Thinking with Obeya", "Resource pages for Systems Thinking with Obeya by Bjarne Berg Wig, in English and Norwegian.", obeya)
+    page("obeya/", "Obeya", "Obeya for your organisation: ILO helps leadership teams set up and run a strategic Obeya room to see the whole system and learn faster together.", obeya)
 
     # ---------- Trippel L ----------
     cal = [
@@ -944,7 +907,7 @@ def build():
     ]
     calhtml = "".join(f'<div class="pdf-group"><h3>{m}</h3><ul>' + "".join(f"<li>{x}</li>" for x in items) + "</ul></div>" for m, items in cal)
     trippel = f"""
-{page_hero("Trippel L – Lærende lederskap", "Et kurs i samarbeid mellom Institute for Learning Organizations og Flowit.", "training-session.jpg")}
+{page_hero("Trippel L – Lærende lederskap", "Et kurs i samarbeid mellom Institute for Learning Organizations og Flowit.", "training-session.jpg", '<a href="{r}events/">Kurs og arrangementer</a>')}
 <section class="section"><div class="container"><div class="prose">
   <p class="note">Kurset ble gjennomført fra desember 2023 til juni 2024. Ta kontakt for å høre om neste gjennomføring.</p>
   <p class="lead">Mer enn noen gang trenger vi å forbedre kvalitet i vårt lederskap. Lærende lederskap utløser en kjedereaksjon av forbedringer og læring. Alle virksomheter er «komplekse tilpasningssystemer» der raskere felles læring er nøkkelen til suksess. Det starter med hvordan vi tenker: utvikling av mentale modeller som er tettere på hvordan virkeligheten egentlig er. Dette kurset handler om å forstå systemer og å forstå og forbedre vår tenkning.</p>
@@ -961,11 +924,11 @@ def build():
 </div></section>
 {CTA}
 """
-    page("trippel-l/", "Trippel L – Lærende lederskap", "Trippel L – Lærende lederskap: kurs i systemtenkning, læringskultur og Obeya fra Institute for Learning Organizations og Flowit.", trippel, "nb")
+    page("events/trippel-l/", "Trippel L – Lærende lederskap", "Trippel L – Lærende lederskap: kurs i systemtenkning, læringskultur og Obeya fra Institute for Learning Organizations og Flowit.", trippel, "nb")
 
     # ---------- Obeya dagseminar ----------
     seminar = f"""
-{page_hero("Obeya dagseminar", "Obeya – raskere felles læring.", "obeya-day-seminar.jpg", "Events")}
+{page_hero("Obeya dagseminar", "Obeya – raskere felles læring.", "obeya-day-seminar.jpg", '<a href="{r}events/">Kurs og arrangementer</a>')}
 <section class="section"><div class="container split">
   <div>
     <p class="note">Seminaret ble holdt i Bergen 17. oktober 2024. Ta kontakt for å høre om neste Obeya-seminar.</p>
@@ -979,21 +942,36 @@ def build():
 </div></section>
 {CTA}
 """
-    page("obeya-dagseminar/", "Obeya dagseminar", "Obeya dagseminar: Obeya – raskere felles læring. Fagseminar om Obeya fra Institute for Learning Organizations.", seminar, "nb")
+    page("events/obeya-day-seminar/", "Obeya dagseminar", "Obeya dagseminar: Obeya – raskere felles læring. Fagseminar om Obeya fra Institute for Learning Organizations.", seminar, "nb")
 
     # ---------- Past events ----------
+    # Upcoming events: add (date, title, place, text, link) here; the section only shows when the list is not empty.
+    UPCOMING = []
+    upcoming_html = ""
+    if UPCOMING:
+        upcoming_html = '<section class="section"><div class="container"><div class="section-head"><span class="eyebrow">Upcoming</span><h2>Coming up</h2></div>' + "".join(
+            f'<div class="event"><div class="date"><b>{d}</b></div><div><h3>{t}</h3><div class="meta">{pl}</div><p>{tx}</p><a class="more-link" href="{lk}">Read more →</a></div></div>' for d, t, pl, tx, lk in UPCOMING) + '</div></section>'
     past = f"""
-{page_hero("Past Events", "Look back at our seminars, study trips and conferences.", "obeya-wall.jpg", "Events")}
+{page_hero("Courses & Events", "Seminars, programmes and conferences from ILO.", "obeya-wall.jpg")}
+{upcoming_html}
 <section class="section"><div class="container">
+  <div class="grid cols-3 event-links">
+    <article class="card"><div class="card-body"><span class="tag">E-learning</span><h3><a href="{{r}}e-learning/">E-learning and webinars</a></h3><p>E-courses, e-books and webinars, available when you need them.</p><a class="more" href="{{r}}e-learning/">Learn more</a></div></article>
+    <article class="card"><div class="card-body"><span class="tag">Programme · 2023–2024</span><h3><a href="{{r}}events/trippel-l/">Trippel L – Learning Leadership</a></h3><p>A course in systems thinking, learning culture and Obeya, run with Flowit.</p><a class="more" href="{{r}}events/trippel-l/">Learn more</a></div></article>
+    <article class="card"><div class="card-body"><span class="tag">Seminar · Bergen 2024</span><h3><a href="{{r}}events/obeya-day-seminar/">Obeya Day Seminar</a></h3><p>Obeya – faster learning together. Ask us about the next seminar.</p><a class="more" href="{{r}}events/obeya-day-seminar/">Learn more</a></div></article>
+  </div>
+</div></section>
+<section class="section alt" id="past"><div class="container">
+  <div class="section-head"><span class="eyebrow">Past events</span><h2>Seminars, study trips and conferences</h2></div>
   {past_events()}
 </div></section>
 {CTA}
 """
-    page("past-events/", "Past Events", "Past ILO events, seminars and study trips.", past)
+    page("events/", "Courses & Events", "Courses, seminars and events from the Institute for Learning Organizations, with past events, seminars and study trips.", past)
 
     # ---------- About Us ----------
     about = f"""
-{page_hero("About Us", "The people behind the Institute for Learning Organizations.", "obeya-wall.jpg")}
+{page_hero("About ILO", "The people behind the Institute for Learning Organizations.", "obeya-wall.jpg")}
 <section class="section"><div class="container">
   <div class="section-head center">
     <span class="eyebrow">Who we are</span>
@@ -1011,7 +989,7 @@ def build():
     <p>Author and sensei Bjarne Berg Wig has more than 30 years of experience in quality management and Lean. He was Quality and Innovation Manager at Hydro Agri Europe (now Yara).</p>
     <p>For the last 20 years, Bjarne has helped many Norwegian and international private and public companies transform into learning organisations. He has developed academic programs with Bergen University College in Quality Management and Lean leadership. Several hundred leaders have gone through his practical training, with high impact on many companies and municipalities in Norway.</p>
     <p>He has written 7 professional books, which are used both in industry and in academic programs. Bjarne is a founder of LOS Norge, the Society for Learning Organizations in Norway, and is regarded as one of the "gurus" of learning organisations in Europe.</p>
-    <div class="btn-row"><a class="btn" href="mailto:bjarne@learnorg.global">Email Bjarne</a><a class="btn ghost" href="{{r}}e-learning-services/#books">His books</a></div>
+    <div class="btn-row"><a class="btn" href="mailto:bjarne@learnorg.global">Email Bjarne</a><a class="btn ghost" href="{{r}}resources/#books">His books</a></div>
   </div>
 </div></section>
 
@@ -1025,9 +1003,18 @@ def build():
     <div class="btn-row"><a class="btn" href="{{r}}contact/">Contact ILO</a><a class="btn ghost" href="{{r}}learning-culture/">Learning Culture</a></div>
   </div>
 </div></section>
+
+<section class="section alt trust" id="clients" style="scroll-margin-top:120px"><div class="container">
+  <div class="section-head center">
+    <span class="eyebrow">Clients</span>
+    <h2>Organisations we have worked with</h2>
+  </div>
+  <div class="logo-wall">{logo_html}</div>
+</div></section>
+{testimonials_html.replace('section alt testimonials', 'section testimonials')}
 {CTA}
 """
-    page("about-us/", "About Us", "Meet the Institute for Learning Organizations: Bjarne Berg Wig and Samer Hamadeh.", about)
+    page("about/", "About ILO", "Meet the Institute for Learning Organizations: Bjarne Berg Wig and Samer Hamadeh.", about)
 
     # ---------- Contact ----------
     contact = f"""

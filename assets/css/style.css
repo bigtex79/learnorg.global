@@ -700,3 +700,9 @@ p { margin: 0 0 1em; }
 @media (max-width: 860px) { .team-photo { max-width: 320px; } }
 .team-photo figcaption span { color: #fff; font-weight: 500; padding: 8px 14px; border: 1px solid rgba(255,255,255,.6); border-radius: 8px 0 8px 0; font-size: .92rem; }
 .team-photo figcaption b { font: 700 1.05rem var(--serif); color: #ffd38a; }
+/* Menu with the new section names (Nov 2026 IA): keep it on one line */
+@media (min-width:1241px){
+  .nav a, .nav button.sub-toggle { font-size: clamp(14.5px, 1.08vw, 17px); padding: 10px clamp(5px, .5vw, 9px); }
+  .nav > ul { gap: 0; }
+}
+@media (min-width:1440px){ .site-header .container { max-width: min(1320px, calc(100vw - 64px)); } }
