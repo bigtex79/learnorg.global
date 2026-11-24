@@ -867,7 +867,7 @@ def build():
 
     # ---------- Obeya ----------
     obeya = f"""
-{page_hero("Obeya", "A room for seeing the whole system and learning faster together.", "obeya-wall.jpg", '<a href="{r}services/">Services</a>')}
+{page_hero("Obeya", "The \u201cbig room\u201d where leaders see the whole picture and solve problems together.", "obeya-wall.jpg", '<a href="{r}services/">Services</a>')}
 <section class="section"><div class="container split">
   <div>
     <span class="eyebrow">Obeya for your organisation</span>
@@ -883,7 +883,7 @@ def build():
   <a class="video-block" href="https://www.youtube.com/watch?v=Vy8tfaOHzAo" target="_blank" rel="noopener">
     <img src="{{r}}assets/img/obeya-wall.jpg" alt="" loading="lazy">
     <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></span>
-    <div class="video-caption"><span class="eyebrow">Watch on YouTube</span><b>The building blocks of systems thinking (DSRP)</b></div>
+    <div class="video-caption"><span class="eyebrow">Watch on YouTube</span><b>The four building blocks of systems thinking: Distinctions, Systems, Relationships, Perspectives</b></div>
   </a>
 </div></section>
 <section class="section"><div class="container split">
