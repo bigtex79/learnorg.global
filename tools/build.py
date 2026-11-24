@@ -707,7 +707,7 @@ def build():
     </div>
     <div class="btn-row"><a class="btn ghost" href="{{r}}sensei-mentorship/#how-we-work">How we work →</a></div>
   </div>
-  <figure class="purpose-figure"><img src="{{r}}assets/img/training-session.jpg" alt="Bjarne Berg Wig teaching the four rules of systems thinking" loading="lazy"><figcaption>Bjarne Berg Wig teaching the four rules of systems thinking (DSRP)</figcaption>
+  <figure class="purpose-figure"><img src="{{r}}assets/img/training-session.jpg" alt="Bjarne Berg Wig teaching the four rules of systems thinking" loading="lazy"><figcaption>Bjarne Berg Wig teaching the four rules of systems thinking</figcaption>
     <blockquote class="purpose-quote"><p>“Learning is a source of innovation.”</p><cite>W. Edwards Deming</cite></blockquote></figure>
 </div></section>
 
