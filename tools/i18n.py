@@ -175,6 +175,13 @@ def finish(text, dst_path, lang, en_path, no_path):
     text = re.sub(r'<html lang="[a-z]+">', f'<html lang="{lang}">', text, count=1)
     if lang == "nb":
         text = text.replace("All rights reserved.", "Alle rettigheter forbeholdt.")
+    else:
+        # English menu: give the Norwegian books English names, and say they are in Norwegian
+        for no_title, en_title in (("Lærende organisasjoner", "Learning Organisations (in Norwegian)"),
+                                   ("LEAN Ledelse", "Lean Leadership (in Norwegian)"),
+                                   ("Det er Ledelse", "It's Leadership (Norwegian e-book)")):
+            text = re.sub(r'(<li><a href="[^"]*book-resources/[^"]*"( class=active)?>)' + re.escape(no_title) + r'(</a></li>)',
+                          r"\1" + en_title + r"\3", text)
     text = text.replace("<!--LANGSWITCH-->", switch("NO" if lang == "nb" else "EN", rel(en_path), rel(no_path)))
     text = re.sub(r'(<meta property="og:locale" content=")[^"]*', r"\1" + ("nb_NO" if lang == "nb" else "en_GB"), text)
     text = re.sub(r'(<meta property="og:url" content=")[^"]*', r"\g<1>" + SITE_URL + dst_path, text)
