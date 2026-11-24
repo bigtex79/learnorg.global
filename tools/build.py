@@ -1,6 +1,6 @@
 import os, sys, json, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from diagrams import DIAGRAMS
+from diagrams import DIAGRAMS, deming_pdsa, pdsa_ring
 
 OUT = sys.argv[1]
 EMAIL = "gabi@learnorg.global"
@@ -15,7 +15,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "46"
+CSS_VERSION = "48"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -625,7 +625,7 @@ def build():
         img, ic = img.split("|")
         badge = f'<span class="card-icon">{icon(ic)}</span>'
         if img == "pdsa":
-            return '<div class="card-media"><div class="card-img card-art">' + pdsa_svg + '</div>' + badge + '</div>'
+            return '<div class="card-media"><div class="card-img card-art">' + pdsa_ring() + '</div>' + badge + '</div>'
         return f'<div class="card-media"><img class="card-img" src="{{r}}assets/img/{img}" alt="" loading="lazy">{badge}</div>'
     home_services = services
     def svc_card(n, img, t, d, h):
@@ -811,7 +811,7 @@ def build():
     process_html = "".join(f'<li><span class="process-num">{n}</span><b>{t}</b><p>{d}</p></li>' for n, (t, d) in enumerate(process, 1))
     sensei = f"""
 {page_hero("Sensei Mentorship", "Transformation through challenge and dialogue.", "hero-coffee.jpg", 'Services')}
-<section class="section"><div class="container split">
+<section class="section"><div class="container sensei-intro">
   <div>
     <span class="eyebrow">Sensei</span>
     <h2>Look beyond the borders of your first understanding</h2>
@@ -819,10 +819,7 @@ def build():
     <p>Whether you are advanced in systems thinking or just now starting to use the method, we recommend you enlist the expertise of our sensei mentor to help you with learning and growing through your journey.</p>
     <div class="btn-row"><a class="btn" href="{{r}}contact/">Let us know how we can help you</a></div>
   </div>
-  <figure class="pdsa-card">
-    {pdsa_svg}
-    <ol class="pdsa-steps">{steps_html}</ol>
-  </figure>
+  <!--pdsa-->{deming_pdsa("en")}<!--/pdsa-->
 </div></section>
 <section class="section alt"><div class="container">
   <div class="section-head center">

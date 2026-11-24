@@ -818,3 +818,9 @@ figure.keys-list .key svg { width: 22px; height: 22px; }
 .thinker small { display: block; margin-top: 12px; color: var(--muted); font-size: .8rem; }
 @media (max-width: 640px) { .chap .thinker { grid-template-columns: 1fr; } .chap .prose .thinker img { width: 160px; } }
 .thinker-links { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.card .card-art .pdsa-ring { width: 62%; height: auto; }
+.sensei-intro { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; max-width: 900px; }
+.sensei-intro figure.diagram { margin-top: 20px; width: 100%; }
+.card .card-art .pdsa-ring { width: 46%; }
+.card .card-media .card-art { display: flex !important; align-items: center; justify-content: center; }
+.card .card-art .pdsa-ring { display: block; margin: auto; }

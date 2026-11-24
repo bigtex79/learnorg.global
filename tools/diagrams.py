@@ -510,3 +510,26 @@ DIAGRAMS = {
     "c4b83cda92b1.png": learning_steps, "89cabc9e1e31.png": lc_mirror, "d6cb8eec4ff2.jpg": deming_pdsa,
     "7f531e0d142e.png": strategy_path, "ea83a3cfdb03.png": hoshin_keys, "e5a6a9f0e2d4.png": hoshin_words,
 }
+
+
+def pdsa_ring():
+    """Small PDSA ring in the same style, for cards (no text labels apart from the letters)."""
+    import math
+    i = _id()
+    cx, cy, R = 160, 160, 105
+    cols = [DEEP, TEAL, TEAL2, AMBER]
+    b = ""
+    for k, lab in enumerate("PDSA"):
+        a1, a2 = -90 + k * 90 + 8, -90 + (k + 1) * 90 - 8
+        x1, y1 = cx + R * math.cos(math.radians(a1)), cy + R * math.sin(math.radians(a1))
+        x2, y2 = cx + R * math.cos(math.radians(a2)), cy + R * math.sin(math.radians(a2))
+        b += f'<path d="M{x1:.1f},{y1:.1f} A{R},{R} 0 0 1 {x2:.1f},{y2:.1f}" fill="none" stroke="{cols[k]}" stroke-width="26"/>'
+        ah = a2 + 2
+        tx, ty = cx + R * math.cos(math.radians(ah + 8)), cy + R * math.sin(math.radians(ah + 8))
+        bx1, by1 = cx + (R - 22) * math.cos(math.radians(ah)), cy + (R - 22) * math.sin(math.radians(ah))
+        bx2, by2 = cx + (R + 22) * math.cos(math.radians(ah)), cy + (R + 22) * math.sin(math.radians(ah))
+        b += f'<path d="M{bx1:.1f},{by1:.1f} L{tx:.1f},{ty:.1f} L{bx2:.1f},{by2:.1f} Z" fill="{cols[k]}"/>'
+        am = math.radians((a1 + a2) / 2)
+        b += text(cx + R * math.cos(am), cy + R * math.sin(am) + 1, lab, 17, 800, "#fff", family=HEAD)
+    b += text(cx, cy, "PDSA", 30, 800, DEEP, family=HEAD)
+    return f'<svg class="pdsa pdsa-ring" viewBox="0 0 320 320" role="img" aria-label="Plan, Do, Study, Act">{b}</svg>'

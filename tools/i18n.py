@@ -14,6 +14,8 @@ import json
 import os
 import re
 import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from diagrams import deming_pdsa
 
 ROOT = sys.argv[1] if len(sys.argv) > 1 else "."
 MISSING = "--missing" in sys.argv
@@ -226,6 +228,7 @@ def run():
                 '<a class="book-card tint-green" href="../book-resources/systemtenkning-med-obeya/">', 1)
             no = re.sub(r'(tint-green".*?<small class="book-lang">)Engelsk(</small><b>)Systems Thinking with Obeya(</b>)',
                         r"\1Norsk\2Systemtenkning med Obeya\3", no, count=1, flags=re.S)
+        no = re.sub(r"<!--pdsa-->.*?<!--/pdsa-->", lambda m: deming_pdsa("nb"), no, flags=re.S)
         out["no/" + p] = finish(no, "no/" + p, "nb", p, "no/" + p)
     for p in NO_SRC:
         src = read(p)
