@@ -809,3 +809,11 @@ figure.keys-list .key svg { width: 22px; height: 22px; }
 /* Photos inside chapters: keep them modest and centred */
 .chap .prose figure > img, .chap .prose p > img, .chap .prose > img { display: block; max-width: min(380px, 100%); width: auto; height: auto; margin: 12px auto; border-radius: 12px 0 12px 0; box-shadow: var(--shadow); }
 .chap .prose img { display: block; max-width: min(380px, 100%); width: auto; height: auto; margin: 12px auto; border-radius: 12px 0 12px 0; box-shadow: var(--shadow); }
+/* Thinker card (Heraclitus) on the book pages */
+.chap .thinker { display: grid; grid-template-columns: 200px 1fr; gap: 30px; align-items: center; margin: 28px 0; padding: 26px; background: linear-gradient(135deg, #f6fbfb, #eef6f6); border-left: 4px solid var(--accent); border-radius: 0 0 16px 0; }
+.chap .prose .thinker img { max-width: 200px; width: 200px; aspect-ratio: 4/5; object-fit: cover; margin: 0; }
+.thinker h3 { margin: 4px 0 10px; font-size: 1.5rem; }
+.thinker-quote { font: 500 1.2rem/1.5 var(--serif); color: var(--deep); margin: 0 0 14px; }
+.thinker .more-link { margin-top: 0; display: inline-block; }
+.thinker small { display: block; margin-top: 12px; color: var(--muted); font-size: .8rem; }
+@media (max-width: 640px) { .chap .thinker { grid-template-columns: 1fr; } .chap .prose .thinker img { width: 160px; } }
