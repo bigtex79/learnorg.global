@@ -26,9 +26,10 @@ SITE_URL = "https://bigtex79.github.io/learnorg.global/"
 EN_SRC = ["", "sensei-mentorship/", "training/", "learning-culture/", "obeya/",
           "resources/", "e-learning/", "events/", "about/", "contact/"]
 # Pages written in Norwegian: the root copy becomes English, the /no/ copy keeps the Norwegian text
-NO_SRC = ["events/trippel-l/", "events/obeya-day-seminar/", "book-resources/det-er-ledelse/"]
+NO_SRC = ["events/trippel-l/", "events/obeya-day-seminar/"]
 # Norwegian book companion pages: one copy, Norwegian menu, EN switch goes to the English counterpart
 NO_ONLY = {"book-resources/lean-ledelse/": "resources/",
+           "book-resources/det-er-ledelse/": "resources/",
            "book-resources/laerende-organisasjoner/": "resources/",
            "book-resources/systemtenkning-med-obeya/": "book-resources/systems-thinking-with-obeya/"}
 for i in range(1, 13):
@@ -171,7 +172,15 @@ def switch(cur, en_href, no_href):
             + item("EN", en_href, "English") + item("NO", no_href, "Norsk") + "</div>")
 
 
+def keep_lang(text, lang):
+    """English pages drop Norwegian-only content; Norwegian pages drop English-only content."""
+    drop, keep = ("nb", "en") if lang == "en" else ("en", "nb")
+    text = re.sub(rf"<!--{drop}-only-->.*?<!--/{drop}-only-->", "", text, flags=re.S)
+    return text.replace(f"<!--{keep}-only-->", "").replace(f"<!--/{keep}-only-->", "")
+
+
 def finish(text, dst_path, lang, en_path, no_path):
+    text = keep_lang(text, lang)
     r = depth_prefix(dst_path)
     rel = lambda p: (r + p) if (r + p) else "./"
     text = re.sub(r'<html lang="[a-z]+">', f'<html lang="{lang}">', text, count=1)
