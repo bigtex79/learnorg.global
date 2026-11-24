@@ -21,7 +21,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = "https://bigtex79.github.io/learnorg.global/"
 
 # Pages written in English that get a Norwegian copy under /no/
-EN_SRC = ["", "services/", "sensei-mentorship/", "training/", "learning-culture/", "obeya/",
+EN_SRC = ["", "sensei-mentorship/", "training/", "learning-culture/", "obeya/",
           "resources/", "e-learning/", "events/", "about/", "contact/"]
 # Pages written in Norwegian: the root copy becomes English, the /no/ copy keeps the Norwegian text
 NO_SRC = ["events/trippel-l/", "events/obeya-day-seminar/", "book-resources/det-er-ledelse/"]

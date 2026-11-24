@@ -18,7 +18,7 @@ TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
     # The logo links home, so there is no Home item (saves room for the longer menu labels)
-    ("Services", "services/", [
+    ("Services", None, [
         ("Sensei Mentorship", "sensei-mentorship/"),
         ("Training", "training/"),
         ("Learning Culture", "learning-culture/"),
@@ -202,6 +202,7 @@ REDIRECTS = {
     "about-us/": "about/",
     "off-site-training/": "training/#off-site",
     "e-learning-services/": "e-learning/",
+    "services/": "#how-we-help",
     "e-resources/": "resources/",
     "book-resources/": "resources/#books",
     "det-er-ledelse/": "book-resources/det-er-ledelse/",
@@ -568,7 +569,7 @@ def build():
   <h1>We help organisations learn faster and improve every day</h1>
   <p>Sensei mentoring, hands-on training and e-learning in Lean and systems thinking, for leaders and teams in businesses and municipalities.</p>
   <div class="btn-row">
-    <a class="btn light" href="{{r}}services/">Explore our services</a>
+    <a class="btn light" href="#how-we-help">Explore our services</a>
     <a class="btn ghost" style="color:#fff;border-color:#fff" href="{{r}}contact/">Free consultation</a>
   </div>
 </div></section>
@@ -598,7 +599,7 @@ def build():
   <div><strong>11</strong><span>major Norwegian organisations as clients</span></div>
 </div></section>
 
-<section class="section alt svc-section"><img class="svc-petals" src="{{r}}assets/img/ilo-petals.png" alt="" aria-hidden="true"><div class="container">
+<section class="section alt svc-section" id="how-we-help" style="scroll-margin-top:110px"><img class="svc-petals" src="{{r}}assets/img/ilo-petals.png" alt="" aria-hidden="true"><div class="container">
   <div class="section-head center">
     <span class="eyebrow">How we help</span>
     <h2>We challenge your thinking and transform your organisation</h2>
@@ -672,7 +673,7 @@ def build():
 </div></section>
 {CTA}
 """
-    page("services/", "Services", "Sensei mentorship, e-learning and training from the Institute for Learning Organizations.", services_page)
+    # The separate Services page was removed (Nov 2026); services/ redirects to the home page section #how-we-help.
 
     # ---------- Sensei ----------
     pdsa_steps = [
@@ -690,7 +691,7 @@ def build():
     ]
     process_html = "".join(f'<li><span class="process-num">{n}</span><b>{t}</b><p>{d}</p></li>' for n, (t, d) in enumerate(process, 1))
     sensei = f"""
-{page_hero("Sensei Mentorship", "Transformation through challenge and dialogue.", "hero-coffee.jpg", '<a href="{r}services/">Services</a>')}
+{page_hero("Sensei Mentorship", "Transformation through challenge and dialogue.", "hero-coffee.jpg", 'Services')}
 <section class="section"><div class="container split">
   <div>
     <span class="eyebrow">Sensei</span>
@@ -717,7 +718,7 @@ def build():
 
     # ---------- Training ----------
     training = f"""
-{page_hero("Training", "Make your workplace the primary campus.", "training-session.jpg", '<a href="{r}services/">Services</a>')}
+{page_hero("Training", "Make your workplace the primary campus.", "training-session.jpg", 'Services')}
 <section class="section"><div class="container">
   <div class="split" style="margin-bottom:96px">
     <img src="{{r}}assets/img/training-session.jpg" alt="On-site training" loading="lazy">
@@ -755,7 +756,7 @@ def build():
     ]
     _unused = "".join(f'<div><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/{v}" title="{t}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><h3>{t}</h3><p class="note">{d}</p></div>' for v, t, d in videos)
     culture = f"""
-{page_hero("Learning Culture Transformation", "From seeing work as execution to seeing work as continuous learning and improvement.", "training-session.jpg", '<a href="{r}services/">Services</a>')}
+{page_hero("Learning Culture Transformation", "From seeing work as execution to seeing work as continuous learning and improvement.", "training-session.jpg", 'Services')}
 <section class="section"><div class="container"><div class="prose">
   <p class="lead">Learning Culture Transformation (LCT) is the shift from seeing work as execution to seeing work as continuous learning and improvement – seeing the organisation as a complex adaptive system that adapts to change through learning.</p>
   <h2>Learning culture</h2>
@@ -868,7 +869,7 @@ def build():
 
     # ---------- Obeya ----------
     obeya = f"""
-{page_hero("Obeya", "The \u201cbig room\u201d where leaders see the whole picture and solve problems together.", "obeya-wall.jpg", '<a href="{r}services/">Services</a>')}
+{page_hero("Obeya", "The \u201cbig room\u201d where leaders see the whole picture and solve problems together.", "obeya-wall.jpg", 'Services')}
 <section class="section"><div class="container split">
   <div>
     <span class="eyebrow">Obeya for your organisation</span>
