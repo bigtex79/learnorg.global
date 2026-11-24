@@ -15,7 +15,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "52"
+CSS_VERSION = "53"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -700,15 +700,15 @@ def build():
     <span class="eyebrow">Our Purpose</span>
     <h2>Change is faster than ever. Learning has to be faster still.</h2>
     <p class="lead">Organisations that want to survive complex, rapid change need to become real learning organisations: systems of people who master the art of learning together. That’s what we help leaders build.</p>
-    <blockquote class="purpose-quote"><p>“Learning is a source of innovation.”</p><cite>W. Edwards Deming</cite></blockquote>
-    <ul class="purpose-points">
-      <li>{icon("obeya")}<span>See the whole system</span></li>
-      <li>{icon("culture")}<span>Learn by doing</span></li>
-      <li>{icon("mentoring")}<span>Lead through dialogue</span></li>
-    </ul>
-    <div class="btn-row"><a class="btn ghost" href="#meet-ilo">Meet the team</a></div>
+    <div class="purpose-ways">
+      <a href="{{r}}obeya/">{icon("obeya")}<b>See the whole system</b><span>Obeya brings leaders into one room around one shared picture.</span><i>Obeya →</i></a>
+      <a href="{{r}}learning-culture/">{icon("culture")}<b>Learn by doing</b><span>Small trials and PDSA cycles turn everyday work into learning.</span><i>Learning Culture →</i></a>
+      <a href="{{r}}sensei-mentorship/">{icon("mentoring")}<b>Lead through dialogue</b><span>A sensei challenges your thinking through questions, not answers.</span><i>Sensei Mentorship →</i></a>
+    </div>
+    <div class="btn-row"><a class="btn ghost" href="{{r}}sensei-mentorship/#how-we-work">How we work →</a></div>
   </div>
-  <figure class="purpose-figure"><img src="{{r}}assets/img/training-session.jpg" alt="Bjarne Berg Wig teaching systems thinking" loading="lazy"><figcaption>Bjarne Berg Wig teaching systems thinking</figcaption></figure>
+  <figure class="purpose-figure"><img src="{{r}}assets/img/training-session.jpg" alt="Bjarne Berg Wig teaching the four rules of systems thinking" loading="lazy"><figcaption>Bjarne Berg Wig teaching the four rules of systems thinking (DSRP)</figcaption>
+    <blockquote class="purpose-quote"><p>“Learning is a source of innovation.”</p><cite>W. Edwards Deming</cite></blockquote></figure>
 </div></section>
 
 <section class="numbers"><div class="container numbers-row">
@@ -821,7 +821,7 @@ def build():
   </div>
   <!--pdsa-->{deming_pdsa("en")}<!--/pdsa-->
 </div></section>
-<section class="section alt"><div class="container">
+<section class="section alt" id="how-we-work" style="scroll-margin-top:110px"><div class="container">
   <div class="section-head center">
     <span class="eyebrow">How we work</span>
     <h2>From first conversation to lasting change</h2>
