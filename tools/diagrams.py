@@ -439,7 +439,11 @@ def deming_pdsa(lang):
         bx1, by1 = cx + (R - 20) * math.cos(math.radians(ah)), cy + (R - 20) * math.sin(math.radians(ah))
         bx2, by2 = cx + (R + 20) * math.cos(math.radians(ah)), cy + (R + 20) * math.sin(math.radians(ah))
         b += f'<path d="M{bx1:.1f},{by1:.1f} L{tx:.1f},{ty:.1f} L{bx2:.1f},{by2:.1f} Z" fill="{cols[k]}"/>'
-    b += text(cx, cy - 10, "PDSA", 30, 800, DEEP, family=HEAD) + text(cx, cy + 22, "W. E. Deming", 13, 600, MUTED)
+    words = ["Plan", "Do", "Study", "Act"] if en else ["Planlegg", "Utfør", "Studer", "Handle"]
+    b += text(cx, cy - 46, "PDSA", 15, 800, MUTED, family=HEAD)
+    for k, w in enumerate(words):
+        b += text(cx, cy - 18 + k * 24, w, 19, 800, cols[k], family=HEAD)
+    b += text(cx, cy + 82, "W. E. Deming", 11, 600, MUTED)
     places = [(cx + 150, 70, "start"), (cx + 150, 350, "start"), (cx - 150, 350, "end"), (cx - 150, 70, "end")]
     for k, ((name, lines), (x, y, anc)) in enumerate(zip(steps, places)):
         b += badge(x + (16 if anc == "start" else -16), y - 26, k + 1, cols[k], 15)
@@ -512,7 +516,7 @@ DIAGRAMS = {
 }
 
 
-def pdsa_ring():
+def pdsa_ring(lang="en"):
     """Small PDSA ring in the same style, for cards (no text labels apart from the letters)."""
     import math
     i = _id()
@@ -531,5 +535,7 @@ def pdsa_ring():
         b += f'<path d="M{bx1:.1f},{by1:.1f} L{tx:.1f},{ty:.1f} L{bx2:.1f},{by2:.1f} Z" fill="{cols[k]}"/>'
         am = math.radians((a1 + a2) / 2)
         b += text(cx + R * math.cos(am), cy + R * math.sin(am) + 1, lab, 17, 800, "#fff", family=HEAD)
-    b += text(cx, cy, "PDSA", 30, 800, DEEP, family=HEAD)
-    return f'<svg class="pdsa pdsa-ring" viewBox="0 0 320 320" role="img" aria-label="Plan, Do, Study, Act">{b}</svg>'
+    words = ["Plan", "Do", "Study", "Act"] if lang == "en" else ["Planlegg", "Utfør", "Studer", "Handle"]
+    for k, w in enumerate(words):
+        b += text(cx, cy - 39 + k * 26, w, 22, 800, cols[k], family=HEAD)
+    return f'<!--ring--><svg class="pdsa pdsa-ring" viewBox="0 0 320 320" role="img" aria-label="{', '.join(words)}">{b}</svg><!--/ring-->'
