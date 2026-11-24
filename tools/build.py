@@ -13,7 +13,7 @@ ICON_MAIL = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria
 ICON_PHONE = '<svg viewBox="0 0 24 24" width="14" height="14" fill="#078586" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1l-2.2 2.2z"/></svg>'
 
 # Bump when style.css changes so browsers fetch the new file
-CSS_VERSION = "34"
+CSS_VERSION = "35"
 TAGLINE = "Lean · Learning · Leadership"
 
 NAV = [
@@ -630,16 +630,17 @@ def build():
   <p class="center"><a class="more-link" href="{{r}}resources/#library">Browse the download library →</a></p>
 </div></section>
 
-<section class="section" id="meet-ilo"><div class="container">
-  <div class="section-head center">
+<section class="section meet-split" id="meet-ilo"><img class="meet-leaf" src="{{r}}assets/img/ilo-petals.png" alt="" aria-hidden="true"><div class="container">
+  <div class="meet-intro">
     <span class="eyebrow">Meet ILO</span>
     <h2>Making systems thinking affordable and accessible</h2>
     <p class="lead">ILO evolved from the Total Quality Management Center Norway. Our two resident experts help employees and leaders become systems thinkers through mentorship, on-site training and e-learning.</p>
+    <div class="mini-stats"><div><b>30+</b><span>years in Lean</span></div><div><b>7</b><span>books</span></div><div><b>100s</b><span>leaders trained</span></div></div>
+    <div class="btn-row"><a class="btn light" href="{{r}}about/">Meet the team</a></div>
   </div>
   <div class="people">
     <article class="person-card"><img src="{{r}}assets/img/bjarne-berg-wig.jpg" alt="Bjarne Berg Wig" loading="lazy"><div><span class="role">Author · Sensei</span><h3>Bjarne Berg Wig</h3><p>More than 30 years in quality management and Lean, including as Quality and Innovation Manager at Hydro Agri Europe (now Yara). He has written 7 professional books and is a founder of LOS Norge, the Society for Learning Organizations in Norway.</p><a class="more-link" href="{{r}}about/#bjarne-berg-wig">Read full bio →</a></div></article>
     <article class="person-card"><img src="{{r}}assets/img/samer-hamadeh.jpg" alt="Samer Hamadeh" loading="lazy"><div><span class="role">Resident expert</span><h3>Samer Hamadeh</h3><p>Specialist in learning culture transformation. Samer works alongside Bjarne on ILO's mentorship, training and seminars, helping organisations build a culture where everyone learns and improves.</p><a class="more-link" href="{{r}}about/#samer-hamadeh">Read full bio →</a></div></article>
-  </div>
 </div></section>
 
 {testimonials_html}
