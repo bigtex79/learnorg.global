@@ -24,8 +24,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../../assets/css/style.css?v=56">
+<link rel="stylesheet" href="../../../assets/css/style.css?v=65">
 <script src="../../../assets/js/main.js?v=56" defer></script>
+<style>.yt-card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:linear-gradient(135deg,#1f2a33,#0b5e5f);color:#fff;text-decoration:none;border-radius:inherit;text-align:center;padding:16px}
+.yt-card:hover .yt-play{transform:scale(1.08)}.yt-play{width:68px;height:48px;border-radius:12px;background:#e62117;position:relative;transition:transform .15s}
+.yt-play:after{content:"";position:absolute;left:28px;top:14px;border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent}
+.yt-text b{display:block;font-size:1rem}.yt-text small{display:block;margin-top:4px;opacity:.8;font-size:.85rem}
+.video{position:relative}</style>
 </head>
 <body>
 <div class="topbar"><div class="container">
@@ -38,24 +43,24 @@
   </div>
 </div></div>
 <header class="site-header"><div class="container">
-  <a class="brand" href="../../../no/">
+  <a class="brand" href="../../../no/index.html">
     <img class="brand-mark-img" src="../../../assets/img/ilo-mark.png" alt="ILO" width="136" height="44">
     <span class="brand-name">Institute for Learning<br>Organisations</span>
   </a>
   <button class="menu-btn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="nav" aria-label="Main">
-    <ul><li><button class="sub-toggle" aria-expanded="false">Tjenester<span class="caret">▾</span></button><ul class="sub"><li><a href="../../../no/sensei-mentorship/">Sensei-mentorskap</a></li><li><a href="../../../no/training/">Opplæring</a></li><li><a href="../../../no/learning-culture/">Læringskultur</a></li><li><a href="../../../no/obeya/">Obeya</a></li></ul></li><li><button class="sub-toggle" aria-expanded="false">Bøker og ressurser<span class="caret">▾</span></button><ul class="sub"><li><a href="../../../no/resources/">Alle bøker og ressurser</a></li><li><a href="../../../book-resources/systems-thinking-with-obeya/">Systems Thinking with Obeya</a></li><li><a href="../../../book-resources/laerende-organisasjoner/">Lærende organisasjoner</a></li><li><a href="../../../book-resources/lean-ledelse/">LEAN Ledelse</a></li><li><a href="../../../book-resources/det-er-ledelse/">Det er Ledelse</a></li><li><a href="../../../no/resources/#library">Nedlastingsbibliotek</a></li><li><a href="../../../no/resources/#videos">Videobibliotek</a></li></ul></li><li><button class="sub-toggle" aria-expanded="false">Kurs og arrangementer<span class="caret">▾</span></button><ul class="sub"><li><a href="../../../no/events/">Kommende og tidligere arrangementer</a></li><li><a href="../../../no/e-learning/">E-læring og webinarer</a></li><li><a href="../../../no/events/trippel-l/">Trippel L</a></li><li><a href="../../../no/events/obeya-day-seminar/">Obeya dagseminar</a></li></ul></li><li><button class="sub-toggle" aria-expanded="false">Om oss<span class="caret">▾</span></button><ul class="sub"><li><a href="../../../no/about/">Om ILO</a></li><li><a href="../../../no/about/#bjarne-berg-wig">Bjarne Berg Wig</a></li><li><a href="../../../no/about/#samer-hamadeh">Samer Hamadeh</a></li><li><a href="../../../no/about/#clients">Kunder</a></li></ul></li></ul>
-    <a class="btn nav-cta" href="../../../no/contact/">Ta kontakt</a>
+    <ul><li class="has-top"><a class="nav-top" href="../../../no/services/index.html">Tjenester</a><button class="sub-toggle caret-btn" aria-expanded="false" aria-label="Vis Tjenester-menyen"><span class="caret">▾</span></button><ul class="sub"><li><a href="../../../no/sensei-mentorship/index.html">Sensei-mentorskap</a></li><li><a href="../../../no/training/index.html">Opplæring</a></li><li><a href="../../../no/learning-culture/index.html">Transformasjon av læringskultur</a></li><li><a href="../../../no/obeya/index.html">Obeya</a></li></ul></li><li class="has-top"><a class="nav-top" href="../../../no/resources/index.html">Bøker og ressurser</a><button class="sub-toggle caret-btn" aria-expanded="false" aria-label="Vis Bøker og ressurser-menyen"><span class="caret">▾</span></button><ul class="sub"><li><a href="../../../no/resources/index.html#books">Bøker</a></li><li><a href="../../../no/resources/index.html#videos">Videobibliotek</a></li><li><a href="../../../no/resources/index.html#library">Nedlastingsbibliotek</a></li></ul></li><li class="has-top"><a class="nav-top" href="../../../no/events/index.html">Kurs og arrangementer</a><button class="sub-toggle caret-btn" aria-expanded="false" aria-label="Vis Kurs og arrangementer-menyen"><span class="caret">▾</span></button><ul class="sub"><li><a href="../../../no/events/index.html#coming-up">Kommende</a></li><li><a href="../../../no/events/index.html#online">E-læring og webinarer</a></li><li><a href="../../../no/events/index.html#past">Tidligere arrangementer</a></li></ul></li><li class="has-top"><a class="nav-top" href="../../../no/about/index.html">Om oss</a><button class="sub-toggle caret-btn" aria-expanded="false" aria-label="Vis Om oss-menyen"><span class="caret">▾</span></button><ul class="sub"><li><a href="../../../no/about/index.html#who-we-are">Hvem vi er</a></li><li><a href="../../../no/about/index.html#bjarne-berg-wig">Bjarne Berg Wig</a></li><li><a href="../../../no/about/index.html#samer-hamadeh">Samer Hamadeh</a></li><li><a href="../../../no/about/index.html#clients">Kunder</a></li></ul></li></ul>
+    <a class="btn nav-cta" href="../../../no/contact/index.html">Ta kontakt</a>
   </nav>
-  <div class="lang-switch" role="navigation" aria-label="Language / Språk"><a href="../../../resources/" hreflang="en" lang="en" title="English">EN</a><a aria-current="true" lang="nb">NO</a></div>
+  <div class="lang-switch" role="navigation" aria-label="Language / Språk"><a href="../../../resources/index.html" hreflang="en" lang="en" title="English">EN</a><a aria-current="true" lang="nb">NO</a></div>
 </div></header>
 <main>
 
 <section class="page-hero" style="background-image:url('../../../assets/img/desk-laptop.jpg')"><div class="container">
-  <div class="crumbs"><a href="../../../no/">Hjem</a> / <span><a href="../../../no/resources/">Bøker og ressurser</a></span> / <span>Kapittel 5: Fundamentet i god Lean-praksis</span></div>
+  <a class="eyebrow hero-eb" href="../index.html">Learning Organisations</a>
   <h1>Kapittel 5: Fundamentet i god Lean-praksis</h1>
   <p>Lærende organisasjoner – ressurser</p>
-  <div class="btn-row"><a class="btn light" href="../../../no/contact/">Bestill en gratis samtale</a></div>
+  <div class="btn-row"><a class="btn light" href="../../../no/contact/index.html">Bestill en gratis samtale</a></div>
 </div></section>
 <section class="section"><div class="container"><div class="prose">
 <p>Når vi skal utvikle ekte lærende organisasjoner, må vi bygge videre på god praksis. Vi må studere og lære av de beste virksomhetene her hjemme og de beste ute. Dette kapitlet må ikke leses som «riktig» historieskriving, men som drøfting av hvordan vi kan lære av og bygge videre på god praksis.</p>
@@ -69,17 +74,17 @@
 <h3>5.2. Hydro møter Toyota Production System</h3>
 <p>I dette kapittelet skal vi se på fem læreeksempler og noen nøkkellæringer vi må bygge videre på. Her er en video med Jeffrey Liker som har skrevet mange bøker om Toyota.</p>
 <p>Han snakker om ledelsesprinsippene i Toyota</p>
-<div class="downloads"><h2>Nedlastinger</h2><ul><li><a href="../../../assets/pdf/vint-fourth-industrial-revolution.pdf" target="_blank" rel="noopener">Den 4. industrielle revolusjon (PDF)</a></li></ul></div>
+<div class="downloads"><h2>Nedlastinger</h2><ul><li><a href="https://bigtex79.github.io/learnorg.global/assets/pdf/vint-fourth-industrial-revolution.pdf">Den 4. industrielle revolusjon (PDF)</a></li></ul></div>
 <h2>Videoer</h2>
-<div class="video-grid"><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/lPDV4RNFuZo" title="YouTube video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/AH5Bn8iguNM" title="YouTube video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><div class="video"><iframe src="https://www.youtube-nocookie.com/embed/7RluP0NkgAY" title="YouTube video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+<div class="video-grid"><div class="video"><a class="yt-card" href="https://www.youtube.com/watch?v=lPDV4RNFuZo" target="_blank" rel="noopener"><span class="yt-play" aria-hidden="true"></span><span class="yt-text"><b>Watch on YouTube</b></span></a></div><div class="video"><a class="yt-card" href="https://www.youtube.com/watch?v=AH5Bn8iguNM" target="_blank" rel="noopener"><span class="yt-play" aria-hidden="true"></span><span class="yt-text"><b>Watch on YouTube</b></span></a></div><div class="video"><a class="yt-card" href="https://www.youtube.com/watch?v=7RluP0NkgAY" target="_blank" rel="noopener"><span class="yt-play" aria-hidden="true"></span><span class="yt-text"><b>Watch on YouTube</b></span></a></div></div>
 
-</div><nav class="chapter-nav"><a href="../../../book-resources/laerende-organisasjoner/kapittel-4/">← Kapittel 4</a><a href="../../../book-resources/laerende-organisasjoner/kapittel-6/">Kapittel 6 →</a></nav></div></section>
+</div><nav class="chapter-nav"><a href="../../../book-resources/laerende-organisasjoner/kapittel-4/index.html">← Kapittel 4</a><a href="../../../book-resources/laerende-organisasjoner/kapittel-6/index.html">Kapittel 6 →</a></nav></div></section>
 <section class="cta-full"><div class="container">
   <div class="cta-band cta-v2">
     <img class="cta-petals" src="../../../assets/img/ilo-petals.png" alt="" aria-hidden="true">
     <div class="cta-text"><h2>Klar til å bygge en lærende organisasjon?</h2><p>Fortell oss hvor dere står i dag, så foreslår vi neste steg for teamet ditt.</p></div>
     <div class="cta-actions">
-      <a class="btn cta-btn" href="../../../no/contact/">Bestill en gratis samtale</a>
+      <a class="btn cta-btn" href="../../../no/contact/index.html">Bestill en gratis samtale</a>
       <p class="cta-alt">eller kontakt oss direkte: <a href="mailto:gabi@learnorg.global">gabi@learnorg.global</a> · <a href="tel:+4748287000">+47 48 28 70 00</a></p>
     </div>
   </div>
@@ -95,21 +100,21 @@
     <div>
       <h4>Snarveier</h4>
       <ul>
-        <li><a href="../../../no/">Hjem</a></li>
-        <li><a href="../../../no/about/">Om ILO</a></li>
-        <li><a href="../../../no/resources/">Bøker og ressurser</a></li>
-        <li><a href="../../../no/events/">Kurs og arrangementer</a></li>
-        <li><a href="../../../no/contact/">Kontakt</a></li>
+        <li><a href="../../../no/index.html">Hjem</a></li>
+        <li><a href="../../../no/about/index.html">Om Institute for Learning Organisations</a></li>
+        <li><a href="../../../no/resources/index.html">Bøker og ressurser</a></li>
+        <li><a href="../../../no/events/index.html">Kurs og arrangementer</a></li>
+        <li><a href="../../../no/contact/index.html">Kontakt</a></li>
       </ul>
     </div>
     <div>
       <h4>Tjenester</h4>
       <ul>
-        <li><a href="../../../no/sensei-mentorship/">Sensei-mentorskap</a></li>
-        <li><a href="../../../no/training/">Opplæring</a></li>
-        <li><a href="../../../no/learning-culture/">Læringskultur</a></li>
-        <li><a href="../../../no/obeya/">Obeya</a></li>
-        <li><a href="../../../no/e-learning/">E-læring</a></li>
+        <li><a href="../../../no/sensei-mentorship/index.html">Sensei-mentorskap</a></li>
+        <li><a href="../../../no/training/index.html">Opplæring</a></li>
+        <li><a href="../../../no/learning-culture/index.html">Transformasjon av læringskultur</a></li>
+        <li><a href="../../../no/obeya/index.html">Obeya</a></li>
+        <li><a href="../../../no/events/index.html#online">E-læring og webinarer</a></li>
       </ul>
     </div>
     <div>
