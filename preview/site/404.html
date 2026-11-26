@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | Institute for Learning Organisations</title>
+<meta name="robots" content="noindex">
+<script>
+(function(){
+  var MAP={"about-us": "about/index.html", "book-resources": "resources/index.html#books", "courses": "events/index.html", "det-er-ledelse": "book-resources/det-er-ledelse/index.html", "e-learning-services": "events/index.html#online", "e-learning": "events/index.html#online", "estore": "events/index.html#online", "e-resources": "resources/index.html", "open-resources": "resources/index.html#library", "obeya-dagseminar": "events/obeya-day-seminar/index.html", "off-site-training": "training/index.html#off-site", "past-events": "events/index.html#past", "trippel-l": "events/trippel-l/index.html", "upcoming-webinars": "events/index.html#online", "workshops-and-webinars": "events/index.html#online", "sensei-mentorship-1": "sensei-mentorship/index.html", "e-learning-1": "events/index.html#online", "blank": "events/trippel-l/index.html", "items": "resources/index.html", "laerende-organisasjoner": "book-resources/laerende-organisasjoner/index.html", "lean-ledelse-for-laerende-organisas": "book-resources/lean-ledelse/index.html", "general-5": "book-resources/systems-thinking-with-obeya/index.html", "no/e-learning": "no/events/index.html#online", "about": "about/index.html", "coaching": "learning-culture/index.html", "library": "resources/index.html#library", "events": "events/index.html", "contact": "contact/index.html", "obeya": "obeya/index.html", "services": "services/index.html", "training": "training/index.html"};
+  var p=location.pathname, root="/";
+  if(/github\.io$/.test(location.hostname)){var seg=p.split("/")[1];root="/"+seg+"/";}
+  var rest=p.slice(root.length).replace(/index\.html$/,"").replace(/\/+$/,"").toLowerCase();
+  window.ILO_ROOT=root;
+  if(MAP[rest]){location.replace(root+MAP[rest]);}
+})();
+</script>
+<style>
+:root{--teal:#078586;--ink:#282f3b;--muted:#4a4e56;--bg:#eef6f6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#eef6f6}}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--muted);padding:24px 16px}
+.box{max-width:560px;background:#fff;border-radius:18px;padding:44px 40px;box-shadow:0 18px 40px -22px rgba(11,79,92,.3);text-align:center}
+.box img{width:150px;margin:0 auto 22px;display:block}
+h1{color:var(--ink);font-size:1.9rem;margin:0 0 10px}p{line-height:1.6;margin:0 0 22px}
+.links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.links a{display:inline-block;padding:11px 18px;border-radius:8px;border:1.5px solid var(--teal);color:var(--teal);text-decoration:none;font-weight:600}
+.links a.primary{background:var(--teal);color:#fff}
+.no{margin-top:28px;padding-top:22px;border-top:1px solid #e4e7ee;font-size:.95rem}
+</style>
+</head>
+<body>
+<main class="box">
+  <img data-src="assets/img/ilo-mark.png" alt="ILO">
+  <h1>We couldn't find that page</h1>
+  <p>The Institute for Learning Organisations has a new website, so some old addresses have changed.</p>
+  <div class="links"><a class="primary" data-href="index.html">Go to the home page</a><a data-href="services/index.html">Services</a><a data-href="resources/index.html">Books &amp; Resources</a><a data-href="contact/index.html">Contact</a></div>
+  <p class="no" lang="nb">Fant ikke siden. <a data-href="no/index.html">Gå til den norske forsiden</a>.</p>
+</main>
+<script>
+document.querySelectorAll("[data-href]").forEach(function(a){a.href=window.ILO_ROOT+a.getAttribute("data-href");});
+document.querySelectorAll("[data-src]").forEach(function(i){i.src=window.ILO_ROOT+i.getAttribute("data-src");});
+</script>
+</body>
+</html>
